@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { MouseTracker, GrainOverlay, FloatingParticles } from "@/components/Atmosphere";
+import { MouseTracker, GrainOverlay, FloatingParticles, SparkleField } from "@/components/Atmosphere";
 
 const QUOTES = [
   {
@@ -41,6 +41,7 @@ export default function Home() {
       <MouseTracker />
       <GrainOverlay />
       <FloatingParticles />
+      <SparkleField />
       <div className="mouse-light" aria-hidden="true" />
 
       {/* Hero */}

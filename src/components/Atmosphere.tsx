@@ -131,3 +131,108 @@ export function FloatingParticles() {
 
   return <canvas ref={ref} className="particles" aria-hidden="true" />;
 }
+
+export function SparkleField() {
+  const ref = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const c = ref.current;
+    if (!c) return;
+    const ctx = c.getContext("2d")!;
+    const dpr = window.devicePixelRatio || 1;
+    let w = 0, h = 0;
+
+    const resize = () => {
+      w = window.innerWidth;
+      h = window.innerHeight;
+      c.width = w * dpr;
+      c.height = h * dpr;
+      c.style.width = `${w}px`;
+      c.style.height = `${h}px`;
+      ctx.scale(dpr, dpr);
+    };
+    resize();
+    window.addEventListener("resize", resize);
+
+    const types = [
+      { color: [230, 212, 186], size: [1.0, 2.2], cycle: [5, 9], hold: [0.08, 0.18], count: 4 },
+      { color: [222, 218, 210], size: [0.7, 1.6], cycle: [6, 11], hold: [0.12, 0.25], count: 4 },
+      { color: [198, 208, 218], size: [0.5, 1.3], cycle: [7, 13], hold: [0.18, 0.35], count: 2 },
+    ];
+
+    const sp: Array<Record<string, number>> = [];
+
+    for (const t of types) {
+      for (let i = 0; i < t.count; i++) {
+        sp.push({
+          x: Math.random() * w,
+          y: 15 + Math.random() * (h - 30),
+          size: t.size[0] + Math.random() * (t.size[1] - t.size[0]),
+          phase: Math.random() * Math.PI * 2,
+          cycle: t.cycle[0] + Math.random() * (t.cycle[1] - t.cycle[0]),
+          hold: t.hold[0] + Math.random() * (t.hold[1] - t.hold[0]),
+          dx: (Math.random() - 0.5) * 0.012,
+          dy: (Math.random() - 0.5) * 0.008,
+          r: t.color[0], g: t.color[1], b: t.color[2],
+          maxA: 0.22 + Math.random() * 0.18,
+        });
+      }
+    }
+
+    let id = 0, t = 0;
+
+    const loop = () => {
+      t += 0.016;
+      ctx.clearRect(0, 0, w, h);
+
+      for (const s of sp) {
+        s.x += s.dx;
+        s.y += s.dy;
+
+        if (s.x < -30) s.x = w + 30;
+        if (s.x > w + 30) s.x = -30;
+        if (s.y < -30) s.y = h + 30;
+        if (s.y > h + 30) s.y = -30;
+
+        const cp = ((t / s.cycle) + s.phase) % 1;
+        const fi = 0.12, ho = s.hold, fo = 0.12;
+        let alpha = 0;
+
+        if (cp < fi) {
+          alpha = cp / fi;
+        } else if (cp < fi + ho) {
+          alpha = 1;
+        } else if (cp < fi + ho + fo) {
+          alpha = 1 - (cp - fi - ho) / fo;
+        }
+
+        alpha *= s.maxA;
+
+        if (alpha > 0.005) {
+          const grad = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.size * 3);
+          grad.addColorStop(0, `rgba(${~~s.r}, ${~~s.g}, ${~~s.b}, ${alpha * 0.5})`);
+          grad.addColorStop(1, `rgba(${~~s.r}, ${~~s.g}, ${~~s.b}, 0)`);
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.size * 3, 0, Math.PI * 2);
+          ctx.fillStyle = grad;
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${~~s.r}, ${~~s.g}, ${~~s.b}, ${alpha})`;
+          ctx.fill();
+        }
+      }
+
+      id = requestAnimationFrame(loop);
+    };
+    loop();
+
+    return () => {
+      cancelAnimationFrame(id);
+      window.removeEventListener("resize", resize);
+    };
+  }, []);
+
+  return <canvas ref={ref} className="sparkles" aria-hidden="true" />;
+}

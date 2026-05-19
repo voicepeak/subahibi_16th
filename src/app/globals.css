@@ -60,6 +60,13 @@ body {
   pointer-events: none;
 }
 
+.sparkles {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
 /* ─── Mouse-reactive light vignette ─── */
 
 .mouse-light {
@@ -119,6 +126,8 @@ body {
 }
 
 .hero-badge {
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   border: 1px solid var(--accent-dim);
   border-radius: 999px;
@@ -130,6 +139,26 @@ body {
   margin-bottom: 2rem;
   backdrop-filter: blur(8px);
   background: rgba(14, 15, 19, 0.35);
+}
+
+.hero-badge::after {
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 247, 231, 0.07) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%) rotate(25deg);
+  animation: badge-shimmer 7s ease-in-out infinite;
+}
+
+@keyframes badge-shimmer {
+  0%, 85%, 100% { transform: translateX(-100%) rotate(25deg); }
+  92% { transform: translateX(100%) rotate(25deg); }
 }
 
 .hero-title {
