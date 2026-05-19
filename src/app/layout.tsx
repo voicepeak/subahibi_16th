@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "SubaHibi 16th Anniversary Fan Project",
-  description: "A short-run unofficial fan anniversary site for SubaHibi players."
+  title: "素晴らしき日々 — 16th Anniversary",
+  description: "Subarashiki Hibi 16th Anniversary Fan Project"
 };
 
 export default function RootLayout({
