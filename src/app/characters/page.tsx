@@ -54,17 +54,17 @@ const CHARACTERS = [
   },
   {
     file: "tm",
-    name: "木村",
-    role: "他——游离之人",
-    quote: "非要走这种山路吗？就没有直通村子的巴士吗？",
-    monologue: "喂喂，我可是被硬拉来的啊。\n不过嘛……偶尔来趟这种乡下也不错。\n空气好，星星也看得清楚。\n比起东京那个闷热的地方好多了。\n只是蚊子太多了。\n喂，羽咲，涂点防蚊药吧。",
-  },
-  {
-    file: "ms",
     name: "间宫皆守",
     role: "他——守护之人",
     quote: "那……不是英雄会做的约定啊……",
     monologue: "我要保护羽咲。\n那是我的使命……也是我的赎罪。\n虽然我可能什么都做不到……\n但至少……让我待在她的身边吧。\n由岐姐……如果我消失的话，\n羽咲她会……怎么样呢……",
+  },
+  {
+    file: "ms",
+    name: "木村",
+    role: "他——游离之人",
+    quote: "非要走这种山路吗？就没有直通村子的巴士吗？",
+    monologue: "喂喂，我可是被硬拉来的啊。\n不过嘛……偶尔来趟这种乡下也不错。\n空气好，星星也看得清楚。\n比起东京那个闷热的地方好多了。\n只是蚊子太多了。\n喂，羽咲，涂点防蚊药吧。",
   },
 ];
 
@@ -113,7 +113,7 @@ export default function CharactersPage() {
           <blockquote className="quote-card">
             <div className="quote-mark" aria-hidden="true" />
             <p className="quote-text">
-              "悲惨的也好、污秽的也好、美丽的也好、荣耀的也好——他们全部都是"我"……
+              '悲惨的也好、污秽的也好、美丽的也好、荣耀的也好——他们全部都是"我"……'
             </p>
             <cite className="quote-source">音无彩名 · 假设7 · 『素晴日』</cite>
           </blockquote>
