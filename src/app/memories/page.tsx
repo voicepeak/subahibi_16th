@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { CGLightbox } from "@/components/CGLightbox";
 import { TextShard } from "@/components/TextShard";
+import { getVolumeShards } from "@/lib/fragments";
 
 const CGS = [
   { src: "/assets/cg/main/ev0009.png", passage: "在人挤人的车站大楼的楼顶上……只有我一个人在这片天空下注视着这个世界。", chapter: "BGT1 序章 — 7月12日" },
@@ -16,13 +17,7 @@ const CGS = [
   { src: "/assets/cg/main/ev4001a.png", passage: "彩名：没有什么……我们走吧……去那开始的地点……", chapter: "终之空Ⅱ" },
 ];
 
-const SHARDS = [
-  { text: "我们的情人，不过是随便借个名字，用幻想吹出来的肥皂泡。", source: "埃德蒙·罗斯坦《西哈诺·德·贝热拉克》" },
-  { text: "这个周末并非世界末日，平淡无比。非常平凡的周末。他就在那里。", source: "BGT1 序章" },
-  { text: "所以我才有办法喜欢上你。因为在那一刻你让我看到，你的世界，是不同于我的世界的另一个世界。", source: "第1卷" },
-  { text: "这个世界，究竟何处才是尽头呢……", source: "水上由岐" },
-  { text: "天空的起始和终焉……终焉和起始的天空……", source: "『终之空』" },
-];
+const SHARDS = getVolumeShards("BGT1序章", 3);
 
 const QUOTES = [
   { text: "世界は、まだ続いている。", source: "『素晴日 〜不连续存在〜』" },

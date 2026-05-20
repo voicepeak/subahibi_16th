@@ -2,13 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import { TextShard } from "@/components/TextShard";
+import { getVolumeShards } from "@/lib/fragments";
 
-const SHARDS = [
-  { text: "祈祷是关于世界意义的思想。", source: "维特根斯坦《草稿1916年6月11日》" },
-  { text: "向日葵依旧向着太阳，仿佛什么也不曾发生过。什么都不曾改变，一切都已改变。", source: "BGT8 尾声" },
-  { text: "透明的白色……那是单纯的光。", source: "『终之空Ⅱ』" },
-  { text: "我们可以在空间中提取违反物理学法则的事态，不能在空间中提取违反几何学法则的事态。", source: "维特根斯坦《逻辑哲学论》" },
-];
+const SHARDS = getVolumeShards("BGT8 尾声 TIT", 3);
 
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);

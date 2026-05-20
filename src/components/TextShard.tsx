@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 
 interface Shard {
   text: string;
@@ -15,13 +15,11 @@ interface TextShardProps {
 
 export function TextShard({ pool, delay = 0, className = "" }: TextShardProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [shard, setShard] = useState<Shard | null>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    if (pool.length === 0) return;
-    setShard(pool[Math.floor(Math.random() * pool.length)]);
+  const shard = useMemo(() => {
+    if (pool.length === 0) return null;
+    return pool[Math.floor(Math.random() * pool.length)];
   }, [pool]);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -30,9 +28,10 @@ export function TextShard({ pool, delay = 0, className = "" }: TextShardProps) {
       ([e]) => {
         if (e.isIntersecting) {
           setTimeout(() => setVisible(true), delay);
+          obs.disconnect();
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.25 }
     );
     obs.observe(el);
     return () => obs.disconnect();

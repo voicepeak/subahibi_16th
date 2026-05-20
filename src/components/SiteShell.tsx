@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { MouseTracker, GrainOverlay, ScanLines, Vignette, FloatingParticles, SparkleField } from "./Atmosphere";
 import { TruthFragment } from "./TruthFragment";
 import { BGMPlayer } from "./BGMPlayer";
-import { VolumeGate } from "./VolumeGate";
 import { TimeSense } from "./TimeSense";
 import { Nav } from "./Nav";
 import { isAfterEnd } from "@/lib/date-utils";
@@ -46,7 +45,6 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       <div className="mouse-light" aria-hidden="true" />
       {!isEntry && <Nav />}
       {!isEntry && <ScrollProgress />}
-      {!isEntry && <VolumeGate />}
 
       <BGMPlayer src="/assets/bgm.ogg" />
 

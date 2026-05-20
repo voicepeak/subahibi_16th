@@ -2,11 +2,9 @@
 
 import { useEffect, useRef } from "react";
 import { TextShard } from "@/components/TextShard";
+import { getRandomShards } from "@/lib/fragments";
 
-const SHARDS = [
-  { text: "光没办法消除黑暗……因为光，是在黑暗的诱惑之下才出现的。", source: "『素晴日』" },
-  { text: "不连续存在——我们总是断裂地存在于这个世界上。", source: "『不连续存在』" },
-];
+const SHARDS = getRandomShards(2);
 
 function FadeIn({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);

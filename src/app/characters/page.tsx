@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { TextShard } from "@/components/TextShard";
+import { getRandomShards } from "@/lib/fragments";
 
 const CHARACTERS = [
   {
@@ -41,11 +42,7 @@ const CHARACTERS = [
   },
 ];
 
-const SHARDS = [
-  { text: '悲惨的也好、污秽的也好、美丽的也好、荣耀的也好——他们全部都是"我"……世界只由"我"构成，所以，我才能理解你。', source: "音无彩名 · 假设7" },
-  { text: "你与我和她，皆是一体——不过是同一个灵魂的不同视角。", source: "『不连续存在』" },
-  { text: "我已经无数次地重复了同样的体验。同一个灵魂，在不同的身体里，看着不同的世界。", source: "第4卷" },
-];
+const SHARDS = getRandomShards(3);
 
 function FadeIn({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);

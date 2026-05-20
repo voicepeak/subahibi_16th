@@ -366,84 +366,6 @@ main { min-height: 100vh; }
   text-transform: uppercase; opacity: 0.5;
 }
 
-/* ─── Typewriter ─── */
-
-.typewriter { display: inline; }
-.typewriter-cursor {
-  display: inline-block; width: 1px; height: 1em;
-  background: var(--accent); margin-left: 2px;
-  animation: cursor-blink 0.7s step-end infinite;
-  vertical-align: -0.05em;
-}
-
-@keyframes cursor-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-.entry-epigraph-wrap {
-  max-width: 520px; margin: 0 auto 2rem;
-  font-family: "Yu Mincho", "Songti SC", "Noto Serif SC", "Times New Roman", serif;
-  font-size: clamp(0.85rem, 1.6vw, 1.1rem);
-  line-height: 1.8; color: var(--text-dim); text-align: center;
-  min-height: 2.2rem; letter-spacing: 0.03em;
-  opacity: 0; animation: entry-fade-up 0.6s ease 0.2s forwards;
-}
-
-.entry-title-fade {
-  animation: entry-fade-up 0.8s cubic-bezier(0.23,1,0.32,1) 0.3s forwards !important;
-  opacity: 0 !important; filter: none !important;
-  transform: translateY(20px) !important;
-}
-
-/* ─── Entry Route Selection ─── */
-
-.entry-routes {
-  display: flex; gap: 1.25rem; margin-top: 1.5rem;
-  flex-wrap: wrap; justify-content: center;
-  opacity: 0; transform: translateY(20px);
-  animation: entry-fade-up 0.6s cubic-bezier(0.23,1,0.32,1) 0.3s forwards;
-}
-
-.entry-route-btn {
-  display: flex; flex-direction: column; align-items: center;
-  gap: 0.35rem; padding: 0.6rem 1rem 0.8rem;
-  border: 1px solid var(--line); border-radius: 4px;
-  background: rgba(255, 247, 231, 0.015); cursor: pointer;
-  min-width: 160px; transition: all 0.4s cubic-bezier(0.23,1,0.32,1);
-  color: var(--text-dim); text-decoration: none;
-  font-family: inherit;
-}
-
-.entry-route-btn:hover {
-  border-color: var(--route-color, var(--accent));
-  background: rgba(255, 247, 231, 0.035);
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-}
-
-.entry-route-line {
-  width: 16px; height: 1px;
-  background: var(--route-color, var(--accent-dim));
-  opacity: 0.4; transition: opacity 0.3s, width 0.3s;
-}
-
-.entry-route-btn:hover .entry-route-line {
-  opacity: 0.8; width: 24px;
-}
-
-.entry-route-label {
-  font-family: "Yu Mincho", "Songti SC", serif;
-  font-size: 0.8rem; letter-spacing: 0.08em;
-  color: var(--text);
-}
-
-.entry-route-sub {
-  font-size: 0.55rem; letter-spacing: 0.1em;
-  opacity: 0.4; text-transform: uppercase;
-  text-align: center; line-height: 1.3;
-}
-
 /* ─── Text Shard ─── */
 
 .text-shard {
@@ -453,7 +375,7 @@ main { min-height: 100vh; }
               transform 0.9s cubic-bezier(0.23,1,0.32,1);
 }
 
-.text-shard-in { opacity: 0.7; transform: translateY(0); }
+.text-shard-in { opacity: 1; transform: translateY(0); }
 
 .text-shard-mark {
   width: 14px; height: 1px;
@@ -469,66 +391,6 @@ main { min-height: 100vh; }
 }
 
 .text-shard-source {
-  display: block; margin-top: 0.8rem;
-  font-size: 0.65rem; font-style: normal;
-  color: var(--accent); opacity: 0.3;
-  letter-spacing: 0.1em;
-}
-
-/* ─── Volume Gate ─── */
-
-.volume-gate {
-  position: fixed; inset: 0; z-index: 500;
-  display: grid; place-items: center;
-  animation: gate-in 0.3s ease, gate-out 0.6s ease 2.2s forwards;
-  pointer-events: none;
-}
-
-@keyframes gate-in { from { opacity: 0; } }
-@keyframes gate-out { to { opacity: 0; } }
-
-.volume-gate-bg {
-  position: absolute; inset: 0;
-  background: rgba(8, 9, 11, 0.94);
-  backdrop-filter: blur(10px);
-}
-
-.volume-gate-card {
-  position: relative; z-index: 1;
-  text-align: center; padding: 2rem;
-  animation: gate-card-in 0.6s cubic-bezier(0.23,1,0.32,1) 0.2s both;
-}
-
-@keyframes gate-card-in {
-  from { opacity: 0; transform: translateY(20px); }
-}
-
-.volume-gate-sub {
-  font-size: 0.65rem; letter-spacing: 0.2em;
-  text-transform: uppercase; display: block;
-  margin-bottom: 0.8rem; opacity: 0.5;
-}
-
-.volume-gate-title {
-  font-family: "Yu Mincho", "Songti SC", "Noto Serif SC", "Times New Roman", serif;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 300; letter-spacing: 0.08em;
-  color: var(--text); margin: 0; line-height: 1.2;
-}
-
-.volume-gate-line {
-  width: 24px; height: 1px; margin: 1.25rem auto;
-  opacity: 0.4;
-}
-
-.volume-gate-epigraph {
-  font-family: "Yu Mincho", "Songti SC", serif;
-  font-size: clamp(0.8rem, 1.6vw, 1rem);
-  line-height: 1.7; color: var(--text-dim);
-  max-width: 360px; margin: 0 auto;
-}
-
-.volume-gate-source {
   display: block; margin-top: 0.8rem;
   font-size: 0.65rem; font-style: normal;
   color: var(--accent); opacity: 0.3;
@@ -711,32 +573,42 @@ main { min-height: 100vh; }
 .time-sense {
   position: fixed; left: 1.25rem; bottom: 1.25rem;
   z-index: 50; display: flex; align-items: center;
-  gap: 0.5rem; opacity: 0.25;
-  transition: opacity 0.5s;
+  gap: 0.65rem;
+  padding: 0.5rem 0.85rem 0.5rem 0.65rem;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: rgba(14, 15, 19, 0.7);
+  backdrop-filter: blur(12px);
+  opacity: 0.45;
+  transition: opacity 0.4s, border-color 0.3s;
+  cursor: default;
 }
 
-.time-sense:hover { opacity: 0.5; }
-
-.time-sense-dot {
-  width: 3px; height: 3px; border-radius: 50%;
-  background: var(--accent);
-  animation: time-dot 2s ease-in-out infinite;
+.time-sense:hover {
+  opacity: 0.85;
+  border-color: rgba(196, 164, 108, 0.2);
 }
 
-@keyframes time-dot {
-  0%, 100% { opacity: 0.2; }
-  50% { opacity: 0.8; }
+.time-sense-icon {
+  font-size: 1rem;
+  line-height: 1;
+  filter: saturate(0.7);
+}
+
+.time-sense-body {
+  display: flex; flex-direction: column;
+  gap: 0.15rem;
 }
 
 .time-sense-text {
-  font-size: 0.58rem; letter-spacing: 0.08em;
-  color: var(--text-dim); white-space: nowrap;
+  font-size: 0.7rem; letter-spacing: 0.04em;
+  color: var(--text-dim);
+  white-space: nowrap;
 }
 
-.time-sense-date {
-  font-size: 0.55rem; letter-spacing: 0.1em;
-  color: var(--accent); margin-left: 0.3rem;
-  opacity: 0.5;
+.time-sense-mark {
+  font-size: 0.6rem; letter-spacing: 0.06em;
+  color: var(--accent); opacity: 0.6;
 }
 
 /* ─── Gallery ─── */
