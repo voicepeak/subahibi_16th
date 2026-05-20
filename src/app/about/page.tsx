@@ -1,11 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { TextShard } from "@/components/TextShard";
-import { getRandomShards } from "@/lib/fragments";
-
-const SHARDS = getRandomShards(2);
-
 function FadeIn({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -56,10 +51,6 @@ export default function AboutPage() {
             </p>
           </div>
         </FadeIn>
-      </section>
-
-      <section className="page-section page-section-narrow">
-        <TextShard pool={SHARDS} delay={100} />
       </section>
 
       <div className="divider-rule" />

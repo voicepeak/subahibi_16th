@@ -1,8 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import { TextShard } from "@/components/TextShard";
-import { getRandomShards } from "@/lib/fragments";
 
 const CHARACTERS = [
   {
@@ -34,17 +32,43 @@ const CHARACTERS = [
     monologue: "每次都是那样。\n只要我一哭由岐就会赶过来。\n因为我每次都只会哭……\n每次都什么也做不了……\n所以才想要变强。\n……我真是没用呢。\n要是我就那样一辈子都不结婚的话……\n你就稍微喜欢我一点吧……",
   },
   {
+    file: "kg",
+    name: "若槻司",
+    role: "我——无法成为任何人的我",
+    quote: "姐姐一直在看着我……所以我必须成为姐姐期待的妹妹。",
+    monologue: "姐姐她……一直都在保护我。\n从小时候开始，不管什么事都是姐姐在保护我。\n所以我也想成为姐姐那样坚强的人。\n但是……我好像……做不到啊。\n因为我……什么也做不好。\n如果……我能像姐姐那样就好了……",
+  },
+  {
     file: "hs",
     name: "间宫羽咲",
     role: "我——献上祈祷之人",
     quote: "即便如此，世界依然是美丽的。所以我祈祷。",
     monologue: "泽衣村的夏天很热。\n宛如阳光在暴晒整个世界一般。\n但是树荫下也有东京比不上的凉爽。\n这里就是这样的村庄。\n向日葵依旧向着太阳，\n仿佛什么也不曾发生过。\n什么都不曾改变，\n一切都已改变。",
   },
+  {
+    file: "ay",
+    name: "音无彩名",
+    role: "她——旁观之人",
+    quote: '悲惨的也好、污秽的也好、美丽的也好、荣耀的也好——他们全部都是"我"。',
+    monologue: '假设。\n如果世界是由个人的感觉构成的——\n那么他人的世界，就永远无法被完全理解。\n这便是孤独的构造。\n但同时——正因为世界只由"我"构成，\n我才能理解你。\n这就是假设7。\n也是这个故事的真相之一。',
+  },
+  {
+    file: "tm",
+    name: "木村",
+    role: "他——游离之人",
+    quote: "非要走这种山路吗？就没有直通村子的巴士吗？",
+    monologue: "喂喂，我可是被硬拉来的啊。\n不过嘛……偶尔来趟这种乡下也不错。\n空气好，星星也看得清楚。\n比起东京那个闷热的地方好多了。\n只是蚊子太多了。\n喂，羽咲，涂点防蚊药吧。",
+  },
+  {
+    file: "ms",
+    name: "间宫皆守",
+    role: "他——守护之人",
+    quote: "那……不是英雄会做的约定啊……",
+    monologue: "我要保护羽咲。\n那是我的使命……也是我的赎罪。\n虽然我可能什么都做不到……\n但至少……让我待在她的身边吧。\n由岐姐……如果我消失的话，\n羽咲她会……怎么样呢……",
+  },
 ];
 
-const SHARDS = getRandomShards(3);
-
-function FadeIn({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
+function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = ref.current;
@@ -56,7 +80,7 @@ function FadeIn({ children, delay = 0, className = "" }: { children: React.React
     obs.observe(el);
     return () => obs.disconnect();
   }, [delay]);
-  return <div ref={ref} className={`fi fi-up ${className}`}>{children}</div>;
+  return <div ref={ref} className={`fi fi-up`}>{children}</div>;
 }
 
 export default function CharactersPage() {
@@ -89,21 +113,17 @@ export default function CharactersPage() {
           <blockquote className="quote-card">
             <div className="quote-mark" aria-hidden="true" />
             <p className="quote-text">
-              "悲惨的也好、污秽的也好、美丽的也好、荣耀的也好——他们全部都是"我"……世界只由"我"构成，所以，我才能理解你。"
+              "悲惨的也好、污秽的也好、美丽的也好、荣耀的也好——他们全部都是"我"……
             </p>
             <cite className="quote-source">音无彩名 · 假设7 · 『素晴日』</cite>
           </blockquote>
         </FadeIn>
       </section>
 
-      <section className="page-section page-section-narrow">
-        <TextShard pool={SHARDS.slice(0, 1)} delay={100} />
-      </section>
-
       <section className="page-section">
         <div className="chara-grid">
           {CHARACTERS.map((c, i) => (
-            <FadeIn key={c.file} delay={i * 80}>
+            <FadeIn key={c.file} delay={i * 60}>
               <button className="chara-card" onClick={() => setFocus(c)}>
                 <div className="chara-card-fig">
                   <img
@@ -116,7 +136,6 @@ export default function CharactersPage() {
                 <div className="chara-card-info">
                   <p className="chara-card-name">{c.name}</p>
                   <p className="chara-card-role">{c.role}</p>
-                  <p className="chara-card-quote">点击倾听心声</p>
                 </div>
               </button>
             </FadeIn>
@@ -125,15 +144,11 @@ export default function CharactersPage() {
       </section>
 
       <section className="page-section page-section-narrow">
-        <TextShard pool={SHARDS.slice(1)} delay={100} />
-      </section>
-
-      <section className="page-section page-section-narrow">
         <FadeIn delay={400}>
           <div className="chara-epilogue">
             <div className="quote-mark" aria-hidden="true" />
             <p className="chara-epilogue-text">
-              这里的所有人，不过是同一个灵魂的不同视角。<br />
+              这里的所有人，不过是同一个灵魂在不同世界中的投影。<br />
               你与我和她，皆是一体。
             </p>
           </div>

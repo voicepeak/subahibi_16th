@@ -3,11 +3,6 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { supabase, isSupabaseReady } from "@/lib/supabase";
 import type { Message } from "@/lib/types";
-import { TextShard } from "@/components/TextShard";
-import { getVolumeShards } from "@/lib/fragments";
-
-const SHARDS = getVolumeShards("第2卷", 3);
-
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -223,10 +218,6 @@ export default function MessagesPage() {
             <cite className="quote-source">『素晴日 〜不连续存在〜』</cite>
           </blockquote>
         </FadeIn>
-      </section>
-
-      <section className="page-section page-section-narrow">
-        <TextShard pool={SHARDS} delay={100} />
       </section>
 
       <section className="page-section page-section-narrow">

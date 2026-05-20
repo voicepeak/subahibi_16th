@@ -366,37 +366,6 @@ main { min-height: 100vh; }
   text-transform: uppercase; opacity: 0.5;
 }
 
-/* ─── Text Shard ─── */
-
-.text-shard {
-  max-width: 420px; margin: 0 auto; padding: 1.5rem 0;
-  text-align: center; opacity: 0; transform: translateY(24px);
-  transition: opacity 0.9s cubic-bezier(0.23,1,0.32,1),
-              transform 0.9s cubic-bezier(0.23,1,0.32,1);
-}
-
-.text-shard-in { opacity: 1; transform: translateY(0); }
-
-.text-shard-mark {
-  width: 14px; height: 1px;
-  background: var(--accent-dim);
-  margin: 0 auto 1.25rem;
-}
-
-.text-shard-body {
-  font-family: "Yu Mincho", "Songti SC", "Noto Serif SC", serif;
-  font-size: clamp(0.85rem, 1.8vw, 1.05rem);
-  line-height: 2; color: var(--text-dim); margin: 0;
-  letter-spacing: 0.03em;
-}
-
-.text-shard-source {
-  display: block; margin-top: 0.8rem;
-  font-size: 0.65rem; font-style: normal;
-  color: var(--accent); opacity: 0.3;
-  letter-spacing: 0.1em;
-}
-
 /* ─── CG Grid + Lightbox ─── */
 
 .cg-grid {
@@ -693,81 +662,59 @@ main { min-height: 100vh; }
 
 .chara-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 1.5rem;
-  width: 100%; max-width: 960px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  width: 100%; max-width: 780px;
 }
 
 .chara-card {
-  display: flex; flex-direction: column;
-  align-items: center; gap: 0.6rem;
-  border: 1px solid var(--line);
-  border-radius: 6px; background: rgba(255,247,231,0.015);
-  padding: 1.25rem 0.5rem 0.8rem;
-  transition: border-color 0.5s, background 0.5s, transform 0.5s cubic-bezier(0.23,1,0.32,1);
-  transform: perspective(800px) rotateX(0deg) rotateY(0deg);
-  will-change: transform;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 0.4rem; padding: 0.75rem 0.25rem 0.7rem;
+  border: 1px solid var(--line); border-radius: 6px;
+  background: rgba(255,247,231,0.012);
+  transition: border-color 0.4s, background 0.4s, transform 0.4s cubic-bezier(0.23,1,0.32,1);
+  cursor: pointer; font-family: inherit; color: inherit;
+  width: 100%;
 }
 
 .chara-card:hover {
-  border-color: rgba(196,164,108,0.22);
-  background: rgba(255,247,231,0.035);
-  transform: perspective(800px) rotateX(2deg) rotateY(4deg) translateY(-4px);
+  border-color: rgba(196,164,108,0.2);
+  background: rgba(255,247,231,0.03);
+  transform: translateY(-3px);
 }
 
 .chara-card-fig {
+  width: 100%;
+  aspect-ratio: 560 / 520;
   display: flex; align-items: flex-end; justify-content: center;
-  height: 220px; width: 100%;
   overflow: hidden;
 }
 
 .chara-card-sprite {
-  width: auto; height: 100%; max-width: none;
-  opacity: 0.6; filter: grayscale(0.45) contrast(0.8);
-  transition: opacity 0.5s, filter 0.5s, transform 0.5s ease;
-  animation: chara-float 4s ease-in-out infinite alternate;
+  height: 100%; width: auto;
+  opacity: 0.6; filter: grayscale(0.35) contrast(0.85);
+  transition: opacity 0.4s, filter 0.4s, transform 0.4s ease;
   object-fit: contain;
-}
-
-.chara-card:nth-child(2) .chara-card-sprite { animation-delay: 0.4s; }
-.chara-card:nth-child(3) .chara-card-sprite { animation-delay: 0.8s; }
-.chara-card:nth-child(4) .chara-card-sprite { animation-delay: 1.2s; }
-.chara-card:nth-child(5) .chara-card-sprite { animation-delay: 1.6s; }
-
-@keyframes chara-float {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-4px); }
 }
 
 .chara-card:hover .chara-card-sprite {
   opacity: 0.9; filter: grayscale(0) contrast(1);
-  animation-play-state: paused;
 }
 
-.chara-card-info { text-align: center; }
+.chara-card-info {
+  text-align: center; padding: 0 0.25rem;
+}
 
 .chara-card-name {
   font-family: "Yu Mincho", "Songti SC", serif;
-  font-size: 1rem; color: var(--text);
-  margin: 0 0 0.2rem; letter-spacing: 0.15em;
+  font-size: 0.85rem; color: var(--text);
+  margin: 0 0 0.1rem; letter-spacing: 0.12em;
 }
 
 .chara-card-role {
-  font-size: 0.62rem; color: var(--accent);
-  letter-spacing: 0.1em; margin: 0 0 0.5rem;
-  opacity: 0.5; line-height: 1.4;
-}
-
-.chara-card-quote {
-  font-size: 0.72rem; line-height: 1.7;
-  color: var(--text-dim); margin: 0;
-  opacity: 0.6;
-}
-
-.chara-card-code {
-  font-family: "Yu Mincho", "Songti SC", serif;
-  font-size: 0.85rem; color: var(--text-dim);
-  margin: 0; letter-spacing: 0.15em;
+  font-size: 0.58rem; color: var(--accent);
+  letter-spacing: 0.08em; margin: 0;
+  opacity: 0.45; line-height: 1.35;
 }
 
 .chara-epilogue {
@@ -1250,8 +1197,7 @@ main { min-height: 100vh; }
   .page-section.first { padding-top: 7rem; }
   .gallery-track { gap: 1rem; padding: 1rem 1.25rem; }
   .gallery-cell { width: 65vw; }
-  .chara-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-  .chara-card-fig { height: 180px; }
+  .chara-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; max-width: 520px; }
 }
 
 @media (max-width: 480px) {

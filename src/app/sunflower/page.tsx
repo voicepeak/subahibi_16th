@@ -1,11 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { TextShard } from "@/components/TextShard";
-import { getVolumeShards } from "@/lib/fragments";
-
-const SHARDS = getVolumeShards("BGT8 尾声 TIT", 3);
-
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -74,10 +69,6 @@ export default function SunflowerPage() {
             </p>
           </div>
         </FadeIn>
-      </section>
-
-      <section className="page-section page-section-narrow">
-        <TextShard pool={SHARDS} delay={100} />
       </section>
 
       <section className="page-section page-section-narrow">

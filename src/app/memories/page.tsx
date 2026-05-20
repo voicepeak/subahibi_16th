@@ -2,8 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { CGLightbox } from "@/components/CGLightbox";
-import { TextShard } from "@/components/TextShard";
-import { getVolumeShards } from "@/lib/fragments";
 
 const CGS = [
   { src: "/assets/cg/main/ev0009.png", passage: "在人挤人的车站大楼的楼顶上……只有我一个人在这片天空下注视着这个世界。", chapter: "BGT1 序章 — 7月12日" },
@@ -16,8 +14,6 @@ const CGS = [
   { src: "/assets/cg/main/ev4006a.png", passage: "由岐：蝉的叫声……这里是……屋顶？为什么……为什么会在这里……", chapter: "终之空Ⅱ" },
   { src: "/assets/cg/main/ev4001a.png", passage: "彩名：没有什么……我们走吧……去那开始的地点……", chapter: "终之空Ⅱ" },
 ];
-
-const SHARDS = getVolumeShards("BGT1序章", 3);
 
 const QUOTES = [
   { text: "世界は、まだ続いている。", source: "『素晴日 〜不连续存在〜』" },
@@ -63,18 +59,10 @@ export default function MemoriesPage() {
         </FadeIn>
       </section>
 
-      <section className="page-section page-section-narrow">
-        <TextShard pool={SHARDS.slice(0, 2)} delay={100} />
-      </section>
-
       <section className="page-section">
         <FadeIn>
           <CGLightbox images={CGS} />
         </FadeIn>
-      </section>
-
-      <section className="page-section page-section-narrow">
-        <TextShard pool={SHARDS.slice(2, 5)} delay={100} />
       </section>
 
       <section className="page-section page-section-narrow">
