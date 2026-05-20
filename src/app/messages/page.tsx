@@ -199,8 +199,6 @@ export default function MessagesPage() {
 
   return (
     <>
-      <TrainOverlay />
-
       <section className="page-section first">
         <div className="page-bg-img" style={{ backgroundImage: `url("/assets/cg/main/ev0009.png")` }} />
         <div className="page-parallax" />
@@ -211,6 +209,8 @@ export default function MessagesPage() {
           </div>
         </FadeIn>
       </section>
+
+      <TrainOverlay />
 
       <section className="page-section page-section-narrow">
         <FadeIn delay={80}>
