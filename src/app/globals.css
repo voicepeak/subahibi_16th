@@ -1200,71 +1200,30 @@ main { min-height: 100vh; }
   .chara-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; max-width: 520px; }
 }
 
-/* ─── Train Parallax ─── */
+/* ─── Train Overlay ─── */
 
-.train-parallax-section {
-  position: relative;
-  min-height: 200vh;
-}
-
-.train-parallax-stage {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow: hidden;
+.train-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
   pointer-events: none;
-  z-index: 1;
+  overflow: hidden;
+  transition: opacity 0.5s ease;
 }
 
-.train-parallax-layer {
+.train-overlay-layer {
   position: absolute;
   left: -10%;
   height: auto;
   display: flex;
   align-items: center;
-  gap: 0;
   will-change: transform;
-  transition: opacity 0.3s ease;
 }
 
-.train-parallax-seg {
+.train-overlay-seg {
   height: auto;
-  max-height: 40vh;
+  max-height: 38vh;
   width: auto;
-  image-rendering: auto;
-  transition: opacity 0.5s ease;
-}
-
-.train-parallax-content {
-  position: relative;
-  z-index: 2;
-  margin-top: 100vh;
-}
-
-.train-parallax-station {
-  position: absolute;
-  bottom: 15%;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  transition: opacity 0.8s ease;
-}
-
-.train-parallax-station-line {
-  width: 1px;
-  height: 60px;
-  background: linear-gradient(180deg, var(--accent), transparent);
-  opacity: 0.4;
-}
-
-.train-parallax-content {
-  position: relative;
-  z-index: 2;
-  will-change: transform, opacity;
-  transition: opacity 0.6s ease, transform 0.8s cubic-bezier(0.23,1,0.32,1);
 }
 
 /* ─── Responsive ─── */
