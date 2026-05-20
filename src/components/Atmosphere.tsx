@@ -81,6 +81,7 @@ export function FloatingParticles() {
     const ctx = c.getContext("2d")!;
     const dpr = window.devicePixelRatio || 1;
     let w = 0, h = 0;
+    let mx = 0, my = 0;
 
     const resize = () => {
       w = window.innerWidth;
@@ -94,15 +95,24 @@ export function FloatingParticles() {
     resize();
     window.addEventListener("resize", resize);
 
-    const pts = Array.from({ length: 30 }, () => ({
+    const onMouse = (e: MouseEvent) => {
+      mx = e.clientX;
+      my = e.clientY;
+    };
+    window.addEventListener("mousemove", onMouse);
+
+    const pts = Array.from({ length: 40 }, () => ({
       x: Math.random() * w,
       y: Math.random() * h,
       r: 0.6 + Math.random() * 2,
-      vx: (Math.random() - 0.5) * 0.08,
-      vy: -0.01 - Math.random() * 0.04,
-      o: 0.06 + Math.random() * 0.18,
+      vx: (Math.random() - 0.5) * 0.12,
+      vy: -0.02 - Math.random() * 0.04,
+      o: 0.08 + Math.random() * 0.2,
       ph: Math.random() * Math.PI * 2,
+      baseVx: 0,
+      baseVy: 0,
     }));
+    pts.forEach(p => { p.baseVx = p.vx; p.baseVy = p.vy; });
 
     let id = 0, t = 0;
 
@@ -111,12 +121,23 @@ export function FloatingParticles() {
       ctx.clearRect(0, 0, w, h);
 
       for (const p of pts) {
-        p.x += p.vx + Math.sin(t + p.ph) * 0.015;
+        const dx = p.x - mx;
+        const dy = p.y - my;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const repel = dist < 120 ? (120 - dist) / 120 * 0.3 : 0;
+
+        p.vx += dx / (dist + 1) * repel * 0.5;
+        p.vy += dy / (dist + 1) * repel * 0.5;
+        p.vx += (p.baseVx - p.vx) * 0.01;
+        p.vy += (p.baseVy - p.vy) * 0.01;
+        p.vx += Math.sin(t + p.ph) * 0.008;
+
+        p.x += p.vx;
         p.y += p.vy;
 
-        if (p.y < -5) { p.y = h + 5; p.x = Math.random() * w; }
-        if (p.x < -5) p.x = w + 5;
-        if (p.x > w + 5) p.x = -5;
+        if (p.y < -10) { p.y = h + 10; p.x = Math.random() * w; }
+        if (p.x < -10) p.x = w + 10;
+        if (p.x > w + 10) p.x = -10;
 
         const cd = Math.abs(1 - p.x / w * 2);
         const alpha = p.o * Math.max(0, 1 - cd * 0.4);
@@ -134,6 +155,7 @@ export function FloatingParticles() {
     return () => {
       cancelAnimationFrame(id);
       window.removeEventListener("resize", resize);
+      window.removeEventListener("mousemove", onMouse);
     };
   }, []);
 

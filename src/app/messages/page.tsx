@@ -199,6 +199,7 @@ export default function MessagesPage() {
   return (
     <>
       <section className="page-section first">
+        <div className="page-bg-img" style={{ backgroundImage: `url("/assets/cg/main/ev0009.png")` }} />
         <div className="page-parallax" />
         <FadeIn>
           <div className="page-head">

@@ -3,10 +3,15 @@
 import { useEffect, useRef, useState } from "react";
 
 const CGS = [
-  { src: "/assets/ev0001.png" },
-  { src: "/assets/ev1002a.png" },
-  { src: "/assets/ev6009c3.png" },
-  { src: "/assets/ev8018.png" },
+  { src: "/assets/cg/main/ev0009.png" },
+  { src: "/assets/cg/main/ev0008b.png" },
+  { src: "/assets/cg/main/ev7001.png" },
+  { src: "/assets/cg/main/ev6005.png" },
+  { src: "/assets/cg/main/ev7010.png" },
+  { src: "/assets/cg/main/ev8011a.png" },
+  { src: "/assets/cg/main/ev8017.png" },
+  { src: "/assets/cg/main/ev4006a.png" },
+  { src: "/assets/cg/main/ev4001a.png" },
 ];
 
 const QUOTES = [

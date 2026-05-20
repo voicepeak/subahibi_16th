@@ -346,6 +346,12 @@ main { min-height: 100vh; }
   pointer-events: none;
 }
 
+.page-bg-img {
+  position: absolute; inset: 0; z-index: -2;
+  background-size: cover; background-position: center;
+  opacity: 0.08; pointer-events: none;
+}
+
 .page-head { text-align: center; }
 
 .page-title {
@@ -467,13 +473,15 @@ main { min-height: 100vh; }
 .chara-card-fig {
   display: flex; align-items: flex-end; justify-content: center;
   height: 220px; width: 100%;
+  overflow: hidden;
 }
 
 .chara-card-sprite {
-  height: 100%; width: auto;
+  width: auto; height: 100%; max-width: none;
   opacity: 0.6; filter: grayscale(0.45) contrast(0.8);
   transition: opacity 0.5s, filter 0.5s, transform 0.5s ease;
   animation: chara-float 4s ease-in-out infinite alternate;
+  object-fit: contain;
 }
 
 .chara-card:nth-child(2) .chara-card-sprite { animation-delay: 0.4s; }
@@ -843,6 +851,150 @@ main { min-height: 100vh; }
     transparent 6px,
     transparent 10px
   );
+}
+
+/* ─── Truth Fragment ─── */
+
+.truth-fragment {
+  position: fixed; right: 1.25rem; bottom: 4.5rem;
+  z-index: 55; border: none; background: none;
+  cursor: pointer; padding: 0;
+  animation: truth-breathe 3s ease-in-out infinite;
+}
+
+@keyframes truth-breathe {
+  0%, 100% { opacity: 0.25; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(1.15); }
+}
+
+.truth-fragment-dot {
+  display: block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px rgba(196, 164, 108, 0.3);
+}
+
+.truth-overlay {
+  position: fixed; inset: 0; z-index: 300;
+  display: grid; place-items: center;
+  cursor: pointer;
+  animation: truth-in 0.3s ease;
+}
+
+@keyframes truth-in {
+  from { opacity: 0; }
+}
+
+.truth-overlay::before {
+  content: ""; position: absolute; inset: 0;
+  background: rgba(8, 9, 11, 0.88);
+  backdrop-filter: blur(6px);
+}
+
+.truth-card {
+  position: relative; z-index: 1;
+  max-width: 440px; padding: 2.5rem 2rem;
+  text-align: center; cursor: default;
+}
+
+.truth-card-mark {
+  width: 20px; height: 1px;
+  background: var(--accent-dim);
+  margin: 0 auto 1.5rem;
+}
+
+.truth-card-text {
+  font-family: "Yu Mincho", "Songti SC", "Noto Serif SC", serif;
+  font-size: clamp(1rem, 2.4vw, 1.4rem);
+  font-weight: 300; line-height: 2;
+  color: var(--text); margin: 0;
+  letter-spacing: 0.05em;
+}
+
+.truth-card-close {
+  margin-top: 2rem;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: transparent; color: var(--text-dim);
+  font-size: 0.65rem; letter-spacing: 0.2em;
+  padding: 0.4rem 1.2rem; cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.25s, color 0.25s;
+}
+
+.truth-card-close:hover {
+  border-color: rgba(196,164,108,0.3);
+  color: var(--accent);
+}
+
+/* ─── Monologue Overlay ─── */
+
+.monologue-overlay {
+  position: fixed; inset: 0; z-index: 300;
+  display: grid; place-items: center;
+  cursor: pointer;
+  animation: truth-in 0.3s ease;
+}
+
+.monologue-overlay::before {
+  content: ""; position: absolute; inset: 0;
+  background: rgba(8, 9, 11, 0.92);
+  backdrop-filter: blur(8px);
+}
+
+.monologue-card {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center;
+  padding: 2rem; max-width: 460px;
+  cursor: default;
+}
+
+.monologue-sprite {
+  height: 180px; width: auto;
+  opacity: 0.5; margin-bottom: 1rem;
+  filter: grayscale(0.3);
+}
+
+.monologue-name {
+  font-family: "Yu Mincho", "Songti SC", serif;
+  font-size: 1.2rem; color: var(--text);
+  margin: 0; letter-spacing: 0.15em;
+}
+
+.monologue-role {
+  font-size: 0.65rem; color: var(--accent);
+  opacity: 0.5; letter-spacing: 0.15em;
+  margin: 0.4rem 0 1.5rem;
+}
+
+.monologue-mark {
+  width: 20px; height: 1px;
+  background: var(--accent-dim);
+  margin: 0 auto 1.5rem;
+}
+
+.monologue-text {
+  font-family: "Yu Mincho", "Songti SC", "Noto Serif SC", serif;
+  font-size: 0.9rem; line-height: 2.2;
+  color: var(--text-dim); margin: 0;
+  white-space: pre-line;
+  letter-spacing: 0.03em;
+}
+
+.monologue-close {
+  margin-top: 2rem;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: transparent; color: var(--text-dim);
+  font-size: 0.65rem; letter-spacing: 0.2em;
+  padding: 0.4rem 1.2rem; cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.25s, color 0.25s;
+}
+
+.monologue-close:hover {
+  border-color: rgba(196,164,108,0.3);
+  color: var(--accent);
 }
 
 @media (max-width: 768px) {

@@ -21,6 +21,8 @@ export default function AboutPage() {
   return (
     <>
       <section className="page-section first">
+        <div className="page-bg-img" style={{ backgroundImage: `url("/assets/bg/bg1003a.png")` }} />
+        <div className="page-parallax" />
         <FadeIn>
           <div className="page-head">
             <h1 className="page-title">About</h1>

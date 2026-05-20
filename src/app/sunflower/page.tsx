@@ -30,7 +30,7 @@ export default function SunflowerPage() {
     <>
       <section className="page-section first">
         <div className="sunflower-hero">
-          <img src="/assets/ev8018.png" alt="" className="sunflower-hero-img" />
+          <img src="/assets/cg/main/ev8018.png" alt="" className="sunflower-hero-img" />
           <div className="sunflower-hero-overlay" />
         </div>
         <FadeIn>

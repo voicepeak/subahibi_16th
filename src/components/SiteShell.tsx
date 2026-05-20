@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import { Volume2, VolumeX } from "lucide-react";
 import { MouseTracker, GrainOverlay, ScanLines, Vignette, FloatingParticles, SparkleField } from "./Atmosphere";
+import { TruthFragment } from "./TruthFragment";
 import { Nav } from "./Nav";
 import { isAfterEnd } from "@/lib/date-utils";
 
@@ -75,6 +76,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       >
         {musicOn ? <Volume2 size={16} /> : <VolumeX size={16} />}
       </button>
+
+      <TruthFragment />
 
       <div className={`page-wrap${loaded ? " page-wrap-in" : ""}${isAfterEnd() ? " page-wrap-ended" : ""}`}>
         {children}
