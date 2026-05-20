@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { supabase, isSupabaseReady } from "@/lib/supabase";
 import type { Message } from "@/lib/types";
+import { TrainParallax } from "@/components/TrainParallax";
+
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -224,37 +226,46 @@ export default function MessagesPage() {
         <FadeIn delay={160}>
           <div className="ticket-form-wrap">
             <h2 className="ticket-form-heading">车票 · ticket</h2>
-            <MessageForm onSent={loadMessages} />
           </div>
         </FadeIn>
       </section>
 
-      <section className="page-section page-section-narrow">
-        <FadeIn delay={240}>
-          <h2 className="ticket-board-heading">
-            留言 · messages
-            <span className="ticket-board-count">{loading ? "" : `(${messages.length})`}</span>
-          </h2>
-        </FadeIn>
+      <TrainParallax>
+        <section className="page-section page-section-narrow">
+          <FadeIn delay={160}>
+            <div className="ticket-form-wrap">
+              <MessageForm onSent={loadMessages} />
+            </div>
+          </FadeIn>
+        </section>
 
-        {loading && (
-          <p className="ticket-empty">加载中…</p>
-        )}
+        <section className="page-section page-section-narrow">
+          <FadeIn delay={240}>
+            <h2 className="ticket-board-heading">
+              留言 · messages
+              <span className="ticket-board-count">{loading ? "" : `(${messages.length})`}</span>
+            </h2>
+          </FadeIn>
 
-        {!loading && messages.length === 0 && (
-          <p className="ticket-empty">等待第一位乘客</p>
-        )}
+          {loading && (
+            <p className="ticket-empty">加载中…</p>
+          )}
 
-        {!loading && messages.length > 0 && (
-          <div className="ticket-board">
-            {messages.map((msg, i) => (
-              <FadeIn key={msg.id} delay={Math.min(i * 40, 400)}>
-                <TicketCard msg={msg} index={messages.length - 1 - i} />
-              </FadeIn>
-            ))}
-          </div>
-        )}
-      </section>
+          {!loading && messages.length === 0 && (
+            <p className="ticket-empty">等待第一位乘客</p>
+          )}
+
+          {!loading && messages.length > 0 && (
+            <div className="ticket-board">
+              {messages.map((msg, i) => (
+                <FadeIn key={msg.id} delay={Math.min(i * 40, 400)}>
+                  <TicketCard msg={msg} index={messages.length - 1 - i} />
+                </FadeIn>
+              ))}
+            </div>
+          )}
+        </section>
+      </TrainParallax>
 
       <div className="divider-rule" />
     </>
