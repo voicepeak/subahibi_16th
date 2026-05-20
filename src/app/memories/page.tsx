@@ -10,8 +10,8 @@ const CGS = [
 ];
 
 const QUOTES = [
-  { text: "世界は、まだ続いている。", source: "『素晴らしき日々 〜不連続存在〜』" },
-  { text: "幸福とは、ただそこにあるものではなく、自分自身で見つけ出すものだ。", source: "『素晴らしき日々 〜不連続存在〜』" },
+  { text: "世界は、まだ続いている。", source: "『素晴日 〜不连续存在〜』" },
+  { text: "幸福とは、ただそこにあるものではなく、自分自身で見つけ出すものだ。", source: "『素晴日 〜不连续存在〜』" },
 ];
 
 function Reveal({ children, className = "" }: { children: React.ReactNode; className?: string }) {

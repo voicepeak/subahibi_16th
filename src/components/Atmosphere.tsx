@@ -64,6 +64,14 @@ export function GrainOverlay() {
   return <canvas ref={ref} className="grain" aria-hidden="true" />;
 }
 
+export function ScanLines() {
+  return <div className="scanlines" aria-hidden="true" />;
+}
+
+export function Vignette() {
+  return <div className="vignette" aria-hidden="true" />;
+}
+
 export function FloatingParticles() {
   const ref = useRef<HTMLCanvasElement>(null);
 
