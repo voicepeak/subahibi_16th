@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import { TextShard } from "@/components/TextShard";
 
 const CHARACTERS = [
   {
@@ -8,7 +9,7 @@ const CHARACTERS = [
     name: "水上由岐",
     role: "你——眺望世界之人",
     quote: "世界是我所看到、触摸到、感受到的东西。所以，世界和我没有差别。",
-    monologue: "我偶尔会思考这种事情。\n世界的极限到底在哪里呢。\n如果我能站在那个地方的话……\n我还是能跟平时一样看着那个尽头的风景吗。\n世界的极限，是否就等同于我的极限呢。\n世界就是我看到的摸到的，并且感受到的东西。\n那样的话，世界到底是什么呢。\n世界和我的差别……\n是没有的。",
+    monologue: "世界的极限到底在哪里呢。\n如果我能站在那个地方的话……\n我还是能跟平时一样看着那个尽头的风景吗。\n世界的极限，是否就等同于我的极限呢。\n世界就是我看到的摸到的，并且感受到的东西。\n那样的话，世界到底是什么呢。\n世界和我的差别……是没有的。",
   },
   {
     file: "tk",
@@ -38,6 +39,12 @@ const CHARACTERS = [
     quote: "即便如此，世界依然是美丽的。所以我祈祷。",
     monologue: "泽衣村的夏天很热。\n宛如阳光在暴晒整个世界一般。\n但是树荫下也有东京比不上的凉爽。\n这里就是这样的村庄。\n向日葵依旧向着太阳，\n仿佛什么也不曾发生过。\n什么都不曾改变，\n一切都已改变。",
   },
+];
+
+const SHARDS = [
+  { text: '悲惨的也好、污秽的也好、美丽的也好、荣耀的也好——他们全部都是"我"……世界只由"我"构成，所以，我才能理解你。', source: "音无彩名 · 假设7" },
+  { text: "你与我和她，皆是一体——不过是同一个灵魂的不同视角。", source: "『不连续存在』" },
+  { text: "我已经无数次地重复了同样的体验。同一个灵魂，在不同的身体里，看着不同的世界。", source: "第4卷" },
 ];
 
 function FadeIn({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
@@ -92,6 +99,10 @@ export default function CharactersPage() {
         </FadeIn>
       </section>
 
+      <section className="page-section page-section-narrow">
+        <TextShard pool={SHARDS.slice(0, 1)} delay={100} />
+      </section>
+
       <section className="page-section">
         <div className="chara-grid">
           {CHARACTERS.map((c, i) => (
@@ -114,6 +125,10 @@ export default function CharactersPage() {
             </FadeIn>
           ))}
         </div>
+      </section>
+
+      <section className="page-section page-section-narrow">
+        <TextShard pool={SHARDS.slice(1)} delay={100} />
       </section>
 
       <section className="page-section page-section-narrow">

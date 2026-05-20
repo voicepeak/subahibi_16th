@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { Volume2, VolumeX } from "lucide-react";
 import { MouseTracker, GrainOverlay, ScanLines, Vignette, FloatingParticles, SparkleField } from "./Atmosphere";
 import { TruthFragment } from "./TruthFragment";
+import { BGMPlayer } from "./BGMPlayer";
+import { VolumeGate } from "./VolumeGate";
+import { TimeSense } from "./TimeSense";
 import { Nav } from "./Nav";
 import { isAfterEnd } from "@/lib/date-utils";
 
@@ -27,33 +29,10 @@ function ScrollProgress() {
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isEntry = pathname === "/";
-  const [musicOn, setMusicOn] = useState(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     setLoaded(true);
-  }, []);
-
-  const toggleMusic = useCallback(() => {
-    if (!audioRef.current) {
-      audioRef.current = new Audio("/assets/bgm.ogg");
-      audioRef.current.loop = true;
-      audioRef.current.volume = 0.25;
-    }
-    if (musicOn) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play().catch(() => {});
-    }
-    setMusicOn(!musicOn);
-  }, [musicOn]);
-
-  useEffect(() => {
-    return () => {
-      audioRef.current?.pause();
-      audioRef.current = null;
-    };
   }, []);
 
   return (
@@ -67,17 +46,13 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       <div className="mouse-light" aria-hidden="true" />
       {!isEntry && <Nav />}
       {!isEntry && <ScrollProgress />}
+      {!isEntry && <VolumeGate />}
 
-      <button
-        className="music-toggle"
-        onClick={toggleMusic}
-        aria-label={musicOn ? "暂停音乐" : "播放音乐"}
-        type="button"
-      >
-        {musicOn ? <Volume2 size={16} /> : <VolumeX size={16} />}
-      </button>
+      <BGMPlayer src="/assets/bgm.ogg" />
 
-      <TruthFragment />
+      {!isEntry && <TruthFragment />}
+
+      {!isEntry && <TimeSense />}
 
       <div className={`page-wrap${loaded ? " page-wrap-in" : ""}${isAfterEnd() ? " page-wrap-ended" : ""}`}>
         {children}

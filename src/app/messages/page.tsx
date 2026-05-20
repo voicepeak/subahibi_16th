@@ -3,6 +3,14 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { supabase, isSupabaseReady } from "@/lib/supabase";
 import type { Message } from "@/lib/types";
+import { TextShard } from "@/components/TextShard";
+
+const SHARDS = [
+  { text: "下一辆列车是特别快车，开往夏夜大三角。", source: "『素晴日 〜不连续存在〜』" },
+  { text: "悲伤而美好的故事，总是从车站开始的。", source: "BGT6 银河铁道之夜" },
+  { text: "人的命运，是否也像列车一样，沿着两条铁轨前行，永远无法交汇呢？", source: "第2卷" },
+  { text: "即使如此，这趟列车还是会继续行驶下去。载着所有的思念。", source: "第2卷" },
+];
 
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -219,6 +227,10 @@ export default function MessagesPage() {
             <cite className="quote-source">『素晴日 〜不连续存在〜』</cite>
           </blockquote>
         </FadeIn>
+      </section>
+
+      <section className="page-section page-section-narrow">
+        <TextShard pool={SHARDS} delay={100} />
       </section>
 
       <section className="page-section page-section-narrow">
