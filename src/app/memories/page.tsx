@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const CGS = [
   { src: "/assets/ev0001.png" },
@@ -14,7 +14,7 @@ const QUOTES = [
   { text: "幸福とは、ただそこにあるものではなく、自分自身で見つけ出すものだ。", source: "『素晴らしき日々 〜不連続存在〜』" },
 ];
 
-function FadeIn({ children }: { children: React.ReactNode }) {
+function Reveal({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = ref.current;
@@ -26,26 +26,40 @@ function FadeIn({ children }: { children: React.ReactNode }) {
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
-  return <div ref={ref} className="fi">{children}</div>;
+  return <div ref={ref} className={`fi ${className}`}>{children}</div>;
 }
 
 export default function MemoriesPage() {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <>
       <section className="page-section first">
-        <FadeIn>
+        <div
+          className="page-parallax"
+          style={{ transform: `translateY(${scrollY * 0.15}px) scale(${1 + scrollY * 0.0002})` }}
+        />
+        <Reveal>
           <div className="page-head">
             <h1 className="page-title">記憶</h1>
             <p className="page-sub">— Scene Archive —</p>
           </div>
-        </FadeIn>
+        </Reveal>
       </section>
 
       <section className="page-section">
         <div className="gallery-track">
           {CGS.map((cg, i) => (
             <div key={i} className="gallery-cell">
-              <img src={cg.src} alt="" className="gallery-img" loading="lazy" />
+              <div className="gallery-cell-inner">
+                <img src={cg.src} alt="" className="gallery-img" loading="lazy" />
+              </div>
             </div>
           ))}
         </div>
@@ -53,12 +67,13 @@ export default function MemoriesPage() {
 
       <section className="page-section page-section-narrow">
         {QUOTES.map((q, i) => (
-          <FadeIn key={i}>
+          <Reveal key={i}>
             <blockquote className="quote-card">
+              <div className="quote-mark" aria-hidden="true" />
               <p className="quote-text">{q.text}</p>
               <cite className="quote-source">{q.source}</cite>
             </blockquote>
-          </FadeIn>
+          </Reveal>
         ))}
       </section>
 

@@ -5,11 +5,12 @@
 :root {
   color-scheme: dark;
   --bg: #0e0f13;
-  --bg-gradient: radial-gradient(ellipse at 50% 20%, #1e202b 0%, #0e0f13 50%, #08090b 100%);
+  --bg-gradient: radial-gradient(ellipse at 50% 20%, #1a1c28 0%, #0e0f13 50%, #08090b 100%);
   --text: #ddd8ce;
-  --text-muted: #88847b;
+  --text-dim: #7a776e;
   --accent: #c4a46c;
   --accent-dim: rgba(196, 164, 108, 0.15);
+  --line: rgba(255, 247, 231, 0.06);
   --mouse-x: 0;
   --mouse-y: 0;
 }
@@ -33,25 +34,49 @@ body {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--accent-dim); border-radius: 999px; }
 
+main { min-height: 100vh; }
+
+/* ─── Page Transition ─── */
+
+.page-wrap {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.page-wrap-in {
+  opacity: 1;
+}
+
+/* ─── Scroll Progress ─── */
+
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 60;
+  height: 1px;
+  background: var(--accent);
+  transform-origin: left;
+  opacity: 0.4;
+}
+
 /* ─── Atmosphere ─── */
 
 .grain {
   position: fixed; inset: 0; z-index: 100;
   width: 100%; height: 100%;
   image-rendering: pixelated; pointer-events: none;
-  opacity: 0.45; mix-blend-mode: overlay;
+  opacity: 0.4; mix-blend-mode: overlay;
 }
 
 .particles { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
-
 .sparkles { position: fixed; inset: 0; z-index: 2; pointer-events: none; }
 
 .mouse-light {
   position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background: radial-gradient(800px circle at
-    calc(50% + calc(var(--mouse-x) * 300px))
-    calc(50% + calc(var(--mouse-y) * 300px)),
-    rgba(196, 164, 108, 0.04), transparent 60%);
+  background: radial-gradient(900px circle at
+    calc(50% + calc(var(--mouse-x) * 280px))
+    calc(50% + calc(var(--mouse-y) * 280px)),
+    rgba(196, 164, 108, 0.035), transparent 60%);
 }
 
 /* ─── Navigation ─── */
@@ -60,33 +85,33 @@ body {
   position: fixed; top: 0; left: 0; right: 0; z-index: 50;
   display: flex; align-items: center; gap: 2rem;
   padding: 0.75rem 1.5rem;
-  background: linear-gradient(180deg, rgba(14,15,19,0.7) 0%, transparent 100%);
-  backdrop-filter: blur(12px);
+  background: linear-gradient(180deg, rgba(14,15,19,0.75) 0%, transparent 100%);
+  backdrop-filter: blur(14px);
 }
 
 .site-nav-mark {
   font-family: "Yu Mincho", "Songti SC", serif;
-  font-size: 1.4rem; font-weight: 400; color: var(--accent);
-  text-decoration: none; opacity: 0.6; transition: opacity 0.2s;
+  font-size: 1.3rem; font-weight: 400; color: var(--accent);
+  text-decoration: none; opacity: 0.5; transition: opacity 0.25s;
   line-height: 1;
 }
 
-.site-nav-mark:hover { opacity: 1; }
+.site-nav-mark:hover { opacity: 0.9; }
 
 .site-nav-links { display: flex; gap: 1.5rem; }
 
 .site-nav-link {
-  display: flex; align-items: baseline; gap: 0.4rem;
-  text-decoration: none; color: var(--text-muted);
-  font-size: 0.8rem; letter-spacing: 0.08em;
+  display: flex; align-items: baseline; gap: 0.35rem;
+  text-decoration: none; color: var(--text-dim);
+  font-size: 0.78rem; letter-spacing: 0.06em;
   padding: 0.2rem 0; position: relative;
-  transition: color 0.2s;
+  transition: color 0.25s;
 }
 
 .site-nav-link::after {
-  content: ""; position: absolute; bottom: 0; left: 0; right: 0;
-  height: 1px; background: var(--accent-dim);
-  transform: scaleX(0); transition: transform 0.25s;
+  content: ""; position: absolute; bottom: -1px; left: 0; right: 0;
+  height: 1px; background: var(--accent);
+  transform: scaleX(0); transition: transform 0.3s cubic-bezier(0.23,1,0.32,1);
   transform-origin: left;
 }
 
@@ -94,10 +119,10 @@ body {
 .site-nav-link:hover::after { transform: scaleX(1); }
 
 .site-nav-link-on { color: var(--text); }
-.site-nav-link-on::after { transform: scaleX(1); background: var(--accent); }
+.site-nav-link-on::after { transform: scaleX(1); }
 
 .site-nav-label { font-family: "Yu Mincho", "Songti SC", serif; font-size: 0.85rem; }
-.site-nav-sub { font-size: 0.6rem; text-transform: uppercase; opacity: 0.5; letter-spacing: 0.12em; }
+.site-nav-sub { font-size: 0.58rem; text-transform: uppercase; opacity: 0.4; letter-spacing: 0.12em; }
 
 /* ─── Entry Page ─── */
 
@@ -113,29 +138,29 @@ body {
   position: absolute; inset: 0; z-index: -1;
   background-image: url("/assets/hero-bg.png");
   background-size: cover; background-position: center;
-  opacity: 0.25; will-change: transform;
+  opacity: 0.2; will-change: transform;
   transform: scale(1.08)
     translate(calc(var(--mouse-x) * -10px), calc(var(--mouse-y) * -10px));
 }
 
 .entry-overlay {
   position: absolute; inset: 0; z-index: -1;
-  background: radial-gradient(ellipse at 50% 30%, transparent 0%, rgba(14,15,19,0.5) 40%, rgba(14,15,19,0.92) 100%);
+  background: radial-gradient(ellipse at 50% 30%, transparent 0%, rgba(14,15,19,0.45) 40%, rgba(14,15,19,0.94) 100%);
 }
 
 .entry-badge {
   display: inline-flex;
   border: 1px solid var(--accent-dim); border-radius: 999px;
-  padding: 0.35rem 1.1rem; font-size: 0.72rem;
+  padding: 0.32rem 1.05rem; font-size: 0.7rem;
   letter-spacing: 0.15em; color: var(--accent);
   text-transform: uppercase; margin-bottom: 2rem;
-  backdrop-filter: blur(8px); background: rgba(14,15,19,0.35);
+  backdrop-filter: blur(8px); background: rgba(14,15,19,0.3);
   position: relative; overflow: hidden;
 }
 
 .entry-badge::after {
   pointer-events: none; content: ""; position: absolute; inset: -50%;
-  background: linear-gradient(90deg, transparent 0%, rgba(255,247,231,0.07) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(255,247,231,0.06) 50%, transparent 100%);
   transform: translateX(-100%) rotate(25deg);
   animation: badge-shimmer 7s ease-in-out infinite;
 }
@@ -148,27 +173,27 @@ body {
 .entry-title {
   font-family: "Yu Mincho", "Songti SC", "Noto Serif SC", "Times New Roman", serif;
   font-size: clamp(2.8rem, 10vw, 8rem); font-weight: 400;
-  letter-spacing: 0.05em; margin: 0; line-height: 1.12;
+  letter-spacing: 0.05em; margin: 0; line-height: 1.1;
   color: var(--text); will-change: transform;
   transform: translate(calc(var(--mouse-x) * 6px), calc(var(--mouse-y) * 6px));
 }
 
 .entry-subtitle {
   font-size: clamp(0.85rem, 1.8vw, 1.3rem);
-  color: var(--text-muted); letter-spacing: 0.3em;
-  margin-top: 1.2rem; font-weight: 300; text-transform: uppercase;
+  color: var(--text-dim); letter-spacing: 0.3em;
+  margin-top: 1.1rem; font-weight: 300; text-transform: uppercase;
 }
 
 .entry-year {
   font-size: 0.82rem; color: var(--accent);
-  letter-spacing: 0.2em; margin-top: 2rem; opacity: 0.6;
+  letter-spacing: 0.2em; margin-top: 1.8rem; opacity: 0.5;
 }
 
 .entry-enter {
   position: absolute; bottom: 3rem;
   display: flex; flex-direction: column; align-items: center;
   gap: 0.6rem; text-decoration: none;
-  color: var(--text-muted); font-size: 0.65rem;
+  color: var(--text-dim); font-size: 0.62rem;
   letter-spacing: 0.25em; text-transform: uppercase;
   animation: enter-pulse 2.8s ease-in-out infinite;
   transition: color 0.3s;
@@ -178,26 +203,36 @@ body {
 
 .entry-enter-line {
   width: 1px; height: 28px;
-  background: linear-gradient(180deg, var(--text-muted), transparent);
+  background: linear-gradient(180deg, var(--text-dim), transparent);
 }
 
 @keyframes enter-pulse {
-  0%, 100% { opacity: 0.3; transform: translateY(0); }
-  50% { opacity: 0.6; transform: translateY(4px); }
+  0%, 100% { opacity: 0.25; transform: translateY(0); }
+  50% { opacity: 0.55; transform: translateY(4px); }
 }
 
-/* ─── Shared Page Sections ─── */
+/* ─── Page Sections ─── */
 
 .page-section {
   position: relative; z-index: 2;
   min-height: 80vh; display: flex;
   flex-direction: column; align-items: center;
-  justify-content: center; padding: 6rem 2rem 4rem;
+  justify-content: center; padding: 6rem 2rem 5rem;
 }
 
 .page-section-narrow { padding: 4rem 2rem; min-height: auto; }
 
 .page-section.first { min-height: 100vh; padding-top: 8rem; }
+
+.page-parallax {
+  position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(180deg,
+    rgba(26,28,40,0.3) 0%,
+    transparent 30%,
+    transparent 70%,
+    rgba(8,9,11,0.6) 100%);
+  pointer-events: none;
+}
 
 .page-head { text-align: center; }
 
@@ -208,9 +243,9 @@ body {
 }
 
 .page-sub {
-  font-size: 0.72rem; color: var(--accent);
-  letter-spacing: 0.25em; margin-top: 1rem;
-  text-transform: uppercase; opacity: 0.6;
+  font-size: 0.7rem; color: var(--accent);
+  letter-spacing: 0.25em; margin-top: 0.8rem;
+  text-transform: uppercase; opacity: 0.5;
 }
 
 /* ─── Gallery ─── */
@@ -218,7 +253,7 @@ body {
 .gallery-track {
   display: flex; gap: 1.5rem;
   overflow-x: auto; scroll-snap-type: x mandatory;
-  padding: 1rem 2rem; width: 100%;
+  padding: 1.5rem 3rem; width: 100%;
   scrollbar-width: none; -webkit-overflow-scrolling: touch;
 }
 
@@ -226,75 +261,103 @@ body {
 
 .gallery-cell {
   flex: 0 0 auto;
-  width: clamp(280px, 40vw, 520px);
+  width: clamp(280px, 38vw, 500px);
   scroll-snap-align: center;
-  border-radius: 4px; overflow: hidden;
-  border: 1px solid rgba(255,247,231,0.08);
-  background: rgba(255,247,231,0.02);
-  transition: border-color 0.3s;
+  transition: transform 0.4s cubic-bezier(0.23,1,0.32,1);
 }
 
-.gallery-cell:hover { border-color: rgba(196,164,108,0.25); }
+.gallery-cell:hover {
+  transform: translateY(-4px);
+}
+
+.gallery-cell-inner {
+  position: relative;
+  border-radius: 4px; overflow: hidden;
+  border: 1px solid var(--line);
+  background: rgba(255,247,231,0.015);
+}
+
+.gallery-cell-inner::after {
+  pointer-events: none; content: "";
+  position: absolute; inset: 0;
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 1px rgba(196,164,108,0.06);
+  transition: box-shadow 0.4s;
+}
+
+.gallery-cell:hover .gallery-cell-inner::after {
+  box-shadow: inset 0 0 0 1px rgba(196,164,108,0.18);
+}
 
 .gallery-img {
   display: block; width: 100%; height: auto;
   aspect-ratio: 4/3; object-fit: cover;
-  opacity: 0.8; transition: opacity 0.4s;
+  opacity: 0.78; transition: opacity 0.5s, transform 0.5s;
 }
 
-.gallery-cell:hover .gallery-img { opacity: 1; }
+.gallery-cell:hover .gallery-img {
+  opacity: 1;
+  transform: scale(1.02);
+}
 
-/* ─── Quote Card ─── */
+/* ─── Quote ─── */
 
 .quote-card {
-  max-width: 620px; margin: 0 auto 4rem;
-  text-align: center;
+  max-width: 600px; margin: 0 auto 4rem;
+  text-align: center; position: relative;
+}
+
+.quote-mark {
+  width: 20px; height: 1px;
+  background: var(--accent-dim);
+  margin: 0 auto 2rem;
 }
 
 .quote-text {
   font-family: "Yu Mincho", "Songti SC", "Noto Serif SC", "Times New Roman", serif;
-  font-size: clamp(1.15rem, 2.5vw, 1.7rem);
+  font-size: clamp(1.1rem, 2.4vw, 1.6rem);
   font-weight: 300; line-height: 1.9;
-  color: var(--text-muted); margin: 0;
+  color: var(--text-dim); margin: 0;
 }
 
 .quote-source {
   display: block; margin-top: 1.5rem;
-  font-size: 0.8rem; font-style: normal;
-  color: var(--accent); letter-spacing: 0.1em; opacity: 0.6;
+  font-size: 0.78rem; font-style: normal;
+  color: var(--accent); letter-spacing: 0.1em; opacity: 0.5;
 }
 
 /* ─── Character Grid ─── */
 
 .chara-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 2rem;
-  width: 100%; max-width: 1100px;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1.5rem;
+  width: 100%; max-width: 960px;
 }
 
 .chara-card {
   display: flex; flex-direction: column;
-  align-items: center; gap: 0.8rem;
-  border: 1px solid rgba(255,247,231,0.06);
-  border-radius: 6px; background: rgba(255,247,231,0.02);
-  padding: 1.5rem 0.75rem 1rem;
-  transition: border-color 0.3s, background 0.3s;
+  align-items: center; gap: 0.6rem;
+  border: 1px solid var(--line);
+  border-radius: 6px; background: rgba(255,247,231,0.015);
+  padding: 1.25rem 0.5rem 0.8rem;
+  transition: border-color 0.35s, background 0.35s, transform 0.35s;
 }
 
 .chara-card:hover {
-  border-color: rgba(196,164,108,0.2);
-  background: rgba(255,247,231,0.04);
+  border-color: rgba(196,164,108,0.18);
+  background: rgba(255,247,231,0.03);
+  transform: translateY(-3px);
 }
 
 .chara-card-fig {
   display: flex; align-items: flex-end; justify-content: center;
-  height: 240px;
+  height: 220px; width: 100%;
 }
 
 .chara-card-sprite {
   height: 100%; width: auto;
-  opacity: 0.65; filter: grayscale(0.4) contrast(0.85);
+  opacity: 0.6; filter: grayscale(0.45) contrast(0.8);
   transition: opacity 0.5s, filter 0.5s;
 }
 
@@ -304,32 +367,26 @@ body {
 
 .chara-card-info { text-align: center; }
 
-.chara-card-name {
-  font-family: "Yu Mincho", "Songti SC", "Noto Serif SC", serif;
-  font-size: 0.95rem; font-weight: 400;
-  margin: 0; color: var(--text);
-}
-
-.chara-card-sub {
-  font-size: 0.65rem; color: var(--text-muted);
-  margin: 0.3rem 0 0; letter-spacing: 0.05em;
-  text-transform: uppercase; opacity: 0.6;
+.chara-card-code {
+  font-family: "Yu Mincho", "Songti SC", serif;
+  font-size: 0.85rem; color: var(--text-dim);
+  margin: 0; letter-spacing: 0.15em;
 }
 
 /* ─── About ─── */
 
-.about-body { max-width: 560px; }
+.about-body { max-width: 540px; }
 
 .about-text {
-  font-size: 0.92rem; line-height: 2;
-  color: var(--text-muted); margin: 0 0 1.5rem;
+  font-size: 0.9rem; line-height: 2.1;
+  color: var(--text-dim); margin: 0 0 1.5rem;
 }
 
-.about-muted { font-size: 0.78rem; opacity: 0.5; }
+.about-muted { font-size: 0.75rem; opacity: 0.4; }
 
 .about-credit {
-  font-size: 0.7rem; color: var(--accent);
-  letter-spacing: 0.1em; margin-top: 3rem; opacity: 0.5;
+  font-size: 0.68rem; color: var(--accent);
+  letter-spacing: 0.1em; margin-top: 3rem; opacity: 0.45;
 }
 
 /* ─── Divider ─── */
@@ -342,8 +399,8 @@ body {
 
 .divider-rule::before {
   content: ""; display: block;
-  width: 1px; height: 60px;
-  background: linear-gradient(180deg, var(--accent-dim), transparent);
+  width: 1px; height: 48px;
+  background: linear-gradient(180deg, rgba(196,164,108,0.2), transparent);
 }
 
 /* ─── Music Toggle ─── */
@@ -352,18 +409,18 @@ body {
   position: fixed; left: 1.25rem; bottom: 1.25rem;
   z-index: 50;
   display: grid; place-items: center;
-  width: 2.5rem; height: 2.5rem;
-  border: 1px solid rgba(255,247,231,0.12); border-radius: 50%;
-  background: rgba(14,15,19,0.55);
-  color: var(--text-muted);
+  width: 2.4rem; height: 2.4rem;
+  border: 1px solid var(--line); border-radius: 50%;
+  background: rgba(14,15,19,0.5);
+  color: var(--text-dim);
   backdrop-filter: blur(12px);
   cursor: pointer;
-  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  transition: border-color 0.25s, color 0.25s, background 0.25s;
 }
 
 .music-toggle:hover {
-  border-color: rgba(196,164,108,0.35);
-  color: var(--accent); background: rgba(14,15,19,0.75);
+  border-color: rgba(196,164,108,0.3);
+  color: var(--accent); background: rgba(14,15,19,0.7);
 }
 
 /* ─── Fade In ─── */
@@ -382,20 +439,20 @@ body {
 /* ─── Responsive ─── */
 
 @media (max-width: 768px) {
-  .site-nav { padding: 0.6rem 1rem; gap: 1.25rem; }
-  .site-nav-links { gap: 1rem; }
+  .site-nav { padding: 0.6rem 1rem; gap: 1rem; }
+  .site-nav-links { gap: 0.75rem; }
   .site-nav-sub { display: none; }
   .page-section { padding: 5rem 1.25rem 3rem; }
   .page-section.first { padding-top: 7rem; }
-  .gallery-track { gap: 1rem; padding: 0.5rem 1rem; }
-  .gallery-cell { width: 70vw; }
+  .gallery-track { gap: 1rem; padding: 1rem 1.25rem; }
+  .gallery-cell { width: 65vw; }
   .chara-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
   .chara-card-fig { height: 180px; }
 }
 
 @media (max-width: 480px) {
-  .chara-grid { grid-template-columns: 1fr; max-width: 260px; }
-  .entry-badge { font-size: 0.62rem; padding: 0.28rem 0.9rem; margin-bottom: 1.5rem; }
-  .music-toggle { left: 1rem; bottom: 1rem; width: 2.25rem; height: 2.25rem; }
-  .site-nav-mark { font-size: 1.2rem; }
+  .chara-grid { grid-template-columns: 1fr; max-width: 220px; }
+  .entry-badge { font-size: 0.6rem; padding: 0.25rem 0.85rem; margin-bottom: 1.5rem; }
+  .music-toggle { left: 1rem; bottom: 1rem; width: 2.1rem; height: 2.1rem; }
+  .site-nav-mark { font-size: 1.1rem; }
 }

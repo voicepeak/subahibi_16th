@@ -2,15 +2,15 @@
 
 import { useEffect, useRef } from "react";
 
-const CHARACTERS = [
-  { id: "yuki", name: "高島ざくろ", sub: "Zakuro Takashima", sprite: "/assets/chara-zakuro.png" },
-  { id: "takuji", name: "間宮卓司", sub: "Takuji Mamiya", sprite: "/assets/chara-takuji.png" },
-  { id: "kimika", name: "雪村希実香", sub: "Kimika Yukimura", sprite: "/assets/chara-kimika.png" },
-  { id: "yuki2", name: "高島由岐", sub: "Yuki Takashima", sprite: "/assets/chara-yuki.png" },
-  { id: "hs", name: "日向", sub: "??", sprite: "/assets/chara-hs.png" },
+const SPRITES = [
+  { file: "zk", label: "zk" },
+  { file: "tk", label: "tk" },
+  { file: "km", label: "km" },
+  { file: "yk", label: "yk" },
+  { file: "hs", label: "hs" },
 ];
 
-function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+function FadeIn({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = ref.current;
@@ -22,13 +22,14 @@ function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
     obs.observe(el);
     return () => obs.disconnect();
   }, [delay]);
-  return <div ref={ref} className="fi fi-up">{children}</div>;
+  return <div ref={ref} className={`fi fi-up ${className}`}>{children}</div>;
 }
 
 export default function CharactersPage() {
   return (
     <>
       <section className="page-section first">
+        <div className="page-parallax" />
         <FadeIn>
           <div className="page-head">
             <h1 className="page-title">邂逅</h1>
@@ -39,15 +40,19 @@ export default function CharactersPage() {
 
       <section className="page-section">
         <div className="chara-grid">
-          {CHARACTERS.map((ch, i) => (
-            <FadeIn key={ch.id} delay={i * 80}>
+          {SPRITES.map((s, i) => (
+            <FadeIn key={s.file} delay={i * 80}>
               <div className="chara-card">
                 <div className="chara-card-fig">
-                  <img src={ch.sprite} alt={ch.name} className="chara-card-sprite" loading="lazy" />
+                  <img
+                    src={`/assets/chara-${s.file}.png`}
+                    alt=""
+                    className="chara-card-sprite"
+                    loading="lazy"
+                  />
                 </div>
                 <div className="chara-card-info">
-                  <h3 className="chara-card-name">{ch.name}</h3>
-                  <p className="chara-card-sub">{ch.sub}</p>
+                  <p className="chara-card-code">{s.label}</p>
                 </div>
               </div>
             </FadeIn>
