@@ -8,5 +8,7 @@ tsconfig.tsbuildinfo
 npm-debug.log*
 
 素材/
-素晴日_全文_clean.docx
+*.docx
+*.txt
+铁道列车.png
 
