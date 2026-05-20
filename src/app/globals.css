@@ -329,6 +329,151 @@ body {
   transform: translateY(0);
 }
 
+/* ─── Music Toggle ─── */
+
+.music-toggle {
+  position: fixed;
+  left: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid rgba(255, 247, 231, 0.12);
+  border-radius: 50%;
+  background: rgba(14, 15, 19, 0.55);
+  color: var(--text-muted);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.music-toggle:hover {
+  border-color: rgba(196, 164, 108, 0.35);
+  color: var(--accent);
+  background: rgba(14, 15, 19, 0.75);
+}
+
+/* ─── CG Gallery ─── */
+
+.gallery-wrap {
+  position: relative;
+  z-index: 2;
+  padding: 4rem 0 6rem;
+}
+
+.gallery-heading {
+  text-align: center;
+  font-family: "Yu Mincho", "Songti SC", "Noto Serif SC", "Times New Roman", serif;
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  font-weight: 300;
+  color: var(--text-muted);
+  letter-spacing: 0.35em;
+  margin: 0 0 3rem;
+}
+
+.gallery-track {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 1rem 2rem;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.gallery-track::-webkit-scrollbar { display: none; }
+
+.gallery-cell {
+  flex: 0 0 auto;
+  width: clamp(260px, 40vw, 520px);
+  scroll-snap-align: center;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 247, 231, 0.08);
+  background: rgba(255, 247, 231, 0.02);
+  transition: border-color 0.3s;
+}
+
+.gallery-cell:hover {
+  border-color: rgba(196, 164, 108, 0.25);
+}
+
+.gallery-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  opacity: 0.85;
+  transition: opacity 0.4s;
+}
+
+.gallery-cell:hover .gallery-img {
+  opacity: 1;
+}
+
+/* ─── Character Encounter ─── */
+
+.chara-wrap {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+}
+
+.chara-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(2rem, 6vw, 6rem);
+  max-width: 960px;
+  width: 100%;
+}
+
+.chara-figure {
+  flex: 0 0 auto;
+}
+
+.chara-sprite {
+  display: block;
+  height: clamp(320px, 50vh, 600px);
+  width: auto;
+  opacity: 0.7;
+  filter: grayscale(0.3) contrast(0.9);
+  transition: opacity 0.6s, filter 0.6s;
+}
+
+.chara-figure:hover .chara-sprite {
+  opacity: 0.9;
+  filter: grayscale(0) contrast(1);
+}
+
+.chara-words {
+  flex: 0 1 auto;
+  max-width: 340px;
+}
+
+.chara-line {
+  font-family: "Yu Mincho", "Songti SC", "Noto Serif SC", "Times New Roman", serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin: 0 0 1rem;
+}
+
+.chara-by {
+  font-size: 0.8rem;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  opacity: 0.6;
+}
+
 /* ─── Responsive ─── */
 
 @media (max-width: 640px) {
@@ -336,4 +481,10 @@ body {
   .hero-year { margin-top: 1.5rem; }
   .quote-section { min-height: 70vh; padding: 2rem 1.5rem; }
   .quote-text { font-size: 1rem; }
+  .gallery-track { gap: 1rem; padding: 0.5rem 1rem; }
+  .gallery-cell { width: 70vw; }
+  .chara-inner { flex-direction: column; text-align: center; gap: 2rem; }
+  .chara-sprite { height: 40vh; }
+  .chara-words { max-width: none; }
+  .music-toggle { left: 1rem; bottom: 1rem; width: 2.25rem; height: 2.25rem; }
 }
