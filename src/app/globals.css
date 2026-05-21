@@ -42,6 +42,11 @@ body::before {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--accent-dim); border-radius: 999px; }
 
+:focus-visible {
+  outline: 1px solid rgba(196, 164, 108, 0.55);
+  outline-offset: 4px;
+}
+
 main { min-height: 100vh; }
 
 /* 鈹€鈹€鈹€ Page Transition 鈹€鈹€鈹€ */
@@ -171,6 +176,166 @@ main { min-height: 100vh; }
 
 .site-nav-label { font-family: "Yu Mincho", "Songti SC", serif; font-size: 0.85rem; }
 .site-nav-sub { font-size: 0.58rem; text-transform: uppercase; opacity: 0.4; letter-spacing: 0.12em; }
+
+.mobile-nav-shell,
+.mobile-nav-layer {
+  display: none;
+}
+
+.mobile-nav-bar,
+.mobile-nav-panel {
+  border: 1px solid rgba(255, 247, 231, 0.09);
+  background: rgba(14, 15, 19, 0.86);
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.36);
+  backdrop-filter: blur(18px);
+}
+
+.mobile-nav-bar {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.15rem;
+  border-radius: 8px;
+  padding: 0.35rem;
+}
+
+.mobile-nav-item {
+  min-width: 0;
+  min-height: 3.35rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-dim);
+  text-decoration: none;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s;
+}
+
+.mobile-nav-item span {
+  overflow: hidden;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: "Yu Mincho", "Songti SC", serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+}
+
+.mobile-nav-item-on {
+  background: rgba(196, 164, 108, 0.08);
+  color: var(--text);
+}
+
+.mobile-nav-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 69;
+}
+
+.mobile-nav-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(8, 9, 11, 0.62);
+  cursor: pointer;
+}
+
+.mobile-nav-panel {
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: calc(5rem + env(safe-area-inset-bottom));
+  border-radius: 8px;
+  padding: 0.85rem;
+  animation: mobile-panel-in 0.24s cubic-bezier(0.23,1,0.32,1);
+}
+
+@keyframes mobile-panel-in {
+  from { opacity: 0; transform: translateY(12px); }
+}
+
+.mobile-nav-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.7rem;
+}
+
+.mobile-nav-panel-title {
+  font-family: "Yu Mincho", "Songti SC", serif;
+  color: var(--text);
+  font-size: 0.86rem;
+  letter-spacing: 0.16em;
+}
+
+.mobile-nav-close {
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: rgba(255,247,231,0.02);
+  color: var(--text-dim);
+  cursor: pointer;
+}
+
+.mobile-nav-more-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
+.mobile-nav-more-link {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.55rem;
+  row-gap: 0.1rem;
+  align-items: center;
+  padding: 0.65rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--text-dim);
+  text-decoration: none;
+  background: rgba(255,247,231,0.012);
+  transition: border-color 0.25s, background 0.25s, color 0.25s;
+}
+
+.mobile-nav-more-link-on {
+  border-color: rgba(196, 164, 108, 0.22);
+  background: rgba(196, 164, 108, 0.06);
+  color: var(--text);
+}
+
+.mobile-nav-more-link svg {
+  grid-row: span 2;
+}
+
+.mobile-nav-more-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: "Yu Mincho", "Songti SC", serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+}
+
+.mobile-nav-more-sub {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--accent);
+  font-size: 0.5rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.35;
+}
 
 /* 鈹€鈹€鈹€ Entry Page 鈹€鈹€鈹€ */
 
@@ -349,7 +514,12 @@ main { min-height: 100vh; }
 
 .page-section-narrow { padding: 3rem 2rem; min-height: auto; }
 
-.page-section.first { min-height: 100vh; padding-top: 7rem; }
+.page-section.first {
+  min-height: 86svh;
+  padding-top: 6rem;
+  padding-bottom: 5rem;
+  overflow: hidden;
+}
 
 .page-parallax {
   position: absolute; inset: 0; z-index: -1;
@@ -364,7 +534,7 @@ main { min-height: 100vh; }
 .page-bg-img {
   position: absolute; inset: 0; z-index: -2;
   background-size: cover; background-position: center;
-  opacity: 0.08; pointer-events: none;
+  opacity: 0.16; pointer-events: none;
 }
 
 .page-head { text-align: center; }
@@ -385,7 +555,7 @@ main { min-height: 100vh; }
 
 .cg-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
   gap: 1rem; width: 100%; max-width: 880px;
 }
 
@@ -1166,6 +1336,7 @@ main { min-height: 100vh; }
 /* 鈹€鈹€鈹€ Fade In 鈹€鈹€鈹€ */
 
 .fi {
+  width: 100%;
   opacity: 0; transform: translateY(20px);
   transition: opacity 0.8s cubic-bezier(0.23,1,0.32,1),
               transform 0.8s cubic-bezier(0.23,1,0.32,1);
@@ -1532,21 +1703,74 @@ main { min-height: 100vh; }
 }
 
 @media (max-width: 768px) {
-  .site-nav { padding: 0.6rem 1rem; gap: 1rem; }
-  .site-nav-links { gap: 0.75rem; }
-  .site-nav-sub { display: none; }
-  .page-section { padding: 5rem 1.25rem 3rem; }
-  .page-section.first { padding-top: 7rem; }
+  .site-nav { display: none; }
+  .mobile-nav-shell {
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 70;
+    padding: 0 0.75rem calc(0.75rem + env(safe-area-inset-bottom));
+    pointer-events: none;
+  }
+  .mobile-nav-bar { pointer-events: auto; }
+  .mobile-nav-layer { display: block; }
+  .page-wrap { padding-bottom: 5.75rem; }
+  .page-section { padding: 4rem 1.25rem 3rem; }
+  .page-section.first {
+    min-height: 82svh;
+    padding-top: 4.5rem;
+    padding-bottom: 4rem;
+  }
+  .page-bg-img { opacity: 0.2; }
+  .cg-grid {
+    max-width: min(100%, 420px);
+    gap: 0.85rem;
+  }
   .gallery-track { gap: 1rem; padding: 1rem 1.25rem; }
   .gallery-cell { width: 65vw; }
   .chara-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; max-width: 520px; }
+  .bgm-player {
+    right: 0.85rem;
+    bottom: calc(5.45rem + env(safe-area-inset-bottom));
+    width: 2.45rem;
+    height: 2.45rem;
+    justify-content: center;
+    padding: 0;
+    border-radius: 50%;
+  }
+  .bgm-player-label { display: none; }
+  .bgm-player-visual { display: none; }
+  .bgm-player::after {
+    content: "♪";
+    font-size: 1rem;
+    line-height: 1;
+    color: var(--accent);
+    opacity: 0.65;
+  }
+  .bgm-player-on::after { content: "♫"; }
+  .time-sense {
+    display: none;
+  }
+  .truth-fragment {
+    left: 1rem;
+    right: auto;
+    bottom: calc(5.95rem + env(safe-area-inset-bottom));
+  }
+  body.is-entry-page .page-wrap { padding-bottom: 0; }
+  body.is-entry-page .bgm-player {
+    bottom: calc(0.85rem + env(safe-area-inset-bottom));
+  }
+  .scanlines { opacity: 0.65; }
+  .vignette { opacity: 0.85; }
 }
 
 /* 鈹€鈹€鈹€ Train Cutscene 鈹€鈹€鈹€ */
 
 .cs-section {
   position: relative;
-  height: 280vh;
+  height: 190vh;
 }
 
 .cs-stage {
@@ -1662,7 +1886,7 @@ main { min-height: 100vh; }
 }
 
 .cs-spacer {
-  height: 180vh;
+  height: 90vh;
   pointer-events: none;
 }
 
@@ -2608,15 +2832,76 @@ main { min-height: 100vh; }
 /* 鈹€鈹€鈹€ Responsive 鈹€鈹€鈹€ */
 
 @media (max-width: 480px) {
-  .chara-grid { grid-template-columns: 1fr; max-width: 220px; }
+  .chara-grid { grid-template-columns: 1fr; max-width: 280px; }
   .entry-badge { font-size: 0.6rem; padding: 0.25rem 0.85rem; margin-bottom: 1.5rem; }
   .site-nav-mark { font-size: 1.1rem; }
-  .bgm-player { right: 0.75rem; bottom: 0.75rem; padding: 0.4rem 0.5rem 0.3rem; }
-  .time-sense { left: 0.75rem; bottom: 0.75rem; padding: 0.4rem 0.6rem; }
+  .bgm-player {
+    right: 0.85rem;
+    bottom: calc(5.45rem + env(safe-area-inset-bottom));
+    padding: 0;
+  }
+  .time-sense {
+    display: none;
+  }
   .time-sense-text { font-size: 0.6rem; }
   .takashima-hero { flex-direction: column; gap: 1rem; }
   .takashima-chara { height: 160px; }
   .takashima-form { flex-direction: column; }
   .bbs-post-head { gap: 0.3rem; }
   .bbs-post-uid { margin-left: 0; }
+  body.is-entry-page .bgm-player {
+    bottom: calc(0.85rem + env(safe-area-inset-bottom));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .fi,
+  .sky-chapter-content {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .sky-chapter-img {
+    opacity: 0.36 !important;
+    transform: none !important;
+  }
+
+  .glitch-intro,
+  .glitch-blackout,
+  .glitch-noise,
+  .glitch-bars,
+  .glitch-scanlines,
+  .glitch-channel,
+  .glitch-block,
+  .crt-band {
+    display: none !important;
+  }
+
+  .cs-section,
+  .cs-spacer {
+    height: auto;
+  }
+
+  .cs-stage {
+    position: relative;
+    min-height: 55vh;
+  }
+
+  .grain,
+  .scanlines,
+  .particles,
+  .sparkles {
+    opacity: 0.06;
+  }
 }

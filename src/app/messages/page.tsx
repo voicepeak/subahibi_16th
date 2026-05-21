@@ -117,11 +117,12 @@ function MessageForm({ onSent }: { onSent: () => void }) {
   return (
     <form className="ticket-form" onSubmit={handleSubmit}>
       <div className="ticket-form-field">
-        <label className="ticket-form-label">
+        <label className="ticket-form-label" htmlFor="message-nickname">
           <span className="ticket-form-lang">名字</span>
           <span className="ticket-form-sub">name</span>
         </label>
         <input
+          id="message-nickname"
           className="ticket-form-input"
           type="text"
           value={nickname}
@@ -132,11 +133,12 @@ function MessageForm({ onSent }: { onSent: () => void }) {
         />
       </div>
       <div className="ticket-form-field">
-        <label className="ticket-form-label">
+        <label className="ticket-form-label" htmlFor="message-country">
           <span className="ticket-form-lang">所在地</span>
           <span className="ticket-form-sub">station</span>
         </label>
         <input
+          id="message-country"
           className="ticket-form-input"
           type="text"
           value={country}
@@ -147,11 +149,12 @@ function MessageForm({ onSent }: { onSent: () => void }) {
         />
       </div>
       <div className="ticket-form-field">
-        <label className="ticket-form-label">
+        <label className="ticket-form-label" htmlFor="message-content">
           <span className="ticket-form-lang">留言</span>
           <span className="ticket-form-sub">message</span>
         </label>
         <textarea
+          id="message-content"
           className="ticket-form-textarea"
           value={content}
           onChange={(e) => setContent(e.target.value)}
@@ -223,8 +226,6 @@ export default function MessagesPage() {
         </FadeIn>
       </section>
 
-      <TrainCutscene />
-
       <section className="page-section page-section-narrow">
         <FadeIn delay={160}>
           <div className="ticket-form-wrap">
@@ -233,6 +234,8 @@ export default function MessagesPage() {
           </div>
         </FadeIn>
       </section>
+
+      <TrainCutscene />
 
       <section className="page-section page-section-narrow">
         <FadeIn delay={240}>

@@ -35,6 +35,11 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     setLoaded(true);
   }, []);
 
+  useEffect(() => {
+    document.body.classList.toggle("is-entry-page", isEntry);
+    return () => document.body.classList.remove("is-entry-page");
+  }, [isEntry]);
+
   return (
     <>
       <DynamicGlow />

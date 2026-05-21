@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, type MouseEvent } from "react";
 import { useRouter } from "next/navigation";
 import { getCountdown, isAfterEnd } from "@/lib/date-utils";
 
@@ -13,6 +13,11 @@ export default function EntryPage() {
   const enter = useCallback(() => {
     router.push("/memories");
   }, [router]);
+
+  const handleEntryClick = useCallback((event: MouseEvent<HTMLElement>) => {
+    if ((event.target as HTMLElement).closest("button, a")) return;
+    enter();
+  }, [enter]);
 
   useEffect(() => {
     setMounted(true);
@@ -36,7 +41,7 @@ export default function EntryPage() {
 
   if (ended) {
     return (
-      <section className="entry" onClick={enter}>
+      <section className="entry" onClick={handleEntryClick}>
         <div className="entry-letterbox-top" />
         <div className="entry-letterbox-bottom" />
         <div className="entry-bg" />
@@ -45,16 +50,16 @@ export default function EntryPage() {
         <h1 className="entry-title entry-title-ended">终の空</h1>
         <p className="entry-subtitle">ここから始まる</p>
         <p className="entry-year">2010 — 2026</p>
-        <div className="entry-enter">
+        <button className="entry-enter" type="button" onClick={enter}>
           <span>PRESS ANY KEY</span>
           <span className="entry-enter-line" />
-        </div>
+        </button>
       </section>
     );
   }
 
   return (
-    <section className="entry" onClick={enter}>
+    <section className="entry" onClick={handleEntryClick}>
       <div className="entry-letterbox-top" />
       <div className="entry-letterbox-bottom" />
       <div className="entry-bg" />
@@ -66,10 +71,10 @@ export default function EntryPage() {
         世界終焉まで <span className="entry-countdown-num">{cd.days}</span> 日
       </p>
       <p className="entry-year">2010 — 2026</p>
-      <div className="entry-enter">
+      <button className="entry-enter" type="button" onClick={enter}>
         <span>PRESS ANY KEY</span>
         <span className="entry-enter-line" />
-      </div>
+      </button>
     </section>
   );
 }
