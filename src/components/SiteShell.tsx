@@ -6,6 +6,7 @@ import { MouseTracker, GrainOverlay, ScanLines, Vignette, FloatingParticles, Spa
 import { TruthFragment } from "./TruthFragment";
 import { BGMPlayer } from "./BGMPlayer";
 import { TimeSense } from "./TimeSense";
+import { DynamicGlow } from "./DynamicGlow";
 import { Nav } from "./Nav";
 import { isAfterEnd } from "@/lib/date-utils";
 
@@ -36,6 +37,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
   return (
     <>
+      <DynamicGlow />
       <MouseTracker />
       <GrainOverlay />
       <ScanLines />
@@ -43,6 +45,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       <FloatingParticles />
       <SparkleField />
       <div className="mouse-light" aria-hidden="true" />
+      <div className="mood-glow" aria-hidden="true" />
       {!isEntry && <Nav />}
       {!isEntry && <ScrollProgress />}
 

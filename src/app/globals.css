@@ -13,6 +13,7 @@
   --line: rgba(255, 247, 231, 0.06);
   --mouse-x: 0;
   --mouse-y: 0;
+  --mood-glow: rgba(196, 164, 108, 0.03);
 }
 
 * { box-sizing: border-box; }
@@ -100,10 +101,17 @@ main { min-height: 100vh; }
 
 .mouse-light {
   position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background: radial-gradient(900px circle at
-    calc(50% + calc(var(--mouse-x) * 280px))
-    calc(50% + calc(var(--mouse-y) * 280px)),
-    rgba(196, 164, 108, 0.035), transparent 60%);
+  background:
+    radial-gradient(900px circle at
+      calc(50% + calc(var(--mouse-x) * 280px))
+      calc(50% + calc(var(--mouse-y) * 280px)),
+      rgba(196, 164, 108, 0.035), transparent 60%);
+}
+
+.mood-glow {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: var(--mood-glow);
+  transition: background 1s ease;
 }
 
 /* ─── Navigation ─── */
@@ -488,6 +496,447 @@ main { min-height: 100vh; }
 .cg-lightbox-close:hover {
   border-color: rgba(196,164,108,0.3);
   color: var(--accent);
+}
+
+/* ─── Takashima Subscription ─── */
+
+.takashima-section {
+  max-width: 520px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.takashima-desc {
+  font-size: 0.78rem;
+  line-height: 1.8;
+  color: var(--text-dim);
+  margin: 0 0 1.25rem;
+  text-align: center;
+  letter-spacing: 0.03em;
+}
+
+.takashima-form {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.takashima-form input {
+  flex: 1;
+}
+
+.takashima-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.takashima-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.takashima-header-label {
+  font-family: "Yu Mincho", "Songti SC", serif;
+  font-size: 0.85rem;
+  color: var(--text);
+  letter-spacing: 0.12em;
+}
+
+.takashima-header-sub {
+  font-size: 0.5rem;
+  color: var(--accent);
+  opacity: 0.35;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.takashima-header-email {
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  opacity: 0.4;
+  margin-left: auto;
+  letter-spacing: 0.05em;
+}
+
+.takashima-reset {
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  width: 1.4rem;
+  height: 1.4rem;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  color: var(--text-dim);
+  font-size: 0.55rem;
+  opacity: 0.3;
+  transition: opacity 0.25s, border-color 0.25s;
+  font-family: inherit;
+  flex-shrink: 0;
+}
+
+.takashima-reset:hover {
+  opacity: 0.7;
+  border-color: rgba(196,164,108,0.3);
+}
+
+.takashima-progress {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.takashima-progress-bar {
+  flex: 1;
+  height: 2px;
+  background: var(--line);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.takashima-progress-fill {
+  height: 100%;
+  background: var(--accent);
+  opacity: 0.4;
+  border-radius: 1px;
+  transition: width 0.5s ease;
+}
+
+.takashima-progress-text {
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  opacity: 0.4;
+  letter-spacing: 0.08em;
+  flex-shrink: 0;
+}
+
+.takashima-next {
+  font-size: 0.65rem;
+  color: var(--accent);
+  opacity: 0.45;
+  text-align: center;
+  margin: 0 0 1rem;
+  letter-spacing: 0.06em;
+  animation: takashima-pulse 2s ease-in-out infinite;
+}
+
+@keyframes takashima-pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+.takashima-empty {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  opacity: 0.3;
+  margin: 1.5rem 0 0;
+  letter-spacing: 0.08em;
+}
+
+.takashima-inbox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.takashima-mail {
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.takashima-mail-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  background: rgba(255,247,231,0.012);
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+  text-align: left;
+  transition: background 0.2s;
+}
+
+.takashima-mail-head:hover {
+  background: rgba(255,247,231,0.025);
+}
+
+.takashima-mail-sender {
+  font-size: 0.6rem;
+  color: var(--accent);
+  opacity: 0.5;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+  min-width: 3rem;
+}
+
+.takashima-mail-subject {
+  font-size: 0.72rem;
+  color: var(--text);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.takashima-mail-status {
+  font-size: 0.5rem;
+  color: var(--text-dim);
+  opacity: 0.3;
+  flex-shrink: 0;
+}
+
+.takashima-mail-body {
+  padding: 0.75rem;
+  border-top: 1px solid var(--line);
+  background: rgba(0,0,0,0.1);
+}
+
+.takashima-mail-text {
+  font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  font-size: 0.78rem;
+  line-height: 1.9;
+  color: var(--text-dim);
+  margin: 0 0 0.5rem;
+  white-space: pre-wrap;
+  letter-spacing: 0.02em;
+}
+
+.takashima-mail-from {
+  font-size: 0.55rem;
+  color: var(--text-dim);
+  opacity: 0.3;
+  letter-spacing: 0.05em;
+}
+
+/* ─── Bulletin Board ─── */
+
+.bbs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 1rem 0 0.75rem;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 1rem;
+}
+
+.bbs-header-title {
+  font-family: "Yu Mincho", "Songti SC", serif;
+  font-size: 0.85rem;
+  color: var(--text);
+  letter-spacing: 0.1em;
+}
+
+.bbs-header-info {
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  opacity: 0.4;
+  letter-spacing: 0.08em;
+}
+
+.bbs-threads {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.bbs-post {
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 0.85rem 1rem 0.6rem;
+  background: rgba(255, 247, 231, 0.008);
+}
+
+.bbs-post-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.bbs-post-id {
+  font-family: "Noto Sans SC", monospace;
+  font-size: 0.7rem;
+  color: var(--accent);
+  opacity: 0.5;
+}
+
+.bbs-post-name {
+  font-size: 0.75rem;
+  color: var(--text);
+  letter-spacing: 0.04em;
+}
+
+.bbs-post-date {
+  font-size: 0.58rem;
+  color: var(--text-dim);
+  opacity: 0.4;
+  letter-spacing: 0.02em;
+}
+
+.bbs-post-uid {
+  font-size: 0.55rem;
+  color: var(--text-dim);
+  opacity: 0.25;
+  font-family: monospace;
+  margin-left: auto;
+}
+
+.bbs-post-subject {
+  font-size: 0.78rem;
+  color: var(--text);
+  letter-spacing: 0.03em;
+  margin-bottom: 0.4rem;
+}
+
+.bbs-post-arrow {
+  color: var(--accent);
+  opacity: 0.5;
+  margin-right: 0.4rem;
+  font-size: 0.7rem;
+}
+
+.bbs-post-body {
+  transition: max-height 0.3s ease;
+  overflow: hidden;
+}
+
+.bbs-post-collapsed {
+  max-height: 4.5em;
+  position: relative;
+}
+
+.bbs-post-collapsed::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1.5em;
+  background: linear-gradient(transparent, rgba(14,15,19,0.95));
+  pointer-events: none;
+}
+
+.bbs-post-text {
+  font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  font-size: 0.78rem;
+  line-height: 1.9;
+  color: var(--text-dim);
+  margin: 0;
+  white-space: pre-wrap;
+  letter-spacing: 0.02em;
+}
+
+.bbs-post-toggle {
+  background: none;
+  border: none;
+  color: var(--accent);
+  opacity: 0.35;
+  font-size: 0.6rem;
+  cursor: pointer;
+  padding: 0.3rem 0 0;
+  font-family: inherit;
+  letter-spacing: 0.08em;
+  transition: opacity 0.2s;
+}
+
+.bbs-post-toggle:hover { opacity: 0.7; }
+
+.bbs-pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.bbs-pager-btn {
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.35rem 1rem;
+  color: var(--text-dim);
+  font-size: 0.65rem;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.08em;
+  transition: border-color 0.25s, color 0.25s;
+}
+
+.bbs-pager-btn:hover:not(:disabled) {
+  border-color: rgba(196,164,108,0.3);
+  color: var(--accent);
+}
+
+.bbs-pager-btn:disabled {
+  opacity: 0.15;
+  cursor: not-allowed;
+}
+
+.bbs-pager-info {
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  opacity: 0.35;
+  letter-spacing: 0.08em;
+}
+
+.bbs-footer {
+  text-align: center;
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  opacity: 0.25;
+  margin-top: 1.5rem;
+  letter-spacing: 0.1em;
+  padding-bottom: 1rem;
+}
+
+/* ─── Takashima Page ─── */
+
+.takashima-hero {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.takashima-chara {
+  height: 300px;
+  width: auto;
+  opacity: 0.6;
+  filter: grayscale(0.3);
+  flex-shrink: 0;
+}
+
+.takashima-intro {
+  max-width: 480px;
+  margin: 0 auto;
+  font-size: 0.85rem;
+  line-height: 2.1;
+  color: var(--text-dim);
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 600px) {
+  .takashima-hero {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .takashima-chara {
+    height: 200px;
+  }
 }
 
 /* ─── BGM Player ─── */
@@ -1211,19 +1660,239 @@ main { min-height: 100vh; }
   transition: opacity 0.6s ease;
 }
 
-.train-overlay-carriage {
+.train-overlay-unit {
   position: absolute;
   top: 0;
   left: 0;
   will-change: transform;
-  transition: opacity 0.3s ease;
+}
+
+.train-glow {
+  position: absolute;
+  inset: -10px;
+  background: radial-gradient(ellipse at 50% 50%, rgba(196, 164, 108, 0.04) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .train-overlay-img {
-  height: auto;
-  max-height: 45vh;
+  display: block;
   width: auto;
+  height: 28vh;
+  max-width: none;
 }
+
+.train-sparkles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.train-spark {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: spark-pulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes spark-pulse {
+  0% { opacity: 0; transform: scale(0.3); }
+  50% { opacity: 0.7; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.5); }
+}
+
+/* ─── Train Cutscene ─── */
+
+.cs-section {
+  position: relative;
+  height: 280vh;
+}
+
+.cs-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.cs-train {
+  position: absolute;
+  left: 0;
+  will-change: transform;
+  filter: drop-shadow(2px 0 3px rgba(8,9,11,0.65)) drop-shadow(-2px 0 3px rgba(8,9,11,0.65)) drop-shadow(0 2px 3px rgba(8,9,11,0.55)) drop-shadow(0 0 6px rgba(8,9,11,0.3));
+}
+
+.cs-train::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1px solid rgba(14,15,19,0.25);
+  border-radius: 1px;
+  pointer-events: none;
+  mix-blend-mode: darken;
+}
+
+.cs-train-img {
+  display: block;
+  height: 30vh;
+  width: auto;
+  max-width: none;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0.6) 100%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0.6) 100%);
+}
+
+.cs-platform {
+  position: absolute;
+  bottom: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  transition: opacity 0.6s ease;
+}
+
+.cs-platform-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.cs-platform-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(180deg, rgba(196,164,108,0.25), transparent);
+}
+
+.cs-sign {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 1.1rem 1.8rem;
+  border: 1px solid rgba(196,164,108,0.1);
+  background: rgba(14,15,19,0.5);
+  backdrop-filter: blur(8px);
+  border-radius: 4px;
+}
+
+.cs-sign-label {
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  color: rgba(196,164,108,0.35);
+  text-transform: uppercase;
+}
+
+.cs-sign-name {
+  font-family: "Yu Mincho", "Songti SC", "Noto Serif SC", serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.7rem);
+  letter-spacing: 0.12em;
+  color: var(--text);
+  font-weight: 300;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.cs-sign-sub {
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  opacity: 0.25;
+  margin: 0;
+}
+
+.cs-lights {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.cs-light {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.15;
+  animation: cs-blink 1.5s ease-in-out infinite;
+}
+
+@keyframes cs-blink {
+  0%, 100% { opacity: 0.1; transform: scale(0.8); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+
+.cs-spacer {
+  height: 180vh;
+  pointer-events: none;
+}
+
+.cs-platform-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.cs-platform-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(180deg, rgba(196,164,108,0.3), transparent);
+}
+
+.cs-sign {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 1.25rem 2rem;
+  border: 1px solid rgba(196,164,108,0.12);
+  background: rgba(14,15,19,0.5);
+  backdrop-filter: blur(8px);
+  border-radius: 4px;
+}
+
+.cs-sign-label {
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  color: rgba(196,164,108,0.4);
+  text-transform: uppercase;
+}
+
+.cs-sign-name {
+  font-family: "Yu Mincho", "Songti SC", "Noto Serif SC", serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  letter-spacing: 0.12em;
+  color: var(--text);
+  font-weight: 300;
+}
+
+.cs-sign-sub {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  opacity: 0.3;
+}
+
+.cs-lights {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.cs-light {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.15;
+  animation: cs-blink 1.5s ease-in-out infinite;
+}
+
+@keyframes cs-blink {
+  0%, 100% { opacity: 0.1; transform: scale(0.8); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+
+
 
 /* ─── Responsive ─── */
 

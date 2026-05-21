@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { supabase, isSupabaseReady } from "@/lib/supabase";
 import type { Message } from "@/lib/types";
-import { TrainOverlay } from "@/components/TrainOverlay";
+import { TrainCutscene } from "@/components/TrainCutscene";
+
 
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -210,8 +211,6 @@ export default function MessagesPage() {
         </FadeIn>
       </section>
 
-      <TrainOverlay />
-
       <section className="page-section page-section-narrow">
         <FadeIn delay={80}>
           <blockquote className="quote-card">
@@ -223,6 +222,8 @@ export default function MessagesPage() {
           </blockquote>
         </FadeIn>
       </section>
+
+      <TrainCutscene />
 
       <section className="page-section page-section-narrow">
         <FadeIn delay={160}>

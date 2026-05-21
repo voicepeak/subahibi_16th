@@ -9,6 +9,8 @@ const LINKS = [
   { href: "/characters", label: "邂逅", sub: "characters" },
   { href: "/messages", label: "车站", sub: "station" },
   { href: "/sunflower", label: "向日葵", sub: "hill" },
+  { href: "/bulletin", label: "揭示板", sub: "bbs" },
+  { href: "/takashima", label: "短信", sub: "takashima" },
   { href: "/about", label: "关于", sub: "about" },
 ];
 

@@ -10,5 +10,6 @@ npm-debug.log*
 素材/
 *.docx
 *.txt
-铁道列车.png
+*.png
+!public/**/*.png
 
