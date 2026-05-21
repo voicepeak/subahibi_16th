@@ -1,19 +1,19 @@
-@tailwind base;
+﻿@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
   color-scheme: dark;
-  --bg: #0e0f13;
-  --bg-gradient: radial-gradient(ellipse at 50% 20%, #1a1c28 0%, #0e0f13 50%, #08090b 100%);
-  --text: #ddd8ce;
-  --text-dim: #7a776e;
+  --bg: #14151b;
+  --bg-gradient: radial-gradient(ellipse at 50% 20%, #1d1f2e 0%, #14151b 50%, #0e0f13 100%);
+  --text: #e8e2d7;
+  --text-dim: #a39e93;
   --accent: #c4a46c;
-  --accent-dim: rgba(196, 164, 108, 0.15);
-  --line: rgba(255, 247, 231, 0.06);
+  --accent-dim: rgba(196, 164, 108, 0.2);
+  --line: rgba(255, 247, 231, 0.09);
   --mouse-x: 0;
   --mouse-y: 0;
-  --mood-glow: rgba(196, 164, 108, 0.03);
+  --mood-glow: rgba(196, 164, 108, 0.04);
 }
 
 * { box-sizing: border-box; }
@@ -22,12 +22,19 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--bg-gradient);
+  background: var(--bg);
   color: var(--text);
   font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed; inset: 0; z-index: -1;
+  background: var(--bg-gradient);
+  pointer-events: none;
 }
 
 ::selection { background: var(--accent-dim); color: var(--text); }
@@ -37,7 +44,7 @@ body {
 
 main { min-height: 100vh; }
 
-/* ─── Page Transition ─── */
+/* 鈹€鈹€鈹€ Page Transition 鈹€鈹€鈹€ */
 
 .page-wrap {
   opacity: 0;
@@ -53,7 +60,7 @@ main { min-height: 100vh; }
   transition: filter 2s ease;
 }
 
-/* ─── Scroll Progress ─── */
+/* 鈹€鈹€鈹€ Scroll Progress 鈹€鈹€鈹€ */
 
 .scroll-progress {
   position: fixed;
@@ -65,13 +72,13 @@ main { min-height: 100vh; }
   opacity: 0.4;
 }
 
-/* ─── Atmosphere ─── */
+/* 鈹€鈹€鈹€ Atmosphere 鈹€鈹€鈹€ */
 
 .grain {
   position: fixed; inset: 0; z-index: 100;
   width: 100%; height: 100%;
   image-rendering: pixelated; pointer-events: none;
-  opacity: 0.4; mix-blend-mode: overlay;
+  opacity: 0.15; mix-blend-mode: overlay;
 }
 
 .scanlines {
@@ -81,8 +88,8 @@ main { min-height: 100vh; }
     0deg,
     transparent 0px,
     transparent 3px,
-    rgba(0, 0, 0, 0.06) 3px,
-    rgba(0, 0, 0, 0.06) 4px
+    rgba(0, 0, 0, 0.035) 3px,
+    rgba(0, 0, 0, 0.035) 4px
   );
 }
 
@@ -91,8 +98,8 @@ main { min-height: 100vh; }
   pointer-events: none;
   background: radial-gradient(
     ellipse at center,
-    transparent 55%,
-    rgba(8, 9, 11, 0.55) 100%
+    transparent 50%,
+    rgba(8, 9, 11, 0.35) 100%
   );
 }
 
@@ -114,13 +121,13 @@ main { min-height: 100vh; }
   transition: background 1s ease;
 }
 
-/* ─── Navigation ─── */
+/* 鈹€鈹€鈹€ Navigation 鈹€鈹€鈹€ */
 
 .site-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 50;
   display: flex; align-items: center; gap: 2rem;
   padding: 0.75rem 1.5rem;
-  background: linear-gradient(180deg, rgba(14,15,19,0.75) 0%, transparent 100%);
+  background: linear-gradient(180deg, rgba(20,21,27,0.8) 0%, transparent 100%);
   backdrop-filter: blur(14px);
   transform: translateY(0);
   transition: transform 0.45s cubic-bezier(0.23,1,0.32,1);
@@ -165,7 +172,7 @@ main { min-height: 100vh; }
 .site-nav-label { font-family: "Yu Mincho", "Songti SC", serif; font-size: 0.85rem; }
 .site-nav-sub { font-size: 0.58rem; text-transform: uppercase; opacity: 0.4; letter-spacing: 0.12em; }
 
-/* ─── Entry Page ─── */
+/* 鈹€鈹€鈹€ Entry Page 鈹€鈹€鈹€ */
 
 .entry {
   position: relative; z-index: 2;
@@ -331,7 +338,7 @@ main { min-height: 100vh; }
   50% { opacity: 0.7; }
 }
 
-/* ─── Page Sections ─── */
+/* 鈹€鈹€鈹€ Page Sections 鈹€鈹€鈹€ */
 
 .page-section {
   position: relative; z-index: 2;
@@ -374,7 +381,7 @@ main { min-height: 100vh; }
   text-transform: uppercase; opacity: 0.5;
 }
 
-/* ─── CG Grid + Lightbox ─── */
+/* 鈹€鈹€鈹€ CG Grid + Lightbox 鈹€鈹€鈹€ */
 
 .cg-grid {
   display: grid;
@@ -498,7 +505,7 @@ main { min-height: 100vh; }
   color: var(--accent);
 }
 
-/* ─── Takashima Subscription ─── */
+/* 鈹€鈹€鈹€ Takashima Subscription 鈹€鈹€鈹€ */
 
 .takashima-section {
   max-width: 520px;
@@ -719,7 +726,7 @@ main { min-height: 100vh; }
   letter-spacing: 0.05em;
 }
 
-/* ─── Bulletin Board ─── */
+/* 鈹€鈹€鈹€ Bulletin Board 鈹€鈹€鈹€ */
 
 .bbs-header {
   display: flex;
@@ -901,7 +908,7 @@ main { min-height: 100vh; }
   padding-bottom: 1rem;
 }
 
-/* ─── Takashima Page ─── */
+/* 鈹€鈹€鈹€ Takashima Page 鈹€鈹€鈹€ */
 
 .takashima-hero {
   display: flex;
@@ -939,7 +946,7 @@ main { min-height: 100vh; }
   }
 }
 
-/* ─── BGM Player ─── */
+/* 鈹€鈹€鈹€ BGM Player 鈹€鈹€鈹€ */
 
 .bgm-player {
   position: fixed; right: 1.25rem; bottom: 1.25rem;
@@ -986,7 +993,7 @@ main { min-height: 100vh; }
   text-transform: uppercase;
 }
 
-/* ─── Time Sense ─── */
+/* 鈹€鈹€鈹€ Time Sense 鈹€鈹€鈹€ */
 
 .time-sense {
   position: fixed; left: 1.25rem; bottom: 1.25rem;
@@ -1029,7 +1036,7 @@ main { min-height: 100vh; }
   color: var(--accent); opacity: 0.6;
 }
 
-/* ─── Quote ─── */
+/* 鈹€鈹€鈹€ Quote 鈹€鈹€鈹€ */
 
 .quote-card {
   max-width: 600px; margin: 0 auto 2.5rem;
@@ -1055,7 +1062,7 @@ main { min-height: 100vh; }
   color: var(--accent); letter-spacing: 0.1em; opacity: 0.5;
 }
 
-/* ─── Character Grid ─── */
+/* 鈹€鈹€鈹€ Character Grid 鈹€鈹€鈹€ */
 
 .chara-grid {
   display: grid;
@@ -1126,7 +1133,7 @@ main { min-height: 100vh; }
   letter-spacing: 0.05em;
 }
 
-/* ─── About ─── */
+/* 鈹€鈹€鈹€ About 鈹€鈹€鈹€ */
 
 .about-body { max-width: 540px; }
 
@@ -1142,49 +1149,7 @@ main { min-height: 100vh; }
   letter-spacing: 0.1em; margin-top: 3rem; opacity: 0.45;
 }
 
-/* ─── Sunflower ─── */
-
-.sunflower-body {
-  max-width: 440px; margin: 0 auto;
-}
-
-.sunflower-text {
-  font-family: "Yu Mincho", "Songti SC", "Noto Serif SC", serif;
-  font-size: 0.95rem; line-height: 2.2;
-  color: var(--text-dim); margin: 0 0 1.2rem;
-  letter-spacing: 0.05em; text-align: center;
-}
-
-/* ─── Sunflower Hero ─── */
-
-.sunflower-hero {
-  position: absolute; inset: 0; z-index: 0;
-  overflow: hidden;
-}
-
-.sunflower-hero-img {
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: center 30%;
-  opacity: 0.15; will-change: transform;
-  filter: saturate(0.5) sepia(0.15);
-  animation: sunflower-zoom 30s ease-in-out infinite alternate;
-}
-
-@keyframes sunflower-zoom {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.08); }
-}
-
-.sunflower-hero-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(180deg,
-    rgba(14,15,19,0.25) 0%,
-    rgba(14,15,19,0.6) 50%,
-    rgba(14,15,19,0.92) 100%
-  );
-}
-
-/* ─── Divider ─── */
+/* 鈹€鈹€鈹€ Divider 鈹€鈹€鈹€ */
 
 .divider-rule {
   position: relative; z-index: 2;
@@ -1198,7 +1163,7 @@ main { min-height: 100vh; }
   background: linear-gradient(180deg, rgba(196,164,108,0.2), transparent);
 }
 
-/* ─── Fade In ─── */
+/* 鈹€鈹€鈹€ Fade In 鈹€鈹€鈹€ */
 
 .fi {
   opacity: 0; transform: translateY(20px);
@@ -1211,9 +1176,9 @@ main { min-height: 100vh; }
 .fi-up { transform: translateY(30px); }
 .fi-up.in { transform: translateY(0); }
 
-/* ─── Responsive ─── */
+/* 鈹€鈹€鈹€ Responsive 鈹€鈹€鈹€ */
 
-/* ─── Ticket Board ─── */
+/* 鈹€鈹€鈹€ Ticket Board 鈹€鈹€鈹€ */
 
 .ticket-form-wrap {
   max-width: 520px; margin: 0 auto; width: 100%;
@@ -1422,7 +1387,7 @@ main { min-height: 100vh; }
   );
 }
 
-/* ─── Truth Fragment ─── */
+/* 鈹€鈹€鈹€ Truth Fragment 鈹€鈹€鈹€ */
 
 .truth-fragment {
   position: fixed; right: 1.25rem; bottom: 4.5rem;
@@ -1496,7 +1461,7 @@ main { min-height: 100vh; }
   color: var(--accent);
 }
 
-/* ─── Monologue Overlay ─── */
+/* 鈹€鈹€鈹€ Monologue Overlay 鈹€鈹€鈹€ */
 
 .monologue-overlay {
   position: fixed; inset: 0; z-index: 300;
@@ -1577,7 +1542,7 @@ main { min-height: 100vh; }
   .chara-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; max-width: 520px; }
 }
 
-/* ─── Train Cutscene ─── */
+/* 鈹€鈹€鈹€ Train Cutscene 鈹€鈹€鈹€ */
 
 .cs-section {
   position: relative;
@@ -1701,7 +1666,946 @@ main { min-height: 100vh; }
   pointer-events: none;
 }
 
-/* ─── Responsive ─── */
+/* 鈹€鈹€鈹€ Glitch Intro 鈹€鈹€鈹€ */
+
+.glitch-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: #000;
+  overflow: hidden;
+}
+
+.glitch-black {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  animation: glitch-fade-out 1.8s ease forwards;
+}
+
+.glitch-blackout {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #000;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+@keyframes glitch-fade-out {
+  0%, 30% { opacity: 1; }
+  70% { opacity: 0.9; }
+  85% { opacity: 0.7; }
+  95% { opacity: 0.3; }
+  100% { opacity: 0; }
+}
+
+.glitch-flash {
+  position: absolute;
+  inset: 0;
+  animation: glitch-flash-burst 0.08s ease-out forwards;
+}
+
+.glitch-flash-w { background: #fff; }
+.glitch-flash-b { background: #000; }
+.glitch-flash-flicker {
+  background: #fff;
+  animation: glitch-flicker 0.3s steps(4) forwards;
+}
+.glitch-flash-final {
+  background: #fff;
+  animation: glitch-final-burst 0.15s ease-out forwards;
+}
+
+@keyframes glitch-flicker {
+  0% { opacity: 1; }
+  25% { opacity: 0.1; }
+  50% { opacity: 0.9; }
+  75% { opacity: 0.05; }
+  100% { opacity: 0; }
+}
+
+@keyframes glitch-final-burst {
+  0% { opacity: 1; }
+  30% { opacity: 0.7; }
+  60% { opacity: 0.3; }
+  100% { opacity: 0; }
+}
+
+@keyframes glitch-flash-burst {
+  0% { opacity: 1; }
+  30% { opacity: 0.8; }
+  100% { opacity: 0; }
+}
+
+/* 鈹€鈹€鈹€ RGB channel displacement 鈹€鈹€鈹€ */
+
+.glitch-channel {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  mix-blend-mode: screen;
+}
+
+.glitch-channel-r {
+  box-shadow: 0 0 0 1px rgba(255,0,0,0.35);
+  animation: glitch-r-drift 0.06s steps(3) infinite;
+}
+
+.glitch-channel-g {
+  box-shadow: 0 0 0 1px rgba(0,255,0,0.25);
+  animation: glitch-g-drift 0.05s steps(2) infinite;
+}
+
+.glitch-channel-b {
+  box-shadow: 0 0 0 1px rgba(0,0,255,0.3);
+  animation: glitch-b-drift 0.07s steps(3) infinite;
+}
+
+.glitch-channel-c {
+  box-shadow: 0 0 0 1px rgba(0,255,255,0.2);
+  animation: glitch-c-drift 0.04s steps(2) infinite;
+}
+
+@keyframes glitch-r-drift {
+  0% { transform: translate(0, 0); clip-path: inset(0 0 80% 0); }
+  20% { transform: translate(8px, 3px); clip-path: inset(5% 0 65% 0); }
+  40% { transform: translate(-6px, -2px); clip-path: inset(25% 0 40% 0); }
+  60% { transform: translate(12px, 4px); clip-path: inset(50% 0 20% 0); }
+  80% { transform: translate(-8px, -3px); clip-path: inset(70% 0 10% 0); }
+  100% { transform: translate(0, 0); clip-path: inset(0 0 80% 0); }
+}
+
+@keyframes glitch-g-drift {
+  0% { transform: translate(0, 0); clip-path: inset(15% 0 60% 0); }
+  25% { transform: translate(-7px, -3px); clip-path: inset(35% 0 35% 0); }
+  50% { transform: translate(9px, 2px); clip-path: inset(55% 0 15% 0); }
+  75% { transform: translate(-4px, -4px); clip-path: inset(75% 0 0% 0); }
+  100% { transform: translate(0, 0); clip-path: inset(15% 0 60% 0); }
+}
+
+@keyframes glitch-b-drift {
+  0% { transform: translate(0, 0); clip-path: inset(8% 0 70% 0); }
+  20% { transform: translate(5px, -4px); clip-path: inset(20% 0 50% 0); }
+  40% { transform: translate(-9px, 3px); clip-path: inset(40% 0 30% 0); }
+  60% { transform: translate(7px, -2px); clip-path: inset(60% 0 10% 0); }
+  80% { transform: translate(-5px, 4px); clip-path: inset(78% 0 0% 0); }
+  100% { transform: translate(0, 0); clip-path: inset(8% 0 70% 0); }
+}
+
+@keyframes glitch-c-drift {
+  0% { transform: translate(0, 0); clip-path: inset(3% 0 75% 0); }
+  25% { transform: translate(6px, 2px); clip-path: inset(12% 0 55% 0); }
+  50% { transform: translate(-8px, -1px); clip-path: inset(32% 0 38% 0); }
+  75% { transform: translate(10px, 3px); clip-path: inset(65% 0 5% 0); }
+  100% { transform: translate(0, 0); clip-path: inset(3% 0 75% 0); }
+}
+
+/* 鈹€鈹€鈹€ CRT static bands 鈹€鈹€鈹€ */
+
+.crt-band {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.10);
+  mix-blend-mode: difference;
+  animation: crt-band-jitter 0.5s steps(5) 8;
+}
+
+@keyframes crt-band-jitter {
+  0% { transform: translateX(0) scaleX(1); opacity: 0.5; }
+  20% { transform: translateX(18px) scaleX(0.75); opacity: 0.8; }
+  40% { transform: translateX(-12px) scaleX(1.15); opacity: 0.3; }
+  60% { transform: translateX(24px) scaleX(0.6); opacity: 0.7; }
+  80% { transform: translateX(-8px) scaleX(1.1); opacity: 0.4; }
+  100% { transform: translateX(0) scaleX(1); opacity: 0.5; }
+}
+
+/* ─── Glitch text (hard cut, no fade) ─── */
+
+.glitch-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Yu Mincho", "Songti SC", "Noto Serif SC", serif;
+  font-size: clamp(2rem, 6vw, 4rem);
+  color: #fff;
+  letter-spacing: 0.15em;
+  white-space: nowrap;
+  opacity: 1;
+  text-shadow:
+    3px 1px rgba(255,0,0,0.4),
+    -2px -1px rgba(0,255,255,0.3);
+}
+
+.glitch-text-corrupt {
+  animation: glitch-snap 0.06s steps(2) 3 forwards;
+}
+
+@keyframes glitch-snap {
+  0% { transform: translate(-50%, -50%) skewX(0deg); opacity: 1; text-shadow: 3px 1px rgba(255,0,0,0.4), -2px -1px rgba(0,255,255,0.3); clip-path: none; }
+  25% { transform: translate(-40%, -48%) skewX(12deg); opacity: 0.4; text-shadow: 14px 4px rgba(255,0,0,0.9), -10px -3px rgba(0,0,255,0.7); clip-path: inset(5% 0 75% 0); }
+  50% { transform: translate(-58%, -52%) skewX(-8deg); opacity: 0.7; text-shadow: -12px -4px rgba(0,255,0,0.6), 8px 5px rgba(255,0,0,0.5); clip-path: inset(30% 0 40% 0); }
+  75% { transform: translate(-44%, -49%) skewX(6deg); opacity: 0.2; text-shadow: 16px -3px rgba(0,255,255,0.8), -8px 4px rgba(255,0,0,0.6); clip-path: inset(60% 0 10% 0); }
+  100% { transform: translate(-50%, -50%) skewX(0deg); opacity: 1; text-shadow: 3px 1px rgba(255,0,0,0.4), -2px -1px rgba(0,255,255,0.3); clip-path: none; }
+}
+
+/* ─── Noise ─── */
+
+.glitch-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+  animation: glitch-noise-shift 0.08s steps(3) infinite;
+}
+
+@keyframes glitch-noise-shift {
+  0% { background-position: 0 0; }
+  33% { background-position: 6px 3px; }
+  66% { background-position: -3px 8px; }
+  100% { background-position: 0 0; }
+}
+
+.glitch-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 3px
+  );
+  animation: glitch-scanlines-jump 0.06s steps(2) infinite;
+}
+
+@keyframes glitch-scanlines-jump {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(1px); }
+}
+
+/* 鈹€鈹€鈹€ Horizontal bars 鈹€鈹€鈹€ */
+
+.glitch-bars {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255,255,255,0.04) 0px,
+    rgba(255,255,255,0.04) 4px,
+    transparent 4px,
+    transparent 12px,
+    rgba(0,0,0,0.06) 12px,
+    rgba(0,0,0,0.06) 14px,
+    transparent 14px,
+    transparent 28px
+  );
+  animation: glitch-bars-scroll 0.2s linear infinite;
+}
+
+@keyframes glitch-bars-scroll {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(28px); }
+}
+
+/* 鈹€鈹€鈹€ Digital artifact blocks 鈹€鈹€鈹€ */
+
+.glitch-block {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.08);
+  mix-blend-mode: difference;
+  animation: glitch-block-pop 0.6s steps(4) 4;
+}
+
+@keyframes glitch-block-pop {
+  0% { opacity: 0; transform: scaleX(0.3); }
+  25% { opacity: 0.8; transform: scaleX(1.3); }
+  50% { opacity: 0.3; transform: scaleX(0.6); }
+  75% { opacity: 0.6; transform: scaleX(1.1); }
+  100% { opacity: 0; transform: scaleX(0); }
+}
+
+/* ─── Periodic glitch for终之空 page (JS-driven, completely clean idle) ─── */
+
+.tsui-glitch-text {
+  position: relative;
+  text-shadow: none;
+}
+
+.tsui-glitch-text::before,
+.tsui-glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: none;
+}
+
+.tsui-glitch-text.glitching {
+  animation: tsui-txt-burst 1.2s steps(1) forwards;
+}
+
+.tsui-glitch-text.glitching::before {
+  z-index: -1;
+  animation: tsui-txt-r 1.2s steps(2) forwards;
+}
+
+.tsui-glitch-text.glitching::after {
+  z-index: -2;
+  animation: tsui-txt-b 1.2s steps(2) forwards;
+}
+
+/* RGB blocks inside glitch container */
+.tsui-glitch-block {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: screen;
+  border-radius: 1px;
+}
+
+.tsui-glitch-text.glitching .tsui-glitch-block {
+  animation: tsui-block-pop 0.2s ease-in-out 6 forwards;
+}
+
+@keyframes tsui-block-pop {
+  0% { opacity: 0; transform: scaleX(0.1) scaleY(0.3); }
+  25% { opacity: 0.7; transform: scaleX(1.2) scaleY(1); }
+  50% { opacity: 0.2; transform: scaleX(0.6) scaleY(0.7); }
+  75% { opacity: 0.5; transform: scaleX(1.4) scaleY(1.2); }
+  100% { opacity: 0; transform: scaleX(0) scaleY(0); }
+}
+
+@keyframes tsui-txt-burst {
+  0% { transform: translate(0); opacity: 1; clip-path: none; }
+  8% { transform: translate(-3px, 1px); opacity: 0.8; }
+  16% { transform: translate(3px, -1px); opacity: 0.65; clip-path: inset(25% 0 45% 0); }
+  25% { transform: translate(-2px, 2px); opacity: 0.85; clip-path: inset(55% 0 15% 0); }
+  33% { transform: translate(4px, 0); opacity: 0.5; clip-path: inset(10% 0 65% 0); }
+  41% { transform: translate(-1px, -2px); opacity: 0.75; clip-path: none; }
+  50% { transform: translate(2px, 1px); opacity: 0.55; clip-path: inset(40% 0 30% 0); }
+  58% { transform: translate(-3px, -1px); opacity: 0.85; }
+  66% { transform: translate(0); opacity: 1; clip-path: none; }
+  100% { transform: translate(0); opacity: 1; clip-path: none; }
+}
+
+@keyframes tsui-txt-r {
+  0% { opacity: 0; transform: translate(0); }
+  8% { opacity: 0.4; transform: translate(8px, 2px); clip-path: inset(10% 0 60% 0); }
+  16% { opacity: 0.5; transform: translate(-6px, -3px); clip-path: inset(40% 0 30% 0); }
+  25% { opacity: 0.35; transform: translate(10px, 4px); clip-path: inset(65% 0 5% 0); }
+  33% { opacity: 0.45; transform: translate(-5px, 2px); clip-path: inset(15% 0 55% 0); }
+  41% { opacity: 0.3; transform: translate(7px, -4px); clip-path: inset(50% 0 20% 0); }
+  50% { opacity: 0.5; transform: translate(-8px, 1px); clip-path: inset(5% 0 70% 0); }
+  58% { opacity: 0.4; transform: translate(6px, -2px); clip-path: inset(35% 0 35% 0); }
+  66% { opacity: 0; transform: translate(0); clip-path: none; }
+  100% { opacity: 0; transform: translate(0); clip-path: none; }
+}
+
+@keyframes tsui-txt-b {
+  0% { opacity: 0; transform: translate(0); }
+  8% { opacity: 0.25; transform: translate(-8px, -3px); clip-path: inset(20% 0 50% 0); }
+  16% { opacity: 0.35; transform: translate(7px, 4px); clip-path: inset(50% 0 20% 0); }
+  25% { opacity: 0.3; transform: translate(-9px, -4px); clip-path: inset(5% 0 70% 0); }
+  33% { opacity: 0.4; transform: translate(6px, 3px); clip-path: inset(35% 0 35% 0); }
+  41% { opacity: 0.3; transform: translate(-7px, -3px); clip-path: inset(60% 0 10% 0); }
+  50% { opacity: 0.45; transform: translate(9px, 5px); clip-path: inset(15% 0 55% 0); }
+  58% { opacity: 0.35; transform: translate(-6px, -4px); clip-path: inset(45% 0 25% 0); }
+  66% { opacity: 0; transform: translate(0); clip-path: none; }
+  100% { opacity: 0; transform: translate(0); clip-path: none; }
+}
+
+/* 鈹€鈹€鈹€ Chapter title burst glitch on reveal 鈹€鈹€鈹€ */
+
+.sky-chapter-burst {
+  animation: chapter-burst 1.2s steps(1) forwards;
+}
+
+@keyframes chapter-burst {
+  0% { text-shadow: none; }
+  5% { text-shadow: 3px 1px rgba(255,80,80,0.5), -2px -1px rgba(80,200,255,0.4); transform: translate(-1px, 1px); }
+  10% { text-shadow: -4px -2px rgba(255,80,80,0.6), 3px 2px rgba(80,200,255,0.5); transform: translate(2px, -1px); clip-path: inset(30% 0 40% 0); }
+  15% { text-shadow: 5px 0 rgba(255,80,80,0.4), -4px 0 rgba(80,200,255,0.3); transform: translate(-2px, 0); clip-path: inset(10% 0 60% 0); }
+  20% { text-shadow: -3px 2px rgba(255,80,80,0.5), 2px -2px rgba(80,200,255,0.4); transform: translate(1px, -2px); clip-path: inset(50% 0 20% 0); }
+  25% { text-shadow: none; transform: translate(0); clip-path: none; }
+  100% { text-shadow: none; transform: translate(0); clip-path: none; }
+}
+
+.sky-hero-section {
+  position: relative;
+  background: radial-gradient(ellipse at 50% 30%, rgba(26,28,40,0.4) 0%, rgba(8,9,11,0.9) 100%);
+}
+
+.sky-journey {
+  position: relative;
+  z-index: 2;
+}
+
+.sky-chapter {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.sky-chapter-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.sky-chapter-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.15);
+  transition: opacity 1.2s cubic-bezier(0.23,1,0.32,1), transform 1.4s cubic-bezier(0.23,1,0.32,1);
+  filter: saturate(0.6) brightness(0.7);
+}
+
+.sky-chapter-in .sky-chapter-img {
+  opacity: 0.4;
+  transform: scale(1);
+}
+
+.sky-chapter-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+    rgba(14,15,19,0.5) 0%,
+    rgba(14,15,19,0.3) 40%,
+    rgba(14,15,19,0.7) 100%
+  );
+}
+
+.sky-chapter-content {
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
+  text-align: center;
+  padding: 2rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.23,1,0.32,1) 0.3s,
+              transform 0.8s cubic-bezier(0.23,1,0.32,1) 0.3s;
+}
+
+.sky-chapter-in .sky-chapter-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sky-chapter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+}
+
+.sky-chapter-num {
+  font-family: "Yu Mincho", "Songti SC", "Noto Serif SC", serif;
+  font-size: 2rem;
+  color: var(--accent);
+  opacity: 0.3;
+  letter-spacing: 0.15em;
+}
+
+.sky-chapter-sub {
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  opacity: 0.3;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.sky-chapter-mark {
+  width: 20px;
+  height: 1px;
+  background: var(--accent-dim);
+  margin: 0 auto 1.5rem;
+}
+
+.sky-chapter-quote {
+  margin: 0 0 1.5rem;
+}
+
+.sky-chapter-text {
+  font-family: "Yu Mincho", "Songti SC", "Noto Serif SC", serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  font-weight: 300;
+  line-height: 2;
+  color: var(--text);
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+
+.sky-chapter-source {
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.72rem;
+  font-style: normal;
+  color: var(--accent);
+  opacity: 0.5;
+  letter-spacing: 0.1em;
+}
+
+.sky-chapter-desc {
+  font-size: 0.82rem;
+  line-height: 1.9;
+  color: var(--text-dim);
+  margin: 1.5rem auto 0;
+  max-width: 360px;
+  opacity: 0.6;
+}
+
+.sky-chapter-last .sky-chapter-text {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+
+@media (max-width: 600px) {
+  .sky-chapter-content { padding: 1.5rem; }
+  .sky-chapter-text { font-size: 1rem; }
+}
+
+/* 鈹€鈹€鈹€ 绉樺瘑鍩哄湴 (Secret Base) 鈹€鈹€鈹€ */
+
+.base-room-section {
+  padding-top: 2rem;
+}
+
+.base-room {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  background: #0a0b0e;
+}
+
+.base-bg-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.base-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.15;
+  filter: saturate(0.2) brightness(0.4) contrast(1.2);
+}
+
+.base-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 60%, transparent 30%, rgba(8,9,11,0.85) 100%);
+}
+
+.base-drip-counter {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 4px;
+  z-index: 5;
+}
+
+.base-drip-drop {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.15;
+  animation: drip-fade 1.5s ease-in-out infinite;
+}
+
+@keyframes drip-fade {
+  0%, 100% { opacity: 0.1; transform: scale(0.6); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+.base-hint {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 120px;
+}
+
+.base-hint-text {
+  font-size: 0.55rem;
+  color: var(--text-dim);
+  opacity: 0.4;
+  letter-spacing: 0.08em;
+}
+
+.base-hint-bar {
+  height: 2px;
+  background: var(--line);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.base-hint-fill {
+  height: 100%;
+  background: var(--accent);
+  opacity: 0.3;
+  border-radius: 1px;
+  transition: width 0.5s ease;
+}
+
+.base-explore {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+}
+
+.base-item {
+  position: absolute;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.3rem;
+  font-family: inherit;
+  color: inherit;
+  transition: transform 0.3s ease;
+  transform: translate(-50%, -50%);
+}
+
+.base-item:hover {
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
+.base-item-icon {
+  font-size: 0.9rem;
+  opacity: 0.35;
+  transition: opacity 0.3s, transform 0.3s;
+  text-shadow: 0 0 12px rgba(196, 164, 108, 0.2);
+}
+
+.base-item-found .base-item-icon {
+  opacity: 0.7;
+  transform: scale(1.1);
+  text-shadow: 0 0 20px rgba(196, 164, 108, 0.4);
+}
+
+.base-item:hover .base-item-icon {
+  opacity: 0.9;
+}
+
+.base-item-label {
+  font-size: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.25s;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.base-item:hover .base-item-label {
+  opacity: 0.5;
+}
+
+.base-complete {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 80%;
+}
+
+.base-complete-line {
+  width: 24px;
+  height: 1px;
+  background: var(--accent-dim);
+  flex-shrink: 0;
+}
+
+.base-complete-text {
+  font-size: 0.6rem;
+  color: var(--accent);
+  opacity: 0.4;
+  margin: 0;
+  text-align: center;
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+}
+
+.base-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  animation: truth-in 0.25s ease;
+}
+
+.base-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 9, 11, 0.92);
+  backdrop-filter: blur(6px);
+}
+
+.base-modal {
+  position: relative;
+  z-index: 1;
+  max-width: 420px;
+  text-align: center;
+  padding: 2rem;
+  cursor: default;
+}
+
+.base-modal-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+  opacity: 0.5;
+  filter: saturate(0.3);
+}
+
+.base-modal-title {
+  font-family: "Yu Mincho", "Songti SC", serif;
+  font-size: 1rem;
+  color: var(--text);
+  margin: 0 0 1rem;
+  letter-spacing: 0.12em;
+}
+
+.base-modal-mark {
+  width: 16px;
+  height: 1px;
+  background: var(--accent-dim);
+  margin: 0 auto 1.25rem;
+}
+
+.base-modal-text {
+  font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  font-size: 0.82rem;
+  line-height: 2;
+  color: var(--text-dim);
+  margin: 0 0 1.5rem;
+  white-space: pre-line;
+  letter-spacing: 0.02em;
+  text-align: left;
+}
+
+.base-modal-close {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  padding: 0.4rem 1.2rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.25s, color 0.25s;
+}
+
+.base-modal-close:hover {
+  border-color: rgba(196,164,108,0.3);
+  color: var(--accent);
+}
+
+@media (max-width: 600px) {
+  .base-room { aspect-ratio: auto; min-height: 400px; }
+}
+
+/* 鈹€鈹€鈹€ 鍝插鎵嬭 (Philosophical Notes) 鈹€鈹€鈹€ */
+
+.philo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.philo-card {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: border-color 0.4s;
+  cursor: default;
+}
+
+.philo-card:hover {
+  border-color: rgba(196, 164, 108, 0.15);
+}
+
+.philo-card-front {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+  text-align: left;
+}
+
+.philo-card-front-content {
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.4rem;
+  min-height: 200px;
+  justify-content: center;
+}
+
+.philo-card-period {
+  font-size: 0.55rem;
+  color: var(--text-dim);
+  opacity: 0.3;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.5rem;
+}
+
+.philo-card-name {
+  font-family: "Yu Mincho", "Songti SC", "Noto Serif SC", serif;
+  font-size: 1.1rem;
+  color: var(--text);
+  margin: 0;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+}
+
+.philo-card-title {
+  font-size: 0.68rem;
+  color: var(--accent);
+  opacity: 0.5;
+  margin: 0.2rem 0 0.8rem;
+  letter-spacing: 0.1em;
+}
+
+.philo-card-mark {
+  width: 16px;
+  height: 1px;
+  background: var(--accent-dim);
+  margin: 0.3rem auto;
+}
+
+.philo-card-preview {
+  font-family: "Yu Mincho", "Songti SC", "Noto Serif SC", serif;
+  font-size: 0.82rem;
+  line-height: 1.8;
+  color: var(--text);
+  margin: 0.8rem 0 0.8rem;
+  letter-spacing: 0.03em;
+  opacity: 0.85;
+  font-style: italic;
+}
+
+.philo-card-hint {
+  font-size: 0.55rem;
+  color: var(--accent);
+  opacity: 0.25;
+  letter-spacing: 0.1em;
+  transition: opacity 0.25s;
+}
+
+.philo-card:hover .philo-card-hint {
+  opacity: 0.6;
+}
+
+.philo-card-back {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.23,1,0.32,1);
+  border-top: 0 solid var(--line);
+}
+
+.philo-card-open .philo-card-back {
+  max-height: 800px;
+  border-top-width: 1px;
+}
+
+.philo-card-back-content {
+  padding: 1.5rem;
+}
+
+.philo-card-back-context {
+  font-size: 0.72rem;
+  color: var(--accent);
+  opacity: 0.6;
+  margin: 0 0 1rem;
+  letter-spacing: 0.05em;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.philo-card-back-divider {
+  width: 24px;
+  height: 1px;
+  background: var(--line);
+  margin: 1rem auto;
+}
+
+.philo-card-back-body {
+  font-size: 0.78rem;
+  line-height: 2;
+  color: var(--text-dim);
+  margin: 0;
+  white-space: pre-line;
+  letter-spacing: 0.02em;
+}
+
+.philo-card-back-connect {
+  margin-top: 0.5rem;
+}
+
+.philo-card-back-connect-label {
+  display: block;
+  font-size: 0.58rem;
+  color: var(--accent);
+  opacity: 0.4;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.philo-card-back-connect-text {
+  font-size: 0.78rem;
+  line-height: 2;
+  color: var(--text-dim);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 600px) {
+  .philo-grid { grid-template-columns: 1fr; }
+}
+
+/* 鈹€鈹€鈹€ Responsive 鈹€鈹€鈹€ */
 
 @media (max-width: 480px) {
   .chara-grid { grid-template-columns: 1fr; max-width: 220px; }

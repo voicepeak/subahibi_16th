@@ -8,9 +8,11 @@ const LINKS = [
   { href: "/memories", label: "记忆", sub: "memories" },
   { href: "/characters", label: "邂逅", sub: "characters" },
   { href: "/messages", label: "车站", sub: "station" },
-  { href: "/sunflower", label: "向日葵", sub: "hill" },
+  { href: "/tsuinosora", label: "终之空", sub: "sky" },
+  { href: "/base", label: "秘密基地", sub: "shelter" },
+  { href: "/philosophy", label: "哲学手记", sub: "notes" },
   { href: "/bulletin", label: "揭示板", sub: "bbs" },
-  { href: "/takashima", label: "短信", sub: "takashima" },
+  { href: "/takashima", label: "短信", sub: "mail" },
   { href: "/about", label: "关于", sub: "about" },
 ];
 

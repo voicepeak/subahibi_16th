@@ -44,8 +44,11 @@ export function GrainOverlay() {
     c.height = size;
     const ctx = c.getContext("2d")!;
     let id = 0;
+    let running = true;
+    let timer: ReturnType<typeof setTimeout> | null = null;
 
     const draw = () => {
+      if (!running) return;
       const d = ctx.createImageData(size, size);
       for (let i = 0; i < d.data.length; i += 4) {
         const v = Math.random() * 255;
@@ -55,10 +58,28 @@ export function GrainOverlay() {
         d.data[i + 3] = 16;
       }
       ctx.putImageData(d, 0, 0);
-      id = requestAnimationFrame(draw);
+      timer = setTimeout(() => requestAnimationFrame(draw), 66);
     };
     draw();
-    return () => cancelAnimationFrame(id);
+
+    const onVis = () => {
+      if (document.hidden) {
+        running = false;
+        cancelAnimationFrame(id);
+        if (timer) clearTimeout(timer);
+      } else {
+        running = true;
+        draw();
+      }
+    };
+    document.addEventListener("visibilitychange", onVis);
+
+    return () => {
+      running = false;
+      cancelAnimationFrame(id);
+      if (timer) clearTimeout(timer);
+      document.removeEventListener("visibilitychange", onVis);
+    };
   }, []);
 
   return <canvas ref={ref} className="grain" aria-hidden="true" />;
@@ -82,6 +103,7 @@ export function FloatingParticles() {
     const dpr = window.devicePixelRatio || 1;
     let w = 0, h = 0;
     let mx = 0, my = 0;
+    let running = true;
 
     const resize = () => {
       w = window.innerWidth;
@@ -101,7 +123,7 @@ export function FloatingParticles() {
     };
     window.addEventListener("mousemove", onMouse);
 
-    const pts = Array.from({ length: 40 }, () => ({
+    const pts = Array.from({ length: 20 }, () => ({
       x: Math.random() * w,
       y: Math.random() * h,
       r: 0.6 + Math.random() * 2,
@@ -115,8 +137,12 @@ export function FloatingParticles() {
     pts.forEach(p => { p.baseVx = p.vx; p.baseVy = p.vy; });
 
     let id = 0, t = 0;
+    let skip = 0;
 
     const loop = () => {
+      if (!running) return;
+      skip = (skip + 1) % 2;
+      if (skip !== 0) { id = requestAnimationFrame(loop); return; }
       t += 0.005;
       ctx.clearRect(0, 0, w, h);
 
@@ -152,10 +178,15 @@ export function FloatingParticles() {
     };
     loop();
 
+    const onVis = () => { running = !document.hidden; };
+    document.addEventListener("visibilitychange", onVis);
+
     return () => {
+      running = false;
       cancelAnimationFrame(id);
       window.removeEventListener("resize", resize);
       window.removeEventListener("mousemove", onMouse);
+      document.removeEventListener("visibilitychange", onVis);
     };
   }, []);
 
@@ -171,6 +202,7 @@ export function SparkleField() {
     const ctx = c.getContext("2d")!;
     const dpr = window.devicePixelRatio || 1;
     let w = 0, h = 0;
+    let running = true;
 
     const resize = () => {
       w = window.innerWidth;
@@ -185,8 +217,8 @@ export function SparkleField() {
     window.addEventListener("resize", resize);
 
     const types = [
-      { color: [230, 212, 186], size: [1.0, 2.2], cycle: [5, 9], hold: [0.08, 0.18], count: 4 },
-      { color: [222, 218, 210], size: [0.7, 1.6], cycle: [6, 11], hold: [0.12, 0.25], count: 4 },
+      { color: [230, 212, 186], size: [1.0, 2.2], cycle: [5, 9], hold: [0.08, 0.18], count: 3 },
+      { color: [222, 218, 210], size: [0.7, 1.6], cycle: [6, 11], hold: [0.12, 0.25], count: 3 },
       { color: [198, 208, 218], size: [0.5, 1.3], cycle: [7, 13], hold: [0.18, 0.35], count: 2 },
     ];
 
@@ -210,8 +242,12 @@ export function SparkleField() {
     }
 
     let id = 0, t = 0;
+    let skip = 0;
 
     const loop = () => {
+      if (!running) return;
+      skip = (skip + 1) % 3;
+      if (skip !== 0) { id = requestAnimationFrame(loop); return; }
       t += 0.016;
       ctx.clearRect(0, 0, w, h);
 
@@ -258,9 +294,14 @@ export function SparkleField() {
     };
     loop();
 
+    const onVis = () => { running = !document.hidden; };
+    document.addEventListener("visibilitychange", onVis);
+
     return () => {
+      running = false;
       cancelAnimationFrame(id);
       window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", onVis);
     };
   }, []);
 
