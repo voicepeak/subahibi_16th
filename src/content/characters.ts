@@ -53,3 +53,26 @@ export const characters: Character[] = [
     monologue: "喂喂，我可是被硬拉来的啊。\n不过嘛……偶尔来趟这种乡下也不错。\n空气好，星星也看得清楚。\n比起东京那个闷热的地方好多了。\n只是蚊子太多了。\n喂，羽咲，涂点防蚊药吧。",
   },
 ];
+
+export type CharacterAsset = {
+  id: string;
+  name: string;
+  image: string;
+  side?: "left" | "right" | "center";
+  accent?: string;
+  quote?: string;
+  tags?: string[];
+  order?: number;
+};
+
+export const characterAssets: CharacterAsset[] = [
+  { id: "yk", name: "水上由岐", image: "/assets/chara-yk.png", side: "center", accent: "眺望世界之人", quote: "世界是我所看到、触摸到、感受到的东西。", tags: ["protagonist"], order: 1 },
+  { id: "zk", name: "高岛柘榴", image: "/assets/chara-zk.png", side: "right", accent: "即为世界本身的少女", quote: "我要保护这个世界。", tags: ["mail", "signal"], order: 2 },
+  { id: "tk", name: "间宫卓司", image: "/assets/chara-tk.png", side: "left", accent: "追求真理之人", quote: "一切都是谎言。", tags: ["savior"], order: 3 },
+  { id: "km", name: "若槻镜", image: "/assets/chara-km.png", side: "right", accent: "活在日常之人", quote: "只是想变得更强。", order: 4 },
+  { id: "kg", name: "若槻司", image: "/assets/chara-kg.png", side: "right", accent: "无法成为任何人的我", tags: ["sister"], order: 5 },
+  { id: "hs", name: "间宫羽咲", image: "/assets/chara-hs.png", side: "left", accent: "献上祈祷之人", quote: "即便如此，世界依然是美丽的。", tags: ["prayer"], order: 6 },
+  { id: "ay", name: "音无彩名", image: "/assets/chara-ay.png", side: "center", accent: "旁观之人", quote: "他们全部都是'我'。", tags: ["observer"], order: 7 },
+  { id: "tm", name: "间宫皆守", image: "/assets/chara-tm.png", side: "left", accent: "守护之人", order: 8 },
+  { id: "ms", name: "木村", image: "/assets/chara-ms.png", side: "right", accent: "游离之人", order: 9 },
+];
