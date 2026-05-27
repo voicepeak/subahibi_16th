@@ -15,7 +15,7 @@ export const videoAssets: VideoAsset[] = [
   {
     id: "op-movie",
     title: "Opening Movie",
-    src: "/assets/op.mpg",
+    src: "/assets/op.mp4",
     poster: "/assets/bg/bg1015a.png",
     section: "home",
     tone: "bright",
