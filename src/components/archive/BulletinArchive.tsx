@@ -42,6 +42,16 @@ export function BulletinArchive() {
         </button>
       </header>
 
+      <div className="bulletin-summary-card">
+        <h3>事件摘要</h3>
+        <p>{activeThread.summary}</p>
+        <div className="bulletin-summary-stats">
+          <span>{activeThread.posts.length} 条帖子</span>
+          <span>日期范围 {activeThread.dateRange}</span>
+          <span>危险等级 {activeThread.dangerLevel}/5</span>
+        </div>
+      </div>
+
       <div className="bulletin-layout">
         <BulletinThreadList threads={bulletinThreads} activeId={activeThread.id} onSelect={setActiveId} />
         <BulletinPostList thread={activeThread} />

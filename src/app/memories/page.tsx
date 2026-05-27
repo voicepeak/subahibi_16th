@@ -5,6 +5,7 @@ import { MessageCircle } from "lucide-react";
 import { MessageForm } from "@/components/interaction/MessageForm";
 import { MessageWall } from "@/components/interaction/MessageWall";
 import { SharePanel } from "@/components/interaction/SharePanel";
+import { MemoryStrip } from "@/components/cinematic/MemoryStrip";
 import { memoryAssets } from "@/content/assets";
 
 export default function MemoriesPage() {
@@ -25,11 +26,7 @@ export default function MemoriesPage() {
         </div>
       </section>
 
-      <section className="memory-strip" aria-label="纪念影像胶片条">
-        {memoryAssets.map((asset) => (
-          <img key={asset.src} src={asset.src} alt="" loading="lazy" />
-        ))}
-      </section>
+      <MemoryStrip assets={memoryAssets} />
 
       <section className="memory-content">
         <div id="message-form" className="memory-form-card">

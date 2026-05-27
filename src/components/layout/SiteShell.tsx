@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { SiteNav } from "@/components/layout/SiteNav";
+import { SpoilerGate } from "@/components/layout/SpoilerGate";
 import { NoiseLayer } from "@/components/cinematic/NoiseLayer";
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
@@ -13,6 +14,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       {!isLanding && <SiteNav />}
       <NoiseLayer fixed subtle />
       <div className="sky-shell">{children}</div>
+      <SpoilerGate />
     </>
   );
 }

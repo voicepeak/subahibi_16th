@@ -1,16 +1,18 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useAudioConsent } from "@/components/layout/AudioGate";
 
 interface BGMPlayerProps {
   src: string;
 }
 
 export function BGMPlayer({ src }: BGMPlayerProps) {
-  const [on, setOn] = useState(false);
+  const [active, setActive] = useState(false);
   const [bars, setBars] = useState<number[]>([]);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const animRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { consented } = useAudioConsent();
 
   const toggle = () => {
     if (!audioRef.current) {
@@ -18,14 +20,16 @@ export function BGMPlayer({ src }: BGMPlayerProps) {
       audioRef.current.loop = true;
       audioRef.current.volume = 0.25;
     }
-    if (on) {
+    if (active) {
       audioRef.current.pause();
       if (animRef.current) clearTimeout(animRef.current);
     } else {
-      audioRef.current.play().catch(() => {});
+      if (consented) {
+        audioRef.current.play().catch(() => {});
+      }
       tick();
     }
-    setOn(!on);
+    setActive(!active);
   };
 
   const tick = () => {
@@ -41,11 +45,13 @@ export function BGMPlayer({ src }: BGMPlayerProps) {
     };
   }, []);
 
+  if (!consented) return null;
+
   return (
     <button
-      className={`bgm-player ${on ? "bgm-player-on" : ""}`}
+      className={`bgm-player ${active ? "bgm-player-on" : ""}`}
       onClick={toggle}
-      aria-label={on ? "暂停BGM" : "播放BGM"}
+      aria-label={active ? "暂停BGM" : "播放BGM"}
       type="button"
     >
       <div className="bgm-player-visual" aria-hidden="true">
@@ -58,7 +64,7 @@ export function BGMPlayer({ src }: BGMPlayerProps) {
         ))}
       </div>
       <span className="bgm-player-label">
-        {on ? "BGM ON" : "BGM OFF"}
+        {active ? "BGM ON" : "BGM OFF"}
       </span>
     </button>
   );
