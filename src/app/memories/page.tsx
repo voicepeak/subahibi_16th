@@ -1,7 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CGLightbox } from "@/components/CGLightbox";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const CGS = [
   { src: "/assets/cg/main/ev0009.png", passage: "在人挤人的车站大楼的楼顶上……只有我一个人在这片天空下注视着这个世界。", chapter: "BGT1 序章 — 7月12日" },
@@ -15,27 +19,18 @@ const CGS = [
   { src: "/assets/cg/main/ev4001a.png", passage: "彩名：没有什么……我们走吧……去那开始的地点……", chapter: "终之空Ⅱ" },
 ];
 
-const QUOTES = [
-  { text: "世界は、まだ続いている。", source: "『素晴日 〜不连续存在〜』" },
-  { text: "幸福とは、ただそこにあるものではなく、自分自身で見つけ出すものだ。", source: "『素晴日 〜不连续存在〜』" },
+const STORY_BEATS = [
+  { src: "/assets/story/ev0001.png", quote: "在人挤人的车站大楼的楼顶上…只有我一个人在这片天空下注视着这个世界。", label: "序章 · 7月12日" },
+  { src: "/assets/story/ev0008a.png", quote: "那一年夏天，我们回到了那个村子。向日葵依旧向着太阳。", label: "终章 · 向日葵坡道" },
+  { src: "/assets/story/ev8005a.png", quote: "世界要终结了。必然要终结了。这是真实。", label: "终之空" },
+  { src: "/assets/story/ev8005j.png", quote: "全部的「我」——不管是谁，他们全部都是「我」。", label: "偏在转生" },
+  { src: "/assets/story/ev8015.png", quote: "只有一个灵魂。它轮回于所有生命之中。", label: "魂之环" },
 ];
 
-function FadeIn({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) el.classList.add("in"); },
-      { threshold: 0.2 }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-  return <div ref={ref} className={`fi ${className}`}>{children}</div>;
-}
-
 export default function MemoriesPage() {
+  const gridRef = useRef<HTMLDivElement>(null);
+  const storyRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -44,37 +39,79 @@ export default function MemoriesPage() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(".cg-grid-cell", { y: 40, opacity: 0, scale: 0.95 }, {
+        y: 0, opacity: 1, scale: 1, stagger: { amount: 0.5, from: "random" },
+        duration: 0.55, ease: "power2.out",
+        scrollTrigger: { trigger: gridRef.current, start: "top 82%", toggleActions: "play none none none" },
+      });
+    });
+    return () => ctx.revert();
+  }, []);
+
+  useEffect(() => {
+    const el = storyRef.current;
+    if (!el) return;
+    const panels = el.querySelectorAll<HTMLElement>(".story-panel");
+    const ctx = gsap.context(() => {
+      panels.forEach((panel, i) => {
+        const img = panel.querySelector<HTMLElement>(".story-img");
+        const text = panel.querySelector<HTMLElement>(".story-text-box");
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: panel, start: "top 75%", end: "top 25%",
+            toggleActions: "play reverse play reverse",
+          },
+        });
+        tl.fromTo(img, { opacity: 0, scale: 1.12, filter: "grayscale(0.8) brightness(0.5)" },
+                    { opacity: 0.2, scale: 1, filter: "grayscale(0) brightness(1)", duration: 0.8, ease: "power2.out" })
+          .fromTo(text, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4");
+      });
+    }, el);
+    return () => ctx.revert();
+  }, []);
+
   return (
     <>
-      <section className="page-section first">
-        <div
-          className="page-parallax"
-          style={{ transform: `translateY(${scrollY * 0.15}px) scale(${1 + scrollY * 0.0002})` }}
-        />
-        <FadeIn>
-          <div className="page-head">
-            <h1 className="page-title">記憶</h1>
-            <p className="page-sub">— Scene Archive —</p>
-          </div>
-        </FadeIn>
+      <section className="page-section first" style={{ overflow: "hidden" }}>
+        <div ref={heroRef} className="story-hero-vid">
+          <video autoPlay muted loop playsInline className="story-hero-vid-el">
+            <source src="/assets/op.mpg" type="video/mpeg" />
+          </video>
+          <div className="story-hero-vid-overlay" />
+        </div>
+        <div className="page-parallax" style={{ transform: `translateY(${scrollY * 0.15}px) scale(${1 + scrollY * 0.0002})` }} />
+        <div className="page-head" style={{ zIndex: 3 }}>
+          <h1 className="page-title">記憶</h1>
+          <p className="page-sub">— Scene Archive —</p>
+        </div>
       </section>
 
       <section className="page-section">
-        <FadeIn>
-          <CGLightbox images={CGS} />
-        </FadeIn>
+        <div ref={gridRef}><CGLightbox images={CGS} /></div>
       </section>
 
-      <section className="page-section page-section-narrow">
-        {QUOTES.map((q, i) => (
-          <FadeIn key={i}>
-            <blockquote className="quote-card">
-              <div className="quote-mark" aria-hidden="true" />
-              <p className="quote-text">{q.text}</p>
-              <cite className="quote-source">{q.source}</cite>
-            </blockquote>
-          </FadeIn>
+      <section ref={storyRef} className="story-scroll">
+        <div className="story-scroll-head">
+          <div className="quote-mark" aria-hidden="true" />
+          <p className="story-scroll-title">叙事 · Narrative</p>
+        </div>
+        {STORY_BEATS.map((beat, i) => (
+          <div key={i} className="story-panel">
+            <img src={beat.src} alt="" className="story-img" loading="lazy" />
+            <div className="story-panel-overlay" />
+            <div className="story-text-box">
+              <div className="story-text-mark" />
+              <p className="story-quote">{beat.quote}</p>
+              <span className="story-label">{beat.label}</span>
+            </div>
+          </div>
         ))}
+        <div className="story-scroll-end">
+          <div className="story-scroll-end-line" />
+          <p className="story-scroll-end-text">世界は、まだ続いている。</p>
+        </div>
       </section>
 
       <div className="divider-rule" />

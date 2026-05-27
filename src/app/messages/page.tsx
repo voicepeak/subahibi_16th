@@ -204,7 +204,7 @@ export default function MessagesPage() {
   return (
     <>
       <section className="page-section first">
-        <div className="page-bg-img" style={{ backgroundImage: `url("/assets/cg/main/ev0009.png")` }} />
+        <div className="page-bg-img" style={{ backgroundImage: `url("/assets/bg/bg1015d.png")` }} />
         <div className="page-parallax" />
         <FadeIn>
           <div className="page-head">
@@ -219,7 +219,7 @@ export default function MessagesPage() {
           <blockquote className="quote-card">
             <div className="quote-mark" aria-hidden="true" />
             <p className="quote-text">
-              "下一辆列车是特别快车，开往夏夜大三角。"
+              "下一辆列车是特别快车，开往夏夜大三角。请注意安全，站在白线以外。"
             </p>
             <cite className="quote-source">『素晴日 〜不连续存在〜』</cite>
           </blockquote>

@@ -403,8 +403,6 @@ main { min-height: 100vh; }
   text-transform: uppercase;
   backdrop-filter: blur(8px); background: rgba(14,15,19,0.3);
   position: relative; overflow: hidden;
-  opacity: 0; transform: translateY(16px);
-  animation: entry-fade-up 0.8s cubic-bezier(0.23,1,0.32,1) 0.6s forwards;
 }
 
 .entry-badge-in {
@@ -431,10 +429,8 @@ main { min-height: 100vh; }
   font-family: "Yu Mincho", "Songti SC", "Noto Serif SC", "Times New Roman", serif;
   font-size: clamp(2.8rem, 10vw, 8rem); font-weight: 400;
   letter-spacing: 0.05em; margin: 0; line-height: 1.1;
-  color: var(--text); will-change: transform;
-  transform: translate(calc(var(--mouse-x) * 6px), calc(var(--mouse-y) * 6px));
-  opacity: 0; filter: blur(4px);
-  animation: entry-title-reveal 1.2s cubic-bezier(0.23,1,0.32,1) 0.8s forwards;
+  color: var(--text);
+  will-change: transform;
 }
 
 @keyframes entry-title-reveal {
@@ -450,15 +446,11 @@ main { min-height: 100vh; }
   font-size: clamp(0.85rem, 1.8vw, 1.3rem);
   color: var(--text-dim); letter-spacing: 0.3em;
   margin-top: 1.1rem; font-weight: 300; text-transform: uppercase;
-  opacity: 0; transform: translateY(16px);
-  animation: entry-fade-up 0.8s cubic-bezier(0.23,1,0.32,1) 1.0s forwards;
 }
 
 .entry-countdown {
   font-size: 0.72rem; color: var(--text-dim);
   letter-spacing: 0.2em; margin-top: 1.4rem;
-  opacity: 0;
-  animation: entry-fade-up 0.8s cubic-bezier(0.23,1,0.32,1) 1.1s forwards;
 }
 
 .entry-countdown-num {
@@ -470,8 +462,6 @@ main { min-height: 100vh; }
 .entry-year {
   font-size: 0.82rem; color: var(--accent);
   letter-spacing: 0.2em; margin-top: 1.8rem;
-  opacity: 0;
-  animation: entry-fade-up 0.8s cubic-bezier(0.23,1,0.32,1) 1.2s forwards;
 }
 
 .entry-enter {
@@ -480,13 +470,8 @@ main { min-height: 100vh; }
   gap: 0.7rem; text-decoration: none;
   color: var(--accent); font-size: 0.62rem;
   letter-spacing: 0.3em; text-transform: uppercase;
-  opacity: 0;
-  animation: entry-fade-up 0.6s cubic-bezier(0.23,1,0.32,1) 1.6s forwards,
-             enter-glow 2.4s ease-in-out 2s infinite;
-  transition: opacity 0.3s;
   border: none; background: none; cursor: pointer;
-  font-family: inherit;
-  padding: 0;
+  font-family: inherit; padding: 0;
 }
 
 .entry-enter:hover {
@@ -1317,6 +1302,162 @@ main { min-height: 100vh; }
 .about-credit {
   font-size: 0.68rem; color: var(--accent);
   letter-spacing: 0.1em; margin-top: 3rem; opacity: 0.45;
+}
+
+/* ─── Story Scroll ─── */
+
+.story-hero-vid {
+  position: absolute; inset: 0; z-index: 0;
+  overflow: hidden;
+}
+
+.story-hero-vid-el {
+  width: 100%; height: 100%;
+  object-fit: cover; opacity: 0.15;
+  filter: saturate(0.6) brightness(0.5);
+}
+
+.story-hero-vid-overlay {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 30%, transparent 0%, rgba(14,15,19,0.7) 60%, rgba(14,15,19,0.95) 100%);
+}
+
+.story-scroll {
+  position: relative; z-index: 2;
+  padding: 0 2rem 4rem;
+}
+
+.story-scroll-head {
+  text-align: center; padding: 4rem 0 2rem;
+}
+
+.story-scroll-title {
+  font-family: "Yu Mincho", "Songti SC", "Noto Serif SC", serif;
+  font-size: 0.75rem; color: var(--accent);
+  letter-spacing: 0.25em; text-transform: uppercase;
+  opacity: 0.4; margin: 0;
+}
+
+.story-panel {
+  position: relative;
+  height: 100vh; min-height: 500px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+
+.story-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  will-change: transform, opacity, filter;
+}
+
+.story-panel-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg,
+    rgba(14,15,19,0.4) 0%,
+    rgba(14,15,19,0.15) 40%,
+    rgba(14,15,19,0.6) 100%
+  );
+  pointer-events: none;
+}
+
+.story-text-box {
+  position: relative; z-index: 2;
+  max-width: 480px; text-align: center;
+  padding: 2rem;
+}
+
+.story-text-mark {
+  width: 16px; height: 1px;
+  background: var(--accent-dim);
+  margin: 0 auto 1.5rem;
+}
+
+.story-quote {
+  font-family: "Yu Mincho", "Songti SC", "Noto Serif SC", serif;
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  font-weight: 300; line-height: 2;
+  color: var(--text); margin: 0 0 1rem;
+  letter-spacing: 0.04em;
+}
+
+.story-label {
+  font-size: 0.6rem; color: var(--accent);
+  letter-spacing: 0.15em; opacity: 0.4;
+  text-transform: uppercase;
+}
+
+.story-scroll-end {
+  text-align: center; padding: 3rem 0;
+}
+
+.story-scroll-end-line {
+  width: 1px; height: 32px;
+  background: linear-gradient(180deg, var(--accent-dim), transparent);
+  margin: 0 auto 1.5rem;
+}
+
+.story-scroll-end-text {
+  font-family: "Yu Mincho", "Songti SC", "Noto Serif SC", serif;
+  font-size: 0.95rem; color: var(--text-dim);
+  letter-spacing: 0.1em; margin: 0; opacity: 0.5;
+}
+
+/* ─── Vortex scroll ─── */
+
+.vortex-section {
+  position: relative;
+  height: 300vh;
+}
+
+.vortex-track {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.vortex-img-wrap {
+  position: absolute; inset: 0;
+  opacity: 0;
+}
+
+.vortex-img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  opacity: 0.08; filter: saturate(0.4) brightness(0.6);
+  transform: scale(1.05);
+}
+
+.vortex-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(14,15,19,0.7) 100%);
+  pointer-events: none;
+}
+
+.vortex-text {
+  position: absolute; bottom: 4rem; left: 0; right: 0;
+  z-index: 2; text-align: center;
+}
+
+.vortex-text-line {
+  width: 1px; height: 24px;
+  background: var(--accent-dim);
+  margin: 0 auto 1rem;
+}
+
+.vortex-quote {
+  font-family: "Yu Mincho", "Songti SC", "Noto Serif SC", serif;
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  color: var(--text); margin: 0 0 0.5rem;
+  letter-spacing: 0.15em; font-weight: 300;
+}
+
+.vortex-sub {
+  font-size: 0.7rem; color: var(--text-dim);
+  letter-spacing: 0.15em; opacity: 0.4;
 }
 
 /* 鈹€鈹€鈹€ Divider 鈹€鈹€鈹€ */
@@ -2833,7 +2974,15 @@ main { min-height: 100vh; }
 
 @media (max-width: 480px) {
   .chara-grid { grid-template-columns: 1fr; max-width: 280px; }
-  .entry-badge { font-size: 0.6rem; padding: 0.25rem 0.85rem; margin-bottom: 1.5rem; }
+  .entry-badge {
+  display: inline-flex;
+  border: 1px solid var(--accent-dim); border-radius: 999px;
+  padding: 0.32rem 1.05rem; font-size: 0.7rem;
+  letter-spacing: 0.15em; color: var(--accent);
+  text-transform: uppercase;
+  backdrop-filter: blur(8px); background: rgba(14,15,19,0.3);
+  position: relative; overflow: hidden;
+}
   .site-nav-mark { font-size: 1.1rem; }
   .bgm-player {
     right: 0.85rem;

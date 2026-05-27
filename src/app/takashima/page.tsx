@@ -1,21 +1,25 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 import { TakashimaSubscription } from "@/components/TakashimaSubscription";
 
-function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+function FadeInSection({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { setTimeout(() => el.classList.add("in"), delay); } },
-      { threshold: 0.15 }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
+    const ctx = gsap.context(() => {
+      gsap.fromTo(el, { y: 24, opacity: 0 }, {
+        y: 0, opacity: 1, duration: 0.6, delay: delay / 1000, ease: "power2.out",
+        scrollTrigger: { trigger: el, start: "top 88%", toggleActions: "play none none none" },
+      });
+    }, el);
+    return () => ctx.revert();
   }, [delay]);
-  return <div ref={ref} className={`fi fi-up`}>{children}</div>;
+
+  return <div ref={ref}>{children}</div>;
 }
 
 export default function TakashimaPage() {
@@ -24,16 +28,16 @@ export default function TakashimaPage() {
       <section className="page-section first">
         <div className="page-bg-img" style={{ backgroundImage: `url("/assets/phone-cg.png")` }} />
         <div className="page-parallax" />
-        <FadeIn>
+        <FadeInSection>
           <div className="page-head">
             <h1 className="page-title">高岛短信</h1>
             <p className="page-sub">— Takashima Mail —</p>
           </div>
-        </FadeIn>
+        </FadeInSection>
       </section>
 
       <section className="page-section page-section-narrow">
-        <FadeIn delay={80}>
+        <FadeInSection delay={80}>
           <div className="takashima-hero">
             <img src="/assets/chara-zk.png" alt="" className="takashima-chara" loading="lazy" />
             <blockquote className="quote-card" style={{ margin: "0" }}>
@@ -44,23 +48,23 @@ export default function TakashimaPage() {
               <cite className="quote-source">高岛柘榴 · 2012/07/11</cite>
             </blockquote>
           </div>
-        </FadeIn>
+        </FadeInSection>
       </section>
 
       <section className="page-section page-section-narrow">
-        <FadeIn delay={120}>
+        <FadeInSection delay={120}>
           <p className="takashima-intro">
             2012年7月，校内揭示板上开始出现来自高岛柘榴的短信。
             最初只是被视为恶作剧，但随着短信内容越发具体、越发黑暗，
             恐惧开始在学生之间蔓延——
           </p>
-        </FadeIn>
+        </FadeInSection>
       </section>
 
       <section className="page-section page-section-narrow">
-        <FadeIn delay={160}>
+        <FadeInSection delay={160}>
           <TakashimaSubscription />
-        </FadeIn>
+        </FadeInSection>
       </section>
 
       <div className="divider-rule" />

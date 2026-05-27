@@ -1,19 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { gsap } from "gsap";
 
 interface BBSPost {
-  num: number;
-  name: string;
-  date: string;
-  uid: string;
-  body: string;
+  num: number; name: string; date: string; uid: string; body: string;
 }
-
-interface BBSThread {
-  title: string;
-  posts: BBSPost[];
-}
+interface BBSThread { title: string; posts: BBSPost[]; }
 
 const THREADS: BBSThread[] = [
   {
@@ -61,7 +54,7 @@ const THREADS: BBSThread[] = [
   {
     title: "收到奇怪的短信……",
     posts: [
-      { num: 1, name: "北校生无名氏", date: "2012/07/12(日) 22:52", uid: "MARUKOME", body: "貌似是收到短信了……。但上面是奇怪的照片跟文章……。>我借由死亡而重生为战士>本来应该是这样但好痛 >明明没有身体>好痛>因为变成这样了好痛 >所以>大家都会死>会在8天后死掉 >所有人肯定都会死。这个邮箱地址是takasimazakuro……。" },
+      { num: 1, name: "北校生无名氏", date: "2012/07/12(日) 22:52", uid: "MARUKOME", body: "貌似是收到短信了……。但上面是奇怪的照片跟文章……。>我借由死亡而重生为战士>本来应该是这样但好痛 >明明没有身体>好痛>因为变成这样了好痛 >所以>大家都会死 >会在8天后死掉 >所有人肯定都会死。这个邮箱地址是takasimazakuro……。" },
       { num: 2, name: "北校生无名氏", date: "2012/07/12(日) 22:55", uid: "GENKI", body: "好像我也收到了……（\u00b7\u03c9\u00b7 ）" },
       { num: 3, name: "北校生无名氏", date: "2012/07/12(日) 22:58", uid: "KINDARMAN", body: "信？那之后满屏都是有人回贴说自己也收到短信了……。从数量上来看应该是上这个揭示板的所有人吧……。" },
       { num: 50, name: "北校生无名氏", date: "2012/07/12(日) 23:40", uid: "WAKAWAK", body: "几点收到的短信？" },
@@ -136,6 +129,20 @@ export default function BulletinPage() {
   const [page, setPage] = useState(0);
   const totalPages = THREADS.length;
   const thread = THREADS[page];
+  const postsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = postsRef.current;
+    if (!el) return;
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        el.querySelectorAll(".bbs-post"),
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, stagger: 0.04, duration: 0.5, ease: "power2.out" }
+      );
+    }, el);
+    return () => ctx.revert();
+  }, [page]);
 
   return (
     <>
@@ -154,7 +161,7 @@ export default function BulletinPage() {
           <span className="bbs-header-info">{thread.posts.length} res</span>
         </div>
 
-        <div className="bbs-threads">
+        <div ref={postsRef} className="bbs-threads">
           {thread.posts.map((post, i) => (
             <div key={`${post.num}-${i}`} className="bbs-post">
               <div className="bbs-post-head">
@@ -163,9 +170,7 @@ export default function BulletinPage() {
                 <span className="bbs-post-date">{post.date}</span>
                 <span className="bbs-post-uid">ID:{post.uid}</span>
               </div>
-              {post.body && (
-                <pre className="bbs-post-text">{post.body}</pre>
-              )}
+              {post.body && <pre className="bbs-post-text">{post.body}</pre>}
             </div>
           ))}
         </div>
