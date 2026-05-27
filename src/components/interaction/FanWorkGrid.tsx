@@ -8,7 +8,7 @@ export function FanWorkGrid({ works }: { works: FeaturedFanWork[] }) {
     <div className="fanwork-grid">
       {works.map((work) => (
         <article key={work.id} className="fanwork-card">
-          <img src={work.image} alt="" loading="lazy" />
+          <img src={work.image} alt={work.title} loading="lazy" />
           <div>
             <h2>{work.title}</h2>
             <p>{work.description}</p>

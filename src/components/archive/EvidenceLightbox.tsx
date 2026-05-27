@@ -18,7 +18,7 @@ export function EvidenceLightbox({ item, onClose }: { item: EvidenceItem | null;
         <button className="evidence-lightbox-close" type="button" onClick={onClose} aria-label="关闭" title="关闭">
           <X size={18} />
         </button>
-        {item.image && <img src={item.image} alt="" loading="lazy" />}
+        {item.image && <img src={item.image} alt={item.title} loading="lazy" />}
         <h2>{item.title}</h2>
         <p>{item.body}</p>
       </div>

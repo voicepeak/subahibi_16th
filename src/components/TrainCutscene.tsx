@@ -53,7 +53,7 @@ export function TrainCutscene() {
                 opacity: fade * tr.alpha,
               }}
             >
-              <img src={SRC} alt="" className="cs-train-img" />
+              <img src={SRC} alt="银河铁道列车" className="cs-train-img" loading="lazy" />
             </div>
           );
         })}

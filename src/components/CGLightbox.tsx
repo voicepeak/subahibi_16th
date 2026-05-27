@@ -41,7 +41,7 @@ export function CGLightbox({ images }: CGLightboxProps) {
             className="cg-grid-cell"
             onClick={() => { setIdx(i); setOpen(true); }}
           >
-            <img src={cg.src} alt="" className="cg-grid-img" loading="lazy" />
+            <img src={cg.src} alt={cg.chapter || "CG"} className="cg-grid-img" loading="lazy" />
             <div className="cg-grid-hint">
               <span className="cg-grid-chapter">{cg.chapter || "——"}</span>
             </div>
@@ -53,7 +53,7 @@ export function CGLightbox({ images }: CGLightboxProps) {
         <div className="cg-lightbox" onClick={() => setOpen(false)}>
           <div className="cg-lightbox-inner" onClick={(e) => e.stopPropagation()}>
             <div className="cg-lightbox-image-wrap">
-              <img src={current.src} alt="" className="cg-lightbox-img" />
+              <img src={current.src} alt={current.chapter || "CG"} className="cg-lightbox-img" loading="lazy" />
               <button className="cg-lightbox-nav cg-lightbox-prev" onClick={prev} aria-label="上一张">
                 ‹
               </button>

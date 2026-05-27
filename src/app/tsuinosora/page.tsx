@@ -78,7 +78,7 @@ export default function TsuiNoSoraPage() {
 
       {started && !done && (
         <section className={cn("tsui-stage", `tsui-stage-${active.intensity}`)}>
-          {active.image && <img src={active.image} alt="" className="tsui-stage-image" />}
+          {active.image && <img src={active.image} alt={active.text} className="tsui-stage-image" loading="lazy" />}
           {(active.intensity === "unstable" || active.intensity === "terminal") && <GlitchLayer intensity={active.intensity === "terminal" ? "high" : "medium"} />}
           <NoiseLayer subtle={active.intensity === "calm"} />
           <div className="tsui-stage-copy">
@@ -97,7 +97,7 @@ export default function TsuiNoSoraPage() {
 
       {done && (
         <section className="tsui-return">
-          <img src="/assets/bg/bg1015a.png" alt="" />
+          <img src="/assets/bg/bg1015a.png" alt="回到天空" loading="lazy" />
           <div>
             <p className="landing-kicker">return</p>
             <h1>幸福地生活吧。</h1>

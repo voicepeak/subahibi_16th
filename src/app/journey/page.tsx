@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { ArrowRight, MessageCircle, Palette } from "lucide-react";
+import { ArrowRight, MessageCircle, Palette, BarChart3 } from "lucide-react";
 import { ChapterProgress } from "@/components/cinematic/ChapterProgress";
 import { ScrollScene } from "@/components/cinematic/ScrollScene";
 import { SharePanel } from "@/components/interaction/SharePanel";
@@ -54,6 +54,10 @@ export default function JourneyPage() {
           <Link href="/works" className="sky-button sky-button-dark">
             <Palette size={16} aria-hidden="true" />
             <span>Works</span>
+          </Link>
+          <Link href="/poll" className="sky-button sky-button-ghost">
+            <BarChart3 size={16} aria-hidden="true" />
+            <span>Polls</span>
           </Link>
           <SharePanel />
         </div>

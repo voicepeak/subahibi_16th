@@ -74,7 +74,7 @@ export default function CharactersPage() {
           {characters.map((c) => (
             <button key={c.file} className="chara-card" onClick={() => setFocus(c)}>
               <div className="chara-card-fig">
-                <img src={`/assets/chara-${c.file}.png`} alt="" className="chara-card-sprite" loading="lazy" />
+                <img src={`/assets/chara-${c.file}.png`} alt={c.name} className="chara-card-sprite" loading="lazy" />
               </div>
               <div className="chara-card-info">
                 <p className="chara-card-name">{c.name}</p>
@@ -99,7 +99,7 @@ export default function CharactersPage() {
       {focus && (
         <div className="monologue-overlay" onClick={close}>
           <div className="monologue-card" onClick={(e) => e.stopPropagation()}>
-            <img src={`/assets/chara-${focus.file}.png`} alt="" className="monologue-sprite" />
+            <img src={`/assets/chara-${focus.file}.png`} alt={focus.name} className="monologue-sprite" loading="lazy" />
             <p className="monologue-name">{focus.name}</p>
             <p className="monologue-role">{focus.role}</p>
             <div className="monologue-mark" aria-hidden="true" />
