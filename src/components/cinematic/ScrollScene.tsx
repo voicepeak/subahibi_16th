@@ -57,16 +57,13 @@ export function ScrollScene({ scene, index }: { scene: JourneyScene; index: numb
   );
 
   const bgImage = scene.mood === "terminal" ? "/assets/denpa/sp0001h.png"
-    : scene.mood === "archive" ? "/assets/bbs-bg.png"
     : scene.mood === "strange" ? "/assets/phone-cg.png"
     : "/assets/bg/bg1015a.png";
 
   return (
     <section id={scene.id} ref={ref} className={cn("scroll-scene", `scroll-scene-${scene.mood}`)}>
       <CGLoopBackdrop images={[bgImage]} intensity={scene.mood === "terminal" ? "unstable" : "calm"} paused />
-      {(scene.mood === "archive" || scene.mood === "terminal") && (
-        <GlitchLayer intensity={scene.mood === "terminal" ? "medium" : "low"} />
-      )}
+      {scene.mood === "terminal" && <GlitchLayer intensity="medium" />}
       <div className="scroll-scene-content">
         <p className="scroll-scene-kicker">{scene.chapter} / {scene.eyebrow}</p>
         <h2>{scene.title}</h2>

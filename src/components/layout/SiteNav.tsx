@@ -8,7 +8,7 @@ import { cn } from "@/lib/cn";
 
 const navItems = [
   { href: "/journey", label: "Journey", sub: "主线", icon: Route },
-  { href: "/archive/bulletin", label: "Archive", sub: "档案", icon: Archive },
+  { href: "/archive/takashima", label: "Takashima", sub: "短信", icon: Archive },
   { href: "/memories", label: "Memories", sub: "留言", icon: MessageCircle },
   { href: "/works", label: "Works", sub: "二创", icon: Palette },
   { href: "/about", label: "About", sub: "说明", icon: Info },

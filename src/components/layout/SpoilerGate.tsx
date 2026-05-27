@@ -41,9 +41,9 @@ export function SpoilerGate() {
             <span>已知晓，继续浏览</span>
             <ArrowRight size={17} aria-hidden="true" />
           </button>
-          <Link href="/archive/bulletin" className="sky-button sky-button-ghost" onClick={consent}>
+          <Link href="/archive/takashima" className="sky-button sky-button-ghost" onClick={consent}>
             <Archive size={16} aria-hidden="true" />
-            <span>Skip to Archive</span>
+            <span>Skip to Takashima</span>
           </Link>
         </div>
       </div>

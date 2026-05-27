@@ -29,13 +29,13 @@ export default function LandingPage() {
                     <span>Enter</span>
                     <ArrowRight size={17} aria-hidden="true" />
                   </Link>
-                  <Link href="/archive/bulletin" className="sky-button sky-button-ghost">
-                    <Archive size={16} aria-hidden="true" />
-                    <span>Skip to Archive</span>
+                <Link href="/archive/takashima" className="sky-button sky-button-ghost">
+                  <Archive size={16} aria-hidden="true" />
+                  <span>Skip to Takashima</span>
                   </Link>
                 </div>
                 <p className="landing-warning-media">包含《素晴日》关键剧情意象与剧透内容。</p>
-                <p className="landing-after-media">sky / mail / bulletin / 7.20 / tsui no sora / wonderful everyday</p>
+                <p className="landing-after-media">sky / mail / character parade / 7.20 / wonderful everyday</p>
               </>
             }
           />

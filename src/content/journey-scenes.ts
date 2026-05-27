@@ -6,7 +6,7 @@ export type JourneyScene = {
   chapter: string;
   title: string;
   subtitle: string;
-  mood: "bright" | "strange" | "archive" | "terminal" | "after";
+  mood: "bright" | "strange" | "terminal" | "after";
   eyebrow: string;
   lines: string[];
   archiveHref?: string;
@@ -39,7 +39,7 @@ export const journeyScenes: JourneyScene[] = [
     id: "takashima-signal",
     chapter: "Chapter 03",
     title: "Takashima Signal",
-    subtitle: "高岛异常信号",
+    subtitle: "高岛短信",
     mood: "strange",
     eyebrow: "22:44 / signal lost",
     lines: ["第一条短信不是通知。", "它像从旧手机里渗出的裂缝。"],
@@ -48,20 +48,8 @@ export const journeyScenes: JourneyScene[] = [
     signal: "22:44",
   },
   {
-    id: "bulletin-spread",
-    chapter: "Chapter 04",
-    title: "Bulletin Spread",
-    subtitle: "揭示板扩散",
-    mood: "archive",
-    eyebrow: "anonymous log / archived board",
-    lines: ["匿名 ID 开始互相引用。", "恐惧从一条回帖变成了可回放的事件。"],
-    archiveHref: "/archive/bulletin",
-    archiveLabel: "Open Bulletin Archive",
-    signal: "res: 0686",
-  },
-  {
     id: "july-20",
-    chapter: "Chapter 05",
+    chapter: "Chapter 04",
     title: "July 20",
     subtitle: "7月20日",
     mood: "terminal",
@@ -71,7 +59,7 @@ export const journeyScenes: JourneyScene[] = [
   },
   {
     id: "wonderful-everyday",
-    chapter: "Chapter 06",
+    chapter: "Chapter 05",
     title: "Wonderful Everyday",
     subtitle: "幸福地生活",
     mood: "after",
