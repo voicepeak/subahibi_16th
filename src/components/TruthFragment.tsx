@@ -1,31 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-
-const TRUTHS = [
-  "世界的界限……即是我的界限。",
-  "悲惨的也好、污秽的也好、美丽的也好、荣耀的也好、他们全部都是“我”……",
-  "世界只由“我”构成……所以，我才能理解你。",
-  "因为啊……没有必要给死者供花了吧……",
-  "幸福的每一天……。每一天都很幸福……。我便是生活在这样一个世界上……。",
-  "下一辆列车是特别快车，开往夏夜大三角。请注意安全，站在白线以外。",
-  "我们的情人不过是随便借个名字，用幻想吹出来的肥皂泡……",
-  "拿去吧！——由于不是出自真心，话就说得格外动听！",
-  "隐藏的诱惑，一直都存在于人们的身边。",
-  "我们的头脑比天空更辽阔……",
-  "天空的起始和终焉……终焉和起始的天空……",
-  "她即世界的少女……原本就是不应存在于这个世界之中的。",
-  "这一切都并非是什么超常现象什么神什么幽灵……全部是你独自一人一手策划的。",
-  "人必须有所信才可以向前走下去。",
-  "世界是我所看到的、触摸到的、以及感受到的。",
-  "如果世界就是我，那其他人是什么？",
-  "光没办法消除黑暗……因为光，是在黑暗的诱惑之下才出现的。",
-  "没有容器，液体便无法装满。",
-  "穿过黑暗……看到了前方的光芒。",
-  "我借由死亡重生为战士……本应该是这样的，好痛。",
-  "答案就在这里，并且你是可以得到那个答案，也是可以无视那个答案的存在。",
-  "什么都不曾改变，一切都已改变。",
-];
+import { truths } from "@/content/quotes";
 
 export function TruthFragment() {
   const [open, setOpen] = useState(false);
@@ -34,7 +10,7 @@ export function TruthFragment() {
   useEffect(() => { setMounted(true); }, []);
 
   const show = useCallback(() => {
-    setQuote(TRUTHS[Math.floor(Math.random() * TRUTHS.length)]);
+    setQuote(truths[Math.floor(Math.random() * truths.length)]);
     setOpen(true);
   }, []);
 

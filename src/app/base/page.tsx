@@ -121,7 +121,7 @@ export default function SecretBasePage() {
       <section ref={sectionRef} className="page-section page-section-narrow base-room-section">
         <div className="base-room">
           <div className="base-bg-layer">
-            <img src="/assets/bg/bg1022a.png" alt="" className="base-bg-img" />
+            <img src="/assets/bg/bg1022a.png" alt="" className="base-bg-img" loading="lazy" role="presentation" />
             <div className="base-bg-overlay" />
           </div>
 

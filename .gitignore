@@ -6,6 +6,7 @@ dist
 !.env.example
 tsconfig.tsbuildinfo
 npm-debug.log*
+.next-dev*.log
 
 素材/
 *.docx

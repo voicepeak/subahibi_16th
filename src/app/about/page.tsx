@@ -1,46 +1,38 @@
-"use client";
+import type { Metadata } from "next";
 
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
+export const metadata: Metadata = {
+  title: "About",
+  description: "项目说明、非官方声明、版权说明与内容提醒。",
+};
 
 export default function AboutPage() {
-  const root = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = root.current;
-    if (!el) return;
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        el.querySelectorAll<HTMLElement>("[data-r]"),
-        { y: 24, opacity: 0 },
-        { y: 0, opacity: 1, stagger: 0.1, duration: 0.6, ease: "power2.out",
-          scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none none" },
-        }
-      );
-    }, el);
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <>
-      <section className="page-section first">
-        <div className="page-parallax" />
-        <div className="page-head">
-          <h1 className="page-title">关于</h1>
-          <p className="page-sub">— About —</p>
-        </div>
+    <main className="about-page">
+      <section className="about-hero">
+        <p className="landing-kicker">About</p>
+        <h1>非官方粉丝纪念站</h1>
+        <p>SubaHibi 16th Anniversary — The Sky Archive</p>
       </section>
 
-      <section ref={root} className="page-section page-section-narrow">
-        <div className="about-body">
-          <p className="about-text" data-r>这是一个非官方的粉丝纪念站。<br />献给《素晴らしき日々 〜不連続存在〜》。</p>
-          <p className="about-text" data-r>本站为纪念性质，所有图像素材版权归原制作公司所有。<br />若权利人认为存在侵权，请联系我们移除相关内容。</p>
-          <p className="about-text about-muted" data-r>Subarashiki Hibi 16th Anniversary<br />2010 — 2026</p>
-          <p className="about-credit" data-r>— Built with love for the wonderful everyday —</p>
-        </div>
+      <section className="about-sections">
+        <article>
+          <h2>项目定位</h2>
+          <p>本站是围绕《素晴日》16 周年的非官方粉丝纪念体验站，以天空、短信、掲示板、7 月 20 日和“幸福地生活”为叙事主线。</p>
+        </article>
+        <article>
+          <h2>内容提醒</h2>
+          <p>本纪念站包含强剧透、死亡、精神压迫等主题表现。站点避免直接展示露骨成人内容，也不提供游戏本体、破解、汉化补丁或商业化服务。</p>
+        </article>
+        <article>
+          <h2>非官方声明</h2>
+          <p>本项目为非官方粉丝纪念站，与原作版权方、发行方无商业合作关系。所有相关名称、角色、音乐、图像等权利归原权利方所有。本站不提供游戏下载、破解、汉化补丁或商业化服务。</p>
+        </article>
+        <article>
+          <h2>素材原则</h2>
+          <p>站内素材仅用于网页氛围展示，不开放批量下载。用户投稿必须拥有授权；若权利人提出下架请求，将及时移除相关内容。</p>
+        </article>
       </section>
-
-      <div className="divider-rule" />
-    </>
+    </main>
   );
 }
+
