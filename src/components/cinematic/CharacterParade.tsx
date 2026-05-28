@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { useReducedMotion } from "@/lib/motion";
-import { gsap, useGSAP } from "@/lib/gsap";
+import { gsap, useGSAP, ensureGsapReady } from "@/lib/gsap";
 import type { CharacterAsset } from "@/content/characters";
 
 type CharacterParadeProps = {
@@ -15,6 +15,7 @@ export function CharacterParade({ characters }: CharacterParadeProps) {
 
   useGSAP(
     () => {
+      ensureGsapReady();
       if (reducedMotion || !ref.current) return;
       const cards = ref.current.querySelectorAll(".char-parade-card");
       gsap.fromTo(

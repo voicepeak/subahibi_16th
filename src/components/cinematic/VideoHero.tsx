@@ -30,11 +30,12 @@ export function VideoHero({ video, fallbackImage, overlay }: VideoHeroProps) {
           loop={video.loop ?? true}
           muted={video.muted ?? true}
           playsInline
+          preload="none"
           aria-hidden="true"
         />
       ) : (
         posterImage && (
-          <img src={posterImage} alt="" className="video-hero-media" aria-hidden="true" />
+          <img src={posterImage} alt="" className="video-hero-media" aria-hidden="true" fetchPriority="high" />
         )
       )}
       {overlay && <div className="video-hero-overlay">{overlay}</div>}

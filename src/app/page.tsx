@@ -1,16 +1,11 @@
-"use client";
-
 import Link from "next/link";
 import { ArrowRight, Archive } from "lucide-react";
 import { VideoHero } from "@/components/cinematic/VideoHero";
-import { CGShowcase } from "@/components/cinematic/CGShowcase";
 import { MediaOverlay } from "@/components/cinematic/MediaOverlay";
 import { videoAssets } from "@/content/videos";
-import { cgAssets } from "@/content/cg";
 
 export default function LandingPage() {
   const video = videoAssets[0];
-  const skyCGs = cgAssets.filter((cg) => cg.tone === "bright").slice(0, 4);
 
   return (
     <main className="landing-page">

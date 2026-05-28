@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 import { CGLoopBackdrop } from "@/components/cinematic/CGLoopBackdrop";
 import { GlitchLayer } from "@/components/cinematic/GlitchLayer";
 import { useReducedMotion } from "@/lib/motion";
-import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
+import { gsap, ScrollTrigger, useGSAP, ensureGsapReady } from "@/lib/gsap";
 import { cn } from "@/lib/cn";
 import type { JourneyScene } from "@/content/journey-scenes";
 
@@ -16,6 +16,7 @@ export function ScrollScene({ scene, index }: { scene: JourneyScene; index: numb
 
   useGSAP(
     () => {
+      ensureGsapReady();
       if (reducedMotion || !ref.current) return;
       const content = ref.current.querySelector(".scroll-scene-content");
       const bg = ref.current.querySelector(".cg-loop-backdrop");

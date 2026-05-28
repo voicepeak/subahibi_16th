@@ -36,7 +36,7 @@ export function InlineCinematicVideo({ src, poster, className }: InlineCinematic
   }, [reducedMotion]);
 
   if (reducedMotion) {
-    return poster ? <img src={poster} alt="" className={cn("inline-cinematic-video", className)} /> : null;
+    return poster ? <img src={poster} alt="" className={cn("inline-cinematic-video", className)} loading="lazy" /> : null;
   }
 
   return (

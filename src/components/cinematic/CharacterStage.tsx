@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { useReducedMotion } from "@/lib/motion";
-import { gsap, useGSAP } from "@/lib/gsap";
+import { gsap, useGSAP, ensureGsapReady } from "@/lib/gsap";
 import { cn } from "@/lib/cn";
 
 type CharacterStageProps = {
@@ -20,6 +20,7 @@ export function CharacterStage({ image, name, subtitle, quote, side = "center", 
 
   useGSAP(
     () => {
+      ensureGsapReady();
       if (reducedMotion || !ref.current) return;
       const el = ref.current;
       gsap.fromTo(
@@ -53,7 +54,7 @@ export function CharacterStage({ image, name, subtitle, quote, side = "center", 
   return (
     <div ref={ref} className={cn("character-stage", `character-stage-${side}`)}>
       {bgImage && (
-        <img src={bgImage} alt="" className="character-stage-bg" aria-hidden="true" />
+        <img src={bgImage} alt="" className="character-stage-bg" aria-hidden="true" loading="lazy" />
       )}
       <div className="character-stage-figure">
         <img src={image} alt={name} className="character-stage-sprite" loading="lazy" />
