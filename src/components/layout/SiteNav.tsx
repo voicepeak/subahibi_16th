@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Archive, Info, Menu, MessageCircle, Palette, Route, X } from "lucide-react";
+import { Archive, Info, Menu, MessageCircle, MessageSquare, Palette, Route, X } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/cn";
 
@@ -11,6 +11,7 @@ const navItems = [
   { href: "/archive/takashima", label: "Takashima", sub: "短信", icon: Archive },
   { href: "/memories", label: "Memories", sub: "留言", icon: MessageCircle },
   { href: "/works", label: "Works", sub: "二创", icon: Palette },
+  { href: "/dialogue", label: "Dialogue", sub: "对话", icon: MessageSquare },
   { href: "/about", label: "About", sub: "说明", icon: Info },
 ];
 
