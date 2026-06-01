@@ -12,11 +12,10 @@ export default function DialoguePage() {
   const [charId, setCharId] = useState("yk");
   const [bgId, setBgId] = useState("bg1015a");
   const [customBg, setCustomBg] = useState<string | null>(null);
-  const [name, setName] = useState("");
   const [text, setText] = useState("");
 
   const character = dialogueCharacters.find((c) => c.id === charId) ?? dialogueCharacters[0];
-  const displayName = name.trim() || character.name;
+  const displayName = character.dialogueName;
   const bgSrc = customBg || dialogueBackgrounds.find((b) => b.id === bgId)?.src || dialogueBackgrounds[0].src;
 
   return (
@@ -49,12 +48,12 @@ export default function DialoguePage() {
           <DialogueEditor
             characterName={displayName}
             text={text}
-            onNameChange={setName}
             onTextChange={setText}
           />
         </div>
 
         <PreviewCanvas
+          charaId={character.id}
           bgSrc={bgSrc}
           charaSrc={character.sprite}
           charaName={displayName}
