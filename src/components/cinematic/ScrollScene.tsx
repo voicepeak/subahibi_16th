@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import { CGLoopBackdrop } from "@/components/cinematic/CGLoopBackdrop";
@@ -19,16 +20,17 @@ export function ScrollScene({ scene, index }: { scene: JourneyScene; index: numb
       ensureGsapReady();
       if (reducedMotion || !ref.current) return;
       const content = ref.current.querySelector(".scroll-scene-content");
+      const artifact = ref.current.querySelector(".scroll-scene-artifact");
       const bg = ref.current.querySelector(".cg-loop-backdrop");
 
       gsap.fromTo(
         content,
-        { autoAlpha: 0, y: 44, filter: "blur(10px)" },
+        { autoAlpha: 0, y: 34, filter: "blur(2px)" },
         {
           autoAlpha: 1,
           y: 0,
           filter: "blur(0px)",
-          duration: 0.9,
+          duration: 0.58,
           ease: "power2.out",
           scrollTrigger: {
             trigger: ref.current,
@@ -37,6 +39,26 @@ export function ScrollScene({ scene, index }: { scene: JourneyScene; index: numb
           },
         }
       );
+
+      if (artifact) {
+        gsap.fromTo(
+          artifact,
+          { autoAlpha: 0, y: 36, rotate: index % 2 === 0 ? 2.5 : -2.5, scale: 0.96 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            rotate: 0,
+            scale: 1,
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: ref.current,
+              start: "top 68%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+      }
 
       if (bg) {
         gsap.to(bg, {
@@ -57,14 +79,19 @@ export function ScrollScene({ scene, index }: { scene: JourneyScene; index: numb
     { scope: ref, dependencies: [reducedMotion], revertOnUpdate: true }
   );
 
-  const bgImage = scene.mood === "terminal" ? "/assets/denpa/sp0001h.png"
-    : scene.mood === "strange" ? "/assets/phone-cg.png"
-    : "/assets/bg/bg1015a.png";
+  const style = { "--scene-accent": scene.visual.accent } as CSSProperties;
+  const sequence = String(index + 1).padStart(2, "0");
 
   return (
-    <section id={scene.id} ref={ref} className={cn("scroll-scene", `scroll-scene-${scene.mood}`)}>
-      <CGLoopBackdrop images={[bgImage]} intensity={scene.mood === "terminal" ? "unstable" : "calm"} paused />
+    <section
+      id={scene.id}
+      ref={ref}
+      style={style}
+      className={cn("scroll-scene", `scroll-scene-${scene.mood}`, `scroll-scene-${scene.visual.align}`)}
+    >
+      <CGLoopBackdrop images={[scene.visual.backdrop]} intensity={scene.mood === "terminal" ? "unstable" : "calm"} paused />
       {scene.mood === "terminal" && <GlitchLayer intensity="medium" />}
+      <span className="scroll-scene-index" aria-hidden="true">{sequence}</span>
       <div className="scroll-scene-content">
         <p className="scroll-scene-kicker">{scene.chapter} / {scene.eyebrow}</p>
         <h2>{scene.title}</h2>
@@ -82,6 +109,12 @@ export function ScrollScene({ scene, index }: { scene: JourneyScene; index: numb
           )}
         </div>
       </div>
+      <aside className="scroll-scene-artifact" aria-label={scene.visual.caption}>
+        <div className="scroll-scene-artifact-image">
+          <img src={scene.visual.image} alt="" loading="lazy" />
+        </div>
+        <p>{scene.visual.caption}</p>
+      </aside>
     </section>
   );
 }

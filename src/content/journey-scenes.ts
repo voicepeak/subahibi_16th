@@ -9,6 +9,13 @@ export type JourneyScene = {
   mood: "bright" | "strange" | "terminal" | "after";
   eyebrow: string;
   lines: string[];
+  visual: {
+    image: string;
+    backdrop: string;
+    caption: string;
+    align: "left" | "right" | "center";
+    accent: string;
+  };
   archiveHref?: string;
   archiveLabel?: string;
   signal?: string;
@@ -23,6 +30,13 @@ export const journeyScenes: JourneyScene[] = [
     mood: "bright",
     eyebrow: "明亮 / 安静 / 夏日",
     lines: ["天空先于一切出现。", "楼顶的风很慢，像什么都还没有发生。"],
+    visual: {
+      image: "/assets/bg/bg1015a.png",
+      backdrop: "/assets/bg/bg1015a.png",
+      caption: "Roof / first sky",
+      align: "right",
+      accent: "#1f8fd1",
+    },
     signal: "2012.07.12 15:20",
   },
   {
@@ -33,6 +47,13 @@ export const journeyScenes: JourneyScene[] = [
     mood: "strange",
     eyebrow: "すべては私",
     lines: ["这里的所有人，不过是同一个灵魂在不同世界中的投影。", "你与我和她，皆是一体。"],
+    visual: {
+      image: "/assets/cg/main/ev0008b.png",
+      backdrop: "/assets/phone-cg.png",
+      caption: "Character mirror / all are I",
+      align: "left",
+      accent: "#b85c78",
+    },
     signal: "all are \"I\"",
   },
   {
@@ -43,6 +64,13 @@ export const journeyScenes: JourneyScene[] = [
     mood: "strange",
     eyebrow: "22:44 / signal lost",
     lines: ["第一条短信不是通知。", "它像从旧手机里渗出的裂缝。"],
+    visual: {
+      image: "/assets/phone-cg2.png",
+      backdrop: "/assets/phone-cg.png",
+      caption: "Mail archive / signal leak",
+      align: "right",
+      accent: "#7cffb2",
+    },
     archiveHref: "/archive/takashima",
     archiveLabel: "Open Mail Archive",
     signal: "22:44",
@@ -55,6 +83,13 @@ export const journeyScenes: JourneyScene[] = [
     mood: "terminal",
     eyebrow: "7/12 → 7/20",
     lines: ["日期不再只是日期。", "短信、掲示板、预言都指向同一个锚点。"],
+    visual: {
+      image: "/assets/denpa/sp0001h.png",
+      backdrop: "/assets/denpa/sp0008g.png",
+      caption: "Terminal date / 07.20",
+      align: "center",
+      accent: "#d44c4c",
+    },
     signal: "2012.07.20",
   },
   {
@@ -65,6 +100,13 @@ export const journeyScenes: JourneyScene[] = [
     mood: "after",
     eyebrow: "after the sky",
     lines: ["噪声消失以后，纪念才真正开始。", "留下留言，或把你的作品放进这座天空档案馆。"],
+    visual: {
+      image: "/assets/cg/main/ev8018.png",
+      backdrop: "/assets/bg/bg1015d.png",
+      caption: "After story / memory keeps moving",
+      align: "left",
+      accent: "#f1d36b",
+    },
     archiveHref: "/memories",
     archiveLabel: "Leave a Memory",
     signal: "2010 — 2026",

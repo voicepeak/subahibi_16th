@@ -3,7 +3,12 @@ import { Battery, Signal } from "lucide-react";
 export function PhoneFrame({ children, time = "22:44" }: { children: React.ReactNode; time?: string }) {
   return (
     <div className="phone-frame">
-      <div className="phone-speaker" aria-hidden="true" />
+      <span className="phone-side-button phone-side-button-left" aria-hidden="true" />
+      <span className="phone-side-button phone-side-button-right" aria-hidden="true" />
+      <div className="phone-hardware" aria-hidden="true">
+        <span className="phone-camera" />
+        <span className="phone-speaker" />
+      </div>
       <div className="phone-screen">
         <div className="phone-status">
           <span>{time}</span>

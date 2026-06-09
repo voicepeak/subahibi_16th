@@ -10,13 +10,21 @@ import "@/components/dialogue/dialogue.css";
 
 export default function DialoguePage() {
   const [charId, setCharId] = useState("yk");
+  const [variantByChar, setVariantByChar] = useState<Record<string, string>>({});
   const [bgId, setBgId] = useState("bg1015a");
   const [customBg, setCustomBg] = useState<string | null>(null);
   const [text, setText] = useState("");
 
   const character = dialogueCharacters.find((c) => c.id === charId) ?? dialogueCharacters[0];
+  const selectedVariantId = variantByChar[character.id] ?? character.variants[0]?.id ?? "default";
+  const variant = character.variants.find((item) => item.id === selectedVariantId) ?? character.variants[0];
   const displayName = character.dialogueName;
+  const charaSrc = variant?.sprite ?? character.sprite;
   const bgSrc = customBg || dialogueBackgrounds.find((b) => b.id === bgId)?.src || dialogueBackgrounds[0].src;
+
+  const handleVariantSelect = (variantId: string) => {
+    setVariantByChar((current) => ({ ...current, [character.id]: variantId }));
+  };
 
   return (
     <>
@@ -34,7 +42,9 @@ export default function DialoguePage() {
           <CharacterPicker
             characters={dialogueCharacters}
             selected={charId}
+            selectedVariant={selectedVariantId}
             onSelect={(id) => { setCharId(id); }}
+            onVariantSelect={handleVariantSelect}
           />
 
           <BackgroundPicker
@@ -55,7 +65,7 @@ export default function DialoguePage() {
         <PreviewCanvas
           charaId={character.id}
           bgSrc={bgSrc}
-          charaSrc={character.sprite}
+          charaSrc={charaSrc}
           charaName={displayName}
           text={text}
         />

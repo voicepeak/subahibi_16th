@@ -22,6 +22,25 @@
   gap: 28px;
 }
 
+.dialogue-section {
+  position: relative;
+  padding: 16px;
+  border: 1px solid rgba(16, 18, 23, 0.1);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(247, 250, 255, 0.52)),
+    radial-gradient(circle at 100% 0%, rgba(111, 169, 216, 0.12), transparent 36%);
+  box-shadow: 0 18px 48px rgba(30, 72, 104, 0.08);
+  backdrop-filter: blur(14px);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.dialogue-section:hover {
+  transform: translateY(-2px);
+  border-color: rgba(111, 169, 216, 0.22);
+  box-shadow: 0 22px 60px rgba(30, 72, 104, 0.13);
+}
+
 .dialogue-section-title {
   margin: 0 0 12px;
   font-family: var(--font-title);
@@ -44,15 +63,16 @@
   padding: 10px 6px 8px;
   border: 1px solid rgba(16, 18, 23, 0.12);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.58);
   cursor: pointer;
-  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s, box-shadow 0.2s;
 }
 
 .dialogue-chara-card:hover {
   background: rgba(255, 255, 255, 0.85);
   border-color: rgba(111, 169, 216, 0.4);
   transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(30, 72, 104, 0.1);
 }
 
 .dialogue-chara-active {
@@ -62,11 +82,13 @@
 }
 
 .dialogue-chara-fig {
-  width: 64px;
-  height: 80px;
+  width: 72px;
+  height: 92px;
   overflow: hidden;
   border-radius: 4px;
-  background: rgba(220, 238, 255, 0.3);
+  background:
+    linear-gradient(180deg, rgba(220, 238, 255, 0.56), rgba(255, 255, 255, 0.2)),
+    radial-gradient(circle at 50% 88%, rgba(111, 169, 216, 0.16), transparent 48%);
 }
 
 .dialogue-chara-fig img {
@@ -80,6 +102,79 @@
   font-size: 12px;
   text-align: center;
   line-height: 1.2;
+}
+
+.dialogue-variant-panel {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(16, 18, 23, 0.1);
+}
+
+.dialogue-variant-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: rgba(16, 18, 23, 0.72);
+}
+
+.dialogue-variant-head small {
+  font-family: var(--font-mono);
+  color: rgba(16, 18, 23, 0.44);
+  text-transform: uppercase;
+}
+
+.dialogue-variant-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.dialogue-variant-thumb {
+  position: relative;
+  min-height: 92px;
+  display: grid;
+  align-content: end;
+  justify-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(16, 18, 23, 0.12);
+  border-radius: 7px;
+  padding: 6px;
+  background: rgba(247, 250, 255, 0.58);
+  color: rgba(16, 18, 23, 0.72);
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.dialogue-variant-thumb:hover {
+  transform: translateY(-2px);
+  border-color: rgba(111, 169, 216, 0.42);
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.dialogue-variant-active {
+  border-color: var(--deep-sky);
+  box-shadow: 0 0 0 1px var(--deep-sky), 0 12px 26px rgba(111, 169, 216, 0.16);
+}
+
+.dialogue-variant-thumb img {
+  position: absolute;
+  top: 5px;
+  height: 74px;
+  max-width: 92%;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+.dialogue-variant-thumb span {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 3px 4px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.72);
+  font-size: 11px;
+  text-align: center;
 }
 
 /* ── Background Picker ── */
@@ -262,13 +357,19 @@
   z-index: 1;
   object-fit: contain;
   object-position: bottom center;
+  filter: drop-shadow(0 16px 22px rgba(16, 18, 23, 0.18));
+  transition: height 240ms ease, left 240ms ease, filter 240ms ease;
 }
 
-.dialogue-preview-frame[data-chara="zk"] { --chara-x: 48.8%; }
-.dialogue-preview-frame[data-chara="kagami"] { --chara-x: 49.2%; }
-.dialogue-preview-frame[data-chara="tsukasa"] { --chara-x: 52.2%; }
-.dialogue-preview-frame[data-chara="hs"] { --chara-x: 50.8%; }
-.dialogue-preview-frame[data-chara="ay"] { --chara-x: 49.3%; }
+.dialogue-preview-frame[data-chara="yk"] { --chara-x: 51.6%; --chara-height: 89%; }
+.dialogue-preview-frame[data-chara="takuji"] { --chara-x: 50%; --chara-height: 86%; }
+.dialogue-preview-frame[data-chara="zk"] { --chara-x: 50%; --chara-height: 88%; }
+.dialogue-preview-frame[data-chara="kagami"] { --chara-x: 49.6%; --chara-height: 88%; }
+.dialogue-preview-frame[data-chara="tsukasa"] { --chara-x: 50.2%; --chara-height: 87%; }
+.dialogue-preview-frame[data-chara="hs"] { --chara-x: 50.8%; --chara-height: 84%; }
+.dialogue-preview-frame[data-chara="ay"] { --chara-x: 49.3%; --chara-height: 86%; }
+.dialogue-preview-frame[data-chara="tm"] { --chara-x: 50.6%; --chara-height: 87%; }
+.dialogue-preview-frame[data-chara="kimika"] { --chara-x: 49%; --chara-height: 86%; }
 
 .dialogue-preview-text-panel {
   position: absolute;
