@@ -27,6 +27,7 @@ export function CharacterPicker({
           <button
             type="button"
             key={c.id}
+            data-chara={c.id}
             className={`dialogue-chara-card ${selected === c.id ? "dialogue-chara-active" : ""}`}
             onClick={() => onSelect(c.id)}
           >
@@ -48,6 +49,7 @@ export function CharacterPicker({
               <button
                 type="button"
                 key={variant.id}
+                data-chara={activeCharacter.id}
                 className={`dialogue-variant-thumb ${selectedVariant === variant.id ? "dialogue-variant-active" : ""}`}
                 onClick={() => onVariantSelect(variant.id)}
                 title={`${activeCharacter.name} / ${variant.label}`}

@@ -35,7 +35,7 @@ export const dialogueCharacters: DialogueCharacter[] = [
     variants: [
       { id: "neutral", label: "正面", sprite: "/assets/chara/variants/takuji-neutral.png" },
       { id: "side", label: "侧身", sprite: "/assets/chara/variants/takuji-side.png" },
-      { id: "raise", label: "抬手", sprite: "/assets/chara/variants/takuji-raise.png" },
+      { id: "raise", label: "差分", sprite: "/assets/chara/variants/takuji-raise.png" },
     ],
   },
   {
@@ -106,7 +106,7 @@ export const dialogueCharacters: DialogueCharacter[] = [
     role: "守护之人",
     variants: [
       { id: "neutral", label: "基础", sprite: "/assets/chara/variants/tm-neutral.png" },
-      { id: "side", label: "侧身", sprite: "/assets/chara/variants/tm-side.png" },
+      { id: "side", label: "差分", sprite: "/assets/chara/variants/tm-side.png" },
       { id: "alt", label: "差分", sprite: "/assets/chara/variants/tm-alt.png" },
     ],
   },

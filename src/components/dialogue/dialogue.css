@@ -52,15 +52,17 @@
 .dialogue-chara-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+  gap: 10px;
 }
 
 .dialogue-chara-card {
+  min-height: 158px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
-  padding: 10px 6px 8px;
+  justify-content: space-between;
+  gap: 7px;
+  padding: 10px 7px 9px;
   border: 1px solid rgba(16, 18, 23, 0.12);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.58);
@@ -82,8 +84,9 @@
 }
 
 .dialogue-chara-fig {
-  width: 72px;
-  height: 92px;
+  position: relative;
+  width: min(112px, 100%);
+  height: 114px;
   overflow: hidden;
   border-radius: 4px;
   background:
@@ -92,10 +95,61 @@
 }
 
 .dialogue-chara-fig img {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  inset: 5px 6px 6px;
+  width: calc(100% - 12px);
+  height: calc(100% - 11px);
   object-fit: contain;
-  object-position: bottom;
+  object-position: center bottom;
+  transform: none;
+  transform-origin: bottom center;
+  image-rendering: auto;
+  filter: none;
+}
+
+.dialogue-chara-card[data-chara="yk"],
+.dialogue-variant-thumb[data-chara="yk"] {
+  --picker-offset-x: 0%;
+}
+
+.dialogue-chara-card[data-chara="takuji"],
+.dialogue-variant-thumb[data-chara="takuji"] {
+  --picker-offset-x: 0%;
+}
+
+.dialogue-chara-card[data-chara="zk"],
+.dialogue-variant-thumb[data-chara="zk"] {
+  --picker-offset-x: -3%;
+}
+
+.dialogue-chara-card[data-chara="kagami"],
+.dialogue-variant-thumb[data-chara="kagami"] {
+  --picker-offset-x: -2%;
+}
+
+.dialogue-chara-card[data-chara="tsukasa"],
+.dialogue-variant-thumb[data-chara="tsukasa"] {
+  --picker-offset-x: 3%;
+}
+
+.dialogue-chara-card[data-chara="hs"],
+.dialogue-variant-thumb[data-chara="hs"] {
+  --picker-offset-x: -1%;
+}
+
+.dialogue-chara-card[data-chara="ay"],
+.dialogue-variant-thumb[data-chara="ay"] {
+  --picker-offset-x: 1%;
+}
+
+.dialogue-chara-card[data-chara="tm"],
+.dialogue-variant-thumb[data-chara="tm"] {
+  --picker-offset-x: 0%;
+}
+
+.dialogue-chara-card[data-chara="kimika"],
+.dialogue-variant-thumb[data-chara="kimika"] {
+  --picker-offset-x: 0%;
 }
 
 .dialogue-chara-name {
@@ -133,7 +187,7 @@
 
 .dialogue-variant-thumb {
   position: relative;
-  min-height: 92px;
+  min-height: 122px;
   display: grid;
   align-content: end;
   justify-items: center;
@@ -159,11 +213,16 @@
 
 .dialogue-variant-thumb img {
   position: absolute;
-  top: 5px;
-  height: 74px;
-  max-width: 92%;
+  inset: 6px 7px 31px;
+  width: calc(100% - 14px);
+  height: calc(100% - 37px);
+  max-width: 100%;
   object-fit: contain;
   object-position: center bottom;
+  transform: translateX(var(--picker-offset-x, 0%));
+  transform-origin: bottom center;
+  image-rendering: auto;
+  filter: none;
 }
 
 .dialogue-variant-thumb span {
@@ -351,25 +410,71 @@
 .dialogue-preview-chara {
   position: absolute;
   bottom: 0;
-  left: var(--chara-x, 50%);
+  left: var(--chara-left, 56%);
   transform: translateX(-50%);
-  height: var(--chara-height, 85.42%);
+  height: var(--chara-height, 84%);
+  width: auto;
+  max-width: var(--chara-max-width, 68%);
   z-index: 1;
   object-fit: contain;
   object-position: bottom center;
   filter: drop-shadow(0 16px 22px rgba(16, 18, 23, 0.18));
-  transition: height 240ms ease, left 240ms ease, filter 240ms ease;
+  transition: height 240ms ease, filter 240ms ease;
 }
 
-.dialogue-preview-frame[data-chara="yk"] { --chara-x: 51.6%; --chara-height: 89%; }
-.dialogue-preview-frame[data-chara="takuji"] { --chara-x: 50%; --chara-height: 86%; }
-.dialogue-preview-frame[data-chara="zk"] { --chara-x: 50%; --chara-height: 88%; }
-.dialogue-preview-frame[data-chara="kagami"] { --chara-x: 49.6%; --chara-height: 88%; }
-.dialogue-preview-frame[data-chara="tsukasa"] { --chara-x: 50.2%; --chara-height: 87%; }
-.dialogue-preview-frame[data-chara="hs"] { --chara-x: 50.8%; --chara-height: 84%; }
-.dialogue-preview-frame[data-chara="ay"] { --chara-x: 49.3%; --chara-height: 86%; }
-.dialogue-preview-frame[data-chara="tm"] { --chara-x: 50.6%; --chara-height: 87%; }
-.dialogue-preview-frame[data-chara="kimika"] { --chara-x: 49%; --chara-height: 86%; }
+.dialogue-preview-frame[data-chara="yk"] {
+  --chara-left: 55%;
+  --chara-height: 86%;
+  --chara-max-width: 70%;
+}
+
+.dialogue-preview-frame[data-chara="takuji"] {
+  --chara-left: 57%;
+  --chara-height: 85%;
+  --chara-max-width: 52%;
+}
+
+.dialogue-preview-frame[data-chara="zk"] {
+  --chara-left: 51%;
+  --chara-height: 84%;
+  --chara-max-width: 66%;
+}
+
+.dialogue-preview-frame[data-chara="kagami"] {
+  --chara-left: 55%;
+  --chara-height: 88%;
+  --chara-max-width: 56%;
+}
+
+.dialogue-preview-frame[data-chara="tsukasa"] {
+  --chara-left: 60%;
+  --chara-height: 96%;
+  --chara-max-width: 62%;
+}
+
+.dialogue-preview-frame[data-chara="hs"] {
+  --chara-left: 56%;
+  --chara-height: 84%;
+  --chara-max-width: 52%;
+}
+
+.dialogue-preview-frame[data-chara="ay"] {
+  --chara-left: 58%;
+  --chara-height: 84%;
+  --chara-max-width: 56%;
+}
+
+.dialogue-preview-frame[data-chara="tm"] {
+  --chara-left: 57%;
+  --chara-height: 89%;
+  --chara-max-width: 54%;
+}
+
+.dialogue-preview-frame[data-chara="kimika"] {
+  --chara-left: 57%;
+  --chara-height: 96%;
+  --chara-max-width: 62%;
+}
 
 .dialogue-preview-text-panel {
   position: absolute;
