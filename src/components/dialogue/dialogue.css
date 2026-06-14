@@ -442,13 +442,13 @@
 
 .dialogue-preview-frame[data-chara="kagami"] {
   --chara-left: 51%;
-  --chara-height: 80%;
+  --chara-height: 84%;
   --chara-max-width: 56%;
 }
 
 .dialogue-preview-frame[data-chara="tsukasa"] {
   --chara-left: 53%;
-  --chara-height: 82%;
+  --chara-height: 84%;
   --chara-max-width: 62%;
 }
 
