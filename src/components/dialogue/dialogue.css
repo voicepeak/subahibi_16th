@@ -423,14 +423,14 @@
 }
 
 .dialogue-preview-frame[data-chara="yk"] {
-  --chara-left: 55%;
-  --chara-height: 86%;
+  --chara-left: 59%;
+  --chara-height: 62%;
   --chara-max-width: 70%;
 }
 
 .dialogue-preview-frame[data-chara="takuji"] {
   --chara-left: 57%;
-  --chara-height: 85%;
+  --chara-height: 74%;
   --chara-max-width: 52%;
 }
 
@@ -441,38 +441,38 @@
 }
 
 .dialogue-preview-frame[data-chara="kagami"] {
-  --chara-left: 55%;
-  --chara-height: 88%;
+  --chara-left: 56%;
+  --chara-height: 68%;
   --chara-max-width: 56%;
 }
 
 .dialogue-preview-frame[data-chara="tsukasa"] {
   --chara-left: 60%;
-  --chara-height: 96%;
+  --chara-height: 70%;
   --chara-max-width: 62%;
 }
 
 .dialogue-preview-frame[data-chara="hs"] {
-  --chara-left: 56%;
-  --chara-height: 84%;
+  --chara-left: 57%;
+  --chara-height: 70%;
   --chara-max-width: 52%;
 }
 
 .dialogue-preview-frame[data-chara="ay"] {
   --chara-left: 58%;
-  --chara-height: 84%;
+  --chara-height: 68%;
   --chara-max-width: 56%;
 }
 
 .dialogue-preview-frame[data-chara="tm"] {
   --chara-left: 57%;
-  --chara-height: 89%;
+  --chara-height: 75%;
   --chara-max-width: 54%;
 }
 
 .dialogue-preview-frame[data-chara="kimika"] {
   --chara-left: 57%;
-  --chara-height: 96%;
+  --chara-height: 72%;
   --chara-max-width: 62%;
 }
 
